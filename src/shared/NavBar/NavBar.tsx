@@ -1,4 +1,5 @@
 import { UserCircleIcon } from "@heroicons/react/16/solid";
+import { SlideTabsExample } from "./NavMenu";
 
 const NavBar = () => {
   return (
@@ -79,13 +80,7 @@ const NavBar = () => {
       </div>
 
       <div className="w-full px-10 text-center py-3 bg-[#698467] text-white">
-        <ul className="flex justify-center gap-20 h-full items-center text-[16px] font-mono text-center">
-          <li>Home</li>
-          <li>Products</li>
-          <li>Carts</li>
-          <li>About us</li>
-          <li>Contact us</li>
-        </ul>
+        <SlideTabsExample />
       </div>
     </nav>
   );
