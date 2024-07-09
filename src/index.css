@@ -75,15 +75,18 @@
   }
 }
 
-.primary-color {
+.p-color {
   color: #698467;
 }
-.secondary-color {
+.s-color {
   color: #87b670;
 }
-.primary-bg-color {
+.p-bg {
   background-color: #698467;
 }
-.secondary-bg-color {
+.s-bg {
   background-color: #87b670;
+}
+.hero-btn {
+  @apply uppercase px-10 py-5 rounded-none bg-white text-slate-500 text-xs;
 }

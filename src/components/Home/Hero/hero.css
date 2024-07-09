@@ -1,0 +1,8 @@
+.h-img {
+    transition: transform 0.5s ease-in-out; 
+  }
+  
+  .hero-banner:hover .h-img {
+    transform: scale(1.2);
+  }
+  
