@@ -5,12 +5,12 @@ import {
   useSpring,
 } from "framer-motion";
 import { useRef } from "react";
-import { FiMousePointer } from "react-icons/fi";
 
-const ProductCard = ({ productImg }) => {
+const ProductCard = ({ product }) => {
+  console.log(product);
   return (
     <div className="grid w-full place-content-center bg-gradient-to-br from-[#698467] to-[#74a859f6] py-5 rounded-md text-slate-900 bg-cover">
-      <TiltCard productImg={productImg} />
+      <TiltCard product={product} />
     </div>
   );
 };
@@ -18,7 +18,7 @@ const ProductCard = ({ productImg }) => {
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
 
-const TiltCard = ({ productImg }) => {
+const TiltCard = ({ product }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -59,11 +59,11 @@ const TiltCard = ({ productImg }) => {
       style={{
         transformStyle: "preserve-3d",
         transform,
-        backgroundImage: `url(${productImg})`,
+        // backgroundImage: `url(${productImg})`,
       }}
-      className="relative h-96 w-72 rounded-xl overflow-hidden"
+      className="relatfsdfsdfive h-96 w-72 rounded-xl overflow-hidden"
     >
-      <img src={productImg} alt="" />
+      {/* <img src={} alt="" /> */}
       <div
         style={{
           transform: "translateZ(75px)",
@@ -75,16 +75,11 @@ const TiltCard = ({ productImg }) => {
           style={{
             transform: "translateZ(50px)",
           }}
-          className="text-center text-2xl font-bold"
+          className="text-center text-2xl font-bold text-white"
         >
-          fsdfsdf
+          {product.name}
         </p>
-        <FiMousePointer
-          style={{
-            transform: "translateZ(75px)",
-          }}
-          className="mx-auto text-4xl"
-        />
+
         {/* <img src={productImg} className="relative z-50" alt="" /> */}
       </div>
     </motion.div>

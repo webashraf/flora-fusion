@@ -14,8 +14,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useGetProductsQuery } from "@/redux/api/baseApi";
 import ProductCard from "@/shared/productCard/ProductCard";
+import { TProducts } from "@/types/types";
 const Products = () => {
+  const { data: products } = useGetProductsQuery({});
+
+  // console.log(products);
   return (
     <div className="mt-20">
       <div className="flex justify-between mb-10">
@@ -59,15 +64,12 @@ const Products = () => {
         </div>
       </div>
       <div className="mb-14 grid grid-cols-4 gap-5">
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
-        <ProductCard productImg={"/src/assets/images/hero/h6_banner1.jpg"} />
+        // maping products from db
+        {products?.slice(0, 8).map((product: TProducts) => (
+          <ProductCard product={product} />
+        ))}
       </div>
+
       <div className="py-5 ">
         <Pagination>
           <PaginationContent>

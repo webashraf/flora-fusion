@@ -4,9 +4,9 @@ import { SlideTabsExample } from "./NavMenu";
 const NavBar = () => {
   return (
     <nav className="w-full flex flex-col items-center">
-      <div className="flex justify-between gap-10 ">
+      <div className="flex justify-between gap-10 w-full">
         <div className="w-[20%] relative bottom-4 ">
-          <img src="/public/Flora Fusion logo.png" alt="" />
+          <img src="/public/Flora_Fusion_logos.png" alt="" />
         </div>
         <div className="w-[80%] bg-red-5  border">
           <div

@@ -1,8 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const bgImg = '"/src/assets/images/HomePageImages/bg-button (1).jpg"';
-
 const ProductsCategory = () => {
   return (
     <div className="">
@@ -22,7 +20,9 @@ const HorizontalScrollCarousel = () => {
   return (
     <div className="mt-32 ">
       <section ref={targetRef} className="relative h-[300vh] pb-10 mb-10">
-      <h2 className="text-5xl font-serif uppercase mb-12 sticky top-20">All Categories</h2>
+        <h2 className="text-5xl font-serif uppercase mb-12 sticky top-20">
+          All Categories
+        </h2>
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <motion.div style={{ x }} className="flex gap-4">
             {cards.map((card) => {
