@@ -1,15 +1,18 @@
+import { Button } from "@/components/ui/button";
+import { useGetCategoriesQuery } from "@/redux/api/baseApi";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const ProductsCategory = () => {
+  const { data: categories } = useGetCategoriesQuery({});
   return (
     <div className="">
-      <HorizontalScrollCarousel />
+      <HorizontalScrollCarousel categories={categories} />
     </div>
   );
 };
 
-const HorizontalScrollCarousel = () => {
+const HorizontalScrollCarousel = ({ categories }) => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -25,8 +28,8 @@ const HorizontalScrollCarousel = () => {
         </h2>
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <motion.div style={{ x }} className="flex gap-4">
-            {cards.map((card) => {
-              return <Card card={card} key={card.id} />;
+            {categories?.map((categorey) => {
+              return <Card categorey={categorey} key={categorey._id} />;
             })}
           </motion.div>
         </div>
@@ -35,65 +38,30 @@ const HorizontalScrollCarousel = () => {
   );
 };
 
-const Card = ({ card }) => {
+const Card = ({ categorey }) => {
   return (
     <div
-      key={card.id}
-      className="group relative h-[450px] w-[450px] overflow-hidden bg-black"
+      key={categorey.id}
+      className="group relative h-[200px] w-[450px] overflow-hidden rounded-sm bg-slate-800"
     >
       <div
         style={{
-          backgroundImage: `url(${card.url})`,
+          backgroundImage: `url(${categorey.url})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
         className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
       ></div>
+      {/* Content show on here */}
       <div className="absolute inset-0 z-10 grid place-content-center">
-        <p className="bg-gradient-to-br from-white/20 to-white/0 p-8 text-6xl font-black uppercase text-white backdrop-blur-lg">
-          {card.title}
+        <p className="bg-gradient-to-br from-white/20 to-white/0 p-8 text-xl font-black uppercase text-white backdrop-blur-lg">
+          {categorey.name}
         </p>
+        <p></p>
+        <Button className="capitalize">See products</Button>
       </div>
     </div>
   );
 };
 
 export default ProductsCategory;
-
-const cards = [
-  {
-    url: "/imgs/abstract/1.jpg",
-    title: "Title 1",
-    id: 1,
-  },
-  {
-    url: "/imgs/abstract/2.jpg",
-    title: "Title 2",
-    id: 2,
-  },
-  {
-    url: "/imgs/abstract/3.jpg",
-    title: "Title 3",
-    id: 3,
-  },
-  {
-    url: "/imgs/abstract/4.jpg",
-    title: "Title 4",
-    id: 4,
-  },
-  {
-    url: "/imgs/abstract/5.jpg",
-    title: "Title 5",
-    id: 5,
-  },
-  {
-    url: "/imgs/abstract/6.jpg",
-    title: "Title 6",
-    id: 6,
-  },
-  {
-    url: "/imgs/abstract/7.jpg",
-    title: "Title 7",
-    id: 7,
-  },
-];

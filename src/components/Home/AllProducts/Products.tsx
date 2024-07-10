@@ -20,7 +20,6 @@ import { TProducts } from "@/types/types";
 const Products = () => {
   const { data: products } = useGetProductsQuery({});
 
-  // console.log(products);
   return (
     <div className="mt-20">
       <div className="flex justify-between mb-10">
@@ -63,10 +62,10 @@ const Products = () => {
           </div>
         </div>
       </div>
+      {/* maping products from db */}
       <div className="mb-14 grid grid-cols-4 gap-5">
-        // maping products from db
         {products?.slice(0, 8).map((product: TProducts) => (
-          <ProductCard product={product} />
+          <ProductCard key={product?._id} product={product} />
         ))}
       </div>
 

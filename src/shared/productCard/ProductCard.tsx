@@ -1,3 +1,4 @@
+import { TProducts } from "@/types/types";
 import {
   motion,
   useMotionTemplate,
@@ -6,8 +7,8 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 
-const ProductCard = ({ product }) => {
-  console.log(product);
+const ProductCard = ({ product }: { product: TProducts }) => {
+  // console.log(product);
   return (
     <div className="grid w-full place-content-center bg-gradient-to-br from-[#698467] to-[#74a859f6] py-5 rounded-md text-slate-900 bg-cover">
       <TiltCard product={product} />
@@ -18,7 +19,7 @@ const ProductCard = ({ product }) => {
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
 
-const TiltCard = ({ product }) => {
+const TiltCard = ({ product }: { product: TProducts }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -59,7 +60,7 @@ const TiltCard = ({ product }) => {
       style={{
         transformStyle: "preserve-3d",
         transform,
-        // backgroundImage: `url(${productImg})`,
+        backgroundImage: `url(${product.imageURL})`,
       }}
       className="relatfsdfsdfive h-96 w-72 rounded-xl overflow-hidden"
     >
@@ -69,7 +70,7 @@ const TiltCard = ({ product }) => {
           transform: "translateZ(75px)",
           transformStyle: "preserve-3d",
         }}
-        className="absolute inset-2 grid place-content-center rounded-xl  shadow-lg bg-[#37161600]"
+        className="absolute inset-2 grid place-content-center rounded-xl  shadow-lg backdrop-blur-md h-[100px] mt-auto gap-1"
       >
         <p
           style={{
@@ -80,7 +81,7 @@ const TiltCard = ({ product }) => {
           {product.name}
         </p>
 
-        {/* <img src={productImg} className="relative z-50" alt="" /> */}
+        <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">{product.category.name}</p>
       </div>
     </motion.div>
   );

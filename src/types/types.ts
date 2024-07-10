@@ -5,6 +5,7 @@ export interface TTreeProductsCategory {
 }
 
 export interface TProducts {
+  _id: string;
   name: string;
   description: string;
   price: number;
