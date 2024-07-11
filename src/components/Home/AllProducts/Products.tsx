@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Pagination,
   PaginationContent,
@@ -14,12 +15,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetProductsQuery } from "@/redux/api/baseApi";
 import ProductCard from "@/shared/productCard/ProductCard";
 import { TProducts } from "@/types/types";
-const Products = () => {
-  const { data: products } = useGetProductsQuery({});
-
+const Products = ({ products }: { products: TProducts | any }) => {
   return (
     <div className="mt-20">
       <div className="flex justify-between mb-10">

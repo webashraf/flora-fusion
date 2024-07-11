@@ -64,7 +64,6 @@ const TiltCard = ({ product }: { product: TProducts }) => {
       }}
       className="relatfsdfsdfive h-96 w-72 rounded-xl overflow-hidden"
     >
-      {/* <img src={} alt="" /> */}
       <div
         style={{
           transform: "translateZ(75px)",

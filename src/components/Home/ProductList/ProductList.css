@@ -40,5 +40,5 @@
   height: 140px;
   top: -10%;
   left: 60%;
-  filter: blur(0rem);
+  filter: blur(0.1rem);
 }

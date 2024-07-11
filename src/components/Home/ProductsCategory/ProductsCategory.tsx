@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
-import { useGetCategoriesQuery } from "@/redux/api/baseApi";
+import { TTreeProductsCategory } from "@/types/types";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const ProductsCategory = () => {
-  const { data: categories } = useGetCategoriesQuery({});
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ProductsCategory = ({
+  categories,
+}: {
+  categories: TTreeProductsCategory | any;
+}) => {
   return (
     <div className="">
       <HorizontalScrollCarousel categories={categories} />
@@ -12,23 +17,28 @@ const ProductsCategory = () => {
   );
 };
 
-const HorizontalScrollCarousel = ({ categories }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const HorizontalScrollCarousel = ({
+  categories,
+}: {
+  categories: TTreeProductsCategory | any;
+}) => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-80%"]);
 
   return (
     <div className="mt-32 ">
-      <section ref={targetRef} className="relative h-[300vh] pb-10 mb-10">
-        <h2 className="text-5xl font-serif uppercase mb-12 sticky top-20">
-          All Categories
-        </h2>
-        <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+      <section ref={targetRef} className="relative s-b h-[300vh] pb-10 mb-10">
+        <div className="sticky top-0 flex h-screen items-center overflow-hidden pl-5">
+          <h2 className="text-4xl font-serif uppercase mb-12 sticky top-20">
+            All Categories
+          </h2>
           <motion.div style={{ x }} className="flex gap-4">
-            {categories?.map((categorey) => {
+            {categories?.map((categorey: TTreeProductsCategory) => {
               return <Card categorey={categorey} key={categorey._id} />;
             })}
           </motion.div>
@@ -38,7 +48,7 @@ const HorizontalScrollCarousel = ({ categories }) => {
   );
 };
 
-const Card = ({ categorey }) => {
+const Card = ({categorey}: {categorey: TTreeProductsCategory | any}) => {
   return (
     <div
       key={categorey.id}
