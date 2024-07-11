@@ -15,5 +15,5 @@ export interface TProducts {
   ratings: string;
   stock: number;
   isAvailable: boolean;
+  qty: number;
 }
-

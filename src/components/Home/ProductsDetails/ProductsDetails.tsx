@@ -32,7 +32,7 @@ const ProductsDetails = ({ products }: { products: TProducts | any }) => {
         </div>
         <div className="h-[600px] overflow-y-scroll w-2/3 ml-auto">
           <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
+      
 
             <TableHeader>
               <TableRow>
