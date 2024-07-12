@@ -1,7 +1,8 @@
 import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import CartItems from "./CartItems";
-import { NavManu } from "./NavMenu";
+import NavMenu from "./NavMenu";
+// import { NavMenu } from "/src/shared/NavBar/NavMenu";
 
 const NavBar = () => {
   const items = useAppSelector((state) => state.cart.cart);
@@ -92,7 +93,7 @@ const NavBar = () => {
       </div>
 
       <div className="w-full px-10 text-center py-3 bg-[#698467] text-white">
-        <NavManu />
+        <NavMenu />
       </div>
     </nav>
   );

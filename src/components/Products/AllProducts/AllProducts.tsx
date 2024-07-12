@@ -2,9 +2,8 @@ import { Button } from "@/components/ui/button";
 import { setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { TProducts } from "@/types/types";
-import "./ProductList.css";
 
-const ProductListCard = ({ product }: { product: TProducts }) => {
+const AllProducts = ({ product }: { product: TProducts }) => {
   const dispatch = useAppDispatch();
 
   // Function to handle adding a product to the cart
@@ -60,4 +59,4 @@ const ProductListCard = ({ product }: { product: TProducts }) => {
   );
 };
 
-export default ProductListCard;
+export default AllProducts;

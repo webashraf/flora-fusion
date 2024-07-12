@@ -2,7 +2,13 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export const NavManu = () => {
+interface Position {
+  left: number;
+  width: number;
+  opacity: number;
+}
+
+const NavMenu: React.FC = () => {
   return (
     <div className="">
       <SlideTabs />
@@ -10,8 +16,8 @@ export const NavManu = () => {
   );
 };
 
-const SlideTabs = () => {
-  const [position, setPosition] = useState({
+const SlideTabs: React.FC = () => {
+  const [position, setPosition] = useState<Position>({
     left: 0,
     width: 0,
     opacity: 0,
@@ -35,6 +41,14 @@ const SlideTabs = () => {
       >
         <Tab setPosition={setPosition}>Home</Tab>
       </NavLink>
+      <NavLink
+        to="/products"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "active" : ""
+        }
+      >
+        <Tab setPosition={setPosition}>Products</Tab>
+      </NavLink>
       <NavLink to="/Pricing">
         <Tab setPosition={setPosition}>Pricing</Tab>
       </NavLink>
@@ -47,8 +61,13 @@ const SlideTabs = () => {
   );
 };
 
-const Tab = ({ children, setPosition }) => {
-  const ref = useRef(null);
+interface TabProps {
+  children: React.ReactNode;
+  setPosition: React.Dispatch<React.SetStateAction<Position>>;
+}
+
+const Tab: React.FC<TabProps> = ({ children, setPosition }) => {
+  const ref = useRef<HTMLLIElement>(null);
 
   return (
     <li
@@ -71,7 +90,11 @@ const Tab = ({ children, setPosition }) => {
   );
 };
 
-const Cursor = ({ position }) => {
+interface CursorProps {
+  position: Position;
+}
+
+const Cursor: React.FC<CursorProps> = ({ position }) => {
   return (
     <motion.li
       animate={{
@@ -81,3 +104,5 @@ const Cursor = ({ position }) => {
     />
   );
 };
+
+export default NavMenu;

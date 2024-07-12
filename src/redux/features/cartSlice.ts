@@ -17,12 +17,12 @@ const cartSlice = createSlice({
       const index = state.cart.findIndex(
         (item) => item._id === action.payload._id
       );
-      console.log(index);
+      console.log("index", index);
 
       if (index !== -1) {
-        state.cart[index].qty += 1;
+        state.cart[index].qty += action.payload.qty;
       } else if (index === -1) {
-        state.cart.push({ ...action.payload, qty: 1 });
+        state.cart.push({ ...action.payload });
       }
     },
   },

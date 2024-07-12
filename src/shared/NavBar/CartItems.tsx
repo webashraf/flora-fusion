@@ -73,16 +73,20 @@ const CartItems = ({ trees }: { trees: TProducts[] }) => {
             </div>
           </div>
           <DialogFooter className="flex items-center">
-            {
-              trees?.length !== 0 ? <div>
-              <div className="">
-                <h4 className="font-semibold mr-">Total: ${newPrice}</h4>
+            {trees?.length !== 0 ? (
+              <div>
+                <div className="">
+                  <h4 className="font-semibold mr-">
+                    Total: ${newPrice.toFixed(2)}
+                  </h4>
+                </div>
+                <Button type="submit" className="capitalize">
+                  Proced to chek-out
+                </Button>
               </div>
-              <Button type="submit" className="capitalize">
-                Proced to chek-out
-              </Button>
-              </div> : ""
-            }
+            ) : (
+              ""
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>

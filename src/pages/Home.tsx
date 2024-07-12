@@ -27,7 +27,6 @@ const Home = () => {
     return <Loader />;
   }
 
-  // Log products data to the console
   console.log("products", products);
 
   return (
