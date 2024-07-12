@@ -80,7 +80,12 @@ const TiltCard = ({ product }: { product: TProducts }) => {
           {product.name}
         </p>
 
-        <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">{product.category.name}</p>
+        <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">
+          {product.category.name}
+        </p>
+        <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">
+          ${product.price}
+        </p>
       </div>
     </motion.div>
   );

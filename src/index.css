@@ -90,3 +90,7 @@
 .hero-btn {
   @apply uppercase px-10 py-5 rounded-none bg-white text-slate-500 text-xs;
 }
+.active {
+  background-color: rgb(0, 0, 0);
+  border-radius: 4px;
+}

@@ -11,29 +11,33 @@ import {
 import Loader from "@/shared/Loader/Loader";
 
 const Home = () => {
-  const { data: products, isLoading: loadingProducts } = useGetProductsQuery(
-    {}
-  );
+  // Fetch products data using the useGetProductsQuery hook
+  const { data: products } = useGetProductsQuery({});
 
-  const { data: categories, isLoading: loadingCategory } =
-    useGetCategoriesQuery({});
+  // Fetch categories data using the useGetCategoriesQuery hook
+  const { data: categories } = useGetCategoriesQuery({});
 
+  // Display a loader if products data is not yet available
   if (!products) {
     return <Loader />;
   }
+
+  // Display a loader if categories data is not yet available
   if (!categories) {
     return <Loader />;
   }
-  console.log(products)
+
+  // Log products data to the console
+  console.log("products", products);
+
   return (
     <>
-      <Hero products={products} />
-      <Products products={products} />
+      <Hero products={products.result} />
+      <Products />
       <ProductsCategory categories={categories} />
-      <ProductList products={products} />
-      <ProductsDetails products={products} />
-      <Gallery products={products} />
-      <div className="p-20"></div>
+      <ProductList products={products.result} />
+      <ProductsDetails products={products.result} />
+      <Gallery products={products.result} />
     </>
   );
 };

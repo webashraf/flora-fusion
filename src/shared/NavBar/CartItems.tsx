@@ -17,7 +17,6 @@ const CartItems = ({ trees }: { trees: TProducts[] }) => {
   trees.forEach((item: TProducts) => {
     newPrice = item.price * item.qty + newPrice;
   });
-
   return (
     <div>
       <Dialog>
@@ -38,42 +37,52 @@ const CartItems = ({ trees }: { trees: TProducts[] }) => {
           </DialogHeader>
           <div className="py-4">
             <div className="g">
-              <Table className="grid grid-cols-2 max-h-[600px]">
-                {trees?.map((tree: TProducts, i: number) => (
-                  <TableBody className="mw-[200px]" key={tree._id}>
-                    <TableRow>
-                      <TableCell className="font-medium">{i + 1}</TableCell>
-                      <TableCell className="uppercase">
-                        <h5 className="text-md font-bold mb-1">{tree.name}</h5>
-                        <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28 mb-1">
-                          Price: {tree.price}
-                          <br />
-                        </p>
-                        <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28">
-                          quantity: <span className="">{tree.qty}</span>
-                        </p>
-                      </TableCell>
+              {trees.length !== 0 ? (
+                <Table className="grid grid-cols-2 max-h-[600px]">
+                  {trees?.map((tree: TProducts, i: number) => (
+                    <TableBody className="mw-[200px]" key={tree._id}>
+                      <TableRow>
+                        <TableCell className="font-medium">{i + 1}</TableCell>
+                        <TableCell className="uppercase">
+                          <h5 className="text-md font-bold mb-1">
+                            {tree.name}
+                          </h5>
+                          <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28 mb-1">
+                            Price: {tree.price}
+                            <br />
+                          </p>
+                          <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28">
+                            quantity: <span className="">{tree.qty}</span>
+                          </p>
+                        </TableCell>
 
-                      <TableCell>
-                        <img
-                          className="h-[80px] w-[50px] object-cover"
-                          src={tree.imageURL}
-                          alt=""
-                        />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                ))}
-              </Table>
+                        <TableCell>
+                          <img
+                            className="h-[80px] w-[50px] object-cover"
+                            src={tree.imageURL}
+                            alt=""
+                          />
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  ))}
+                </Table>
+              ) : (
+                <h3 className="text-3xl text-black">Cart is empty!!</h3>
+              )}
             </div>
           </div>
           <DialogFooter className="flex items-center">
-            <div className="">
-              <h4 className="font-semibold mr-">Total: ${newPrice}</h4>
-            </div>
-            <Button type="submit" className="capitalize">
-              Proced to chek-out
-            </Button>
+            {
+              trees?.length !== 0 ? <div>
+              <div className="">
+                <h4 className="font-semibold mr-">Total: ${newPrice}</h4>
+              </div>
+              <Button type="submit" className="capitalize">
+                Proced to chek-out
+              </Button>
+              </div> : ""
+            }
           </DialogFooter>
         </DialogContent>
       </Dialog>

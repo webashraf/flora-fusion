@@ -1,14 +1,14 @@
 import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import CartItems from "./CartItems";
-import { SlideTabsExample } from "./NavMenu";
+import { NavManu } from "./NavMenu";
 
 const NavBar = () => {
   const items = useAppSelector((state) => state.cart.cart);
   // console.log(items);
 
   return (
-    <nav className="w-full flex flex-col items-center">
+    <nav className="w-full flex flex-col items-center bg-white">
       <div className="flex justify-between gap-10 w-full">
         <div className="w-[20%] relative bottom-4 ">
           <img src="/public/Flora_Fusion_logos.png" alt="" />
@@ -46,7 +46,7 @@ const NavBar = () => {
           </div>
 
           <div className="w-[100%]  h-[40%] flex justify-end items-center border-t">
-            <div className="bg-white border-x rounded-md w-[60%] flex ">
+            {/* <div className="bg-white border-x rounded-md w-[60%] flex ">
               <input
                 type="text"
                 className=" py-2 ps-3 w-[880%] "
@@ -66,7 +66,7 @@ const NavBar = () => {
                   />
                 </svg>
               </div>
-            </div>
+            </div> */}
             <div className="border-x  px-12 py-3 relative flex justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ const NavBar = () => {
       </div>
 
       <div className="w-full px-10 text-center py-3 bg-[#698467] text-white">
-        <SlideTabsExample />
+        <NavManu />
       </div>
     </nav>
   );

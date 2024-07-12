@@ -15,59 +15,90 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import { useGetProductsQuery } from "@/redux/api/baseApi";
 import ProductCard from "@/shared/productCard/ProductCard";
 import { TProducts } from "@/types/types";
-const Products = ({ products }: { products: TProducts | any }) => {
+import { useState } from "react";
+
+const Products = () => {
+  // State to hold search input and price filter
+  const [searchInput, setSearchInput] = useState({ searchItem: "", price: 1 });
+
+  // Fetch products based on searchInput state
+  const { data: products } = useGetProductsQuery(searchInput);
+
+  // Handle search form submission
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    const value = e.target.searchInput.value; // Get the search input value
+    setSearchInput((prevState) => ({ ...prevState, searchItem: value })); // Update search input state
+  };
+
+  // Handle filter selection change
+  const handleFilter = (e: any) => {
+    let sorting: number = -1;
+    if (e === "1") {
+      sorting = 1; // Set sorting to ascending if value is "1"
+    }
+    setSearchInput((prevState) => ({ ...prevState, price: sorting })); // Update price filter state
+  };
+
   return (
     <div className="mt-20">
       <div className="flex justify-between mb-10">
         <div className="">
-          <Select>
+          {/* Select component for price filter */}
+          <Select onValueChange={handleFilter}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Filter" />
             </SelectTrigger>
             <SelectContent>
               <Select defaultOpen>Filter</Select>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
+              <SelectItem value="1">Price: Low-High</SelectItem>
+              <SelectItem value="-1">Price: High-Low</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div className="w-1/3 flex justify-end">
-          {" "}
-          <div className="bg-white border rounded-lg w-[60%] flex ">
-            <input
-              type="text"
-              className=" py-2 ps-3 w-[880%] "
-              placeholder="What are you looking for?"
-            />
-            <div className="px-5  flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-6"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
+          <div className="bg-white border rounded-lg w-[60%]">
+            {/* Search form */}
+            <form onSubmit={handleSearch} className="w-[100%] flex">
+              <input
+                id="searchInput"
+                type="text"
+                className="py-2 ps-3 w-[100%]"
+                placeholder="What are you looking for?"
+              />
+              <button type="submit" className="px-5 flex items-center border">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </form>
           </div>
         </div>
       </div>
-      {/* maping products from db */}
+      
+      {/* Map products from database and display using ProductCard component */}
       <div className="mb-14 grid grid-cols-4 gap-5">
-        {products?.slice(0, 8).map((product: TProducts) => (
+        {products?.result?.slice(0, 8).map((product: TProducts) => (
           <ProductCard key={product?._id} product={product} />
         ))}
       </div>
 
-      <div className="py-5 ">
+      <div className="py-5">
+        {/* Pagination component */}
         <Pagination>
           <PaginationContent>
             <PaginationItem>

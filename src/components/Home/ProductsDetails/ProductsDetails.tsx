@@ -2,20 +2,34 @@ import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { TProducts } from "@/types/types";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProductsDetails = ({ products }: { products: TProducts | any }) => {
+  const navigate = useNavigate();
+  const [product, setProduct] = useState({});
+
+  // Function to get a random product from the list
   const getRandomProduct = (number: number = 10) => {
     return products[Math.floor(Math.random() * number) + 1];
   };
+
   const currentProduct = getRandomProduct();
+
+  // Handle the click event to navigate to the single product page
+  // const handleSingleProduct = (singleProduct) => {
+  //   console.log(singleProduct);
+  //   console.log("Product selected", product);
+  //   setProduct(singleProduct);
+  //   navigate("/single-product", { state: { product: product } });
+  // };
 
   return (
     <div className="mt-20 ">
@@ -23,17 +37,17 @@ const ProductsDetails = ({ products }: { products: TProducts | any }) => {
         <div className="w-1/3 relative">
           <img
             className="w-full h-[600px] object-cover"
-            src={currentProduct.imageURL}
+            src={currentProduct?.imageURL}
             alt=""
           />
           <h2 className="text-4xl font-bold backdrop-blur-lg w-full text-center py-5 text-white absolute bottom-0 z-40">
-            {currentProduct.name}
+            {currentProduct?.name}
           </h2>
         </div>
+
+        {/* Display the list of products in a table */}
         <div className="h-[600px] overflow-y-scroll w-2/3 ml-auto">
           <Table>
-      
-
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[100px]">Serial</TableHead>
@@ -44,6 +58,7 @@ const ProductsDetails = ({ products }: { products: TProducts | any }) => {
               </TableRow>
             </TableHeader>
 
+            {/* Map through the products and display each one in a table row */}
             {products?.map((product: TProducts, i: number) => (
               <TableBody key={product._id}>
                 <TableRow>
@@ -54,12 +69,15 @@ const ProductsDetails = ({ products }: { products: TProducts | any }) => {
                       {product.category.name}
                     </p>
                   </TableCell>
-                  <TableCell className="uppercase ">
+                  <TableCell className="uppercase">
                     {product.description}
                   </TableCell>
                   <TableCell>{product.price}</TableCell>
                   <TableCell className="text-right">
-                    <Button className="">View Items</Button>
+                    {/* Button to view single product details */}
+                    <NavLink to={`/single-product/${product._id}`}>
+                      <Button className="">View Items</Button>
+                    </NavLink>
                   </TableCell>
                 </TableRow>
               </TableBody>

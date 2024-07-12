@@ -5,15 +5,24 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
-        method: "GET",
-        url: "/products",
-      }),
+      query: ({ searchItem = "", price = 1}) => {
+        console.log("Parameters received in getProducts query:", { searchItem, price });
+        return {
+          method: "GET",
+          url: `/products?searchItem=${searchItem}&price=${price}`,
+        };
+      },
     }),
     getCategories: builder.query({
       query: () => ({
         url: "/categories",
         method: "GET",
+      }),
+    }),
+    updateStock: builder.mutation({
+      query: () => ({
+        url: "/update-tree",
+        method: "POST",
       }),
     }),
   }),

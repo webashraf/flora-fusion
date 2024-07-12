@@ -1,17 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { setCart } from "@/redux/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { TProducts } from "@/types/types";
 import "./ProductList.css";
+
 const ProductListCard = ({ product }: { product: TProducts }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch(); 
 
-  const state = useAppSelector((state) => state.cart.cart);
+  // const state = useAppSelector((state) => state.cart.cart);
+
+  // Function to handle adding a product to the cart
   const handleAddtocart = (tree: TProducts) => {
-    console.log(state);
-
+    // Creating a new cart item with quantity set to 1
     const treeCartItem = { ...tree, qty: 1 };
 
+    // Dispatching Redux action setCart to update cart state with new item
     dispatch(setCart(treeCartItem));
   };
 
@@ -30,13 +33,23 @@ const ProductListCard = ({ product }: { product: TProducts }) => {
             <div className="backdrop-blur-sm hover:backdrop-blur-xl px-3 w-[320px] ease-linear absolute bottom-0 py-3 transition-all duration-300 text-white">
               <span>{product.name}</span>
               <p className="subtitle font-bold">{product.category.name}</p>
-              <h6 className="font-serif text-xs">Stock : {product.stock}</h6>
+              {product.stock === 0 ? (
+                <h6 className="font-serif text-xs text-red-600">
+                  Out of Stock
+                </h6>
+              ) : (
+                <h6 className="font-serif text-xs">Stock : {product.stock}</h6>
+              )}
               <h6 className="font-serif text-xs">
-                Ratins ⭐: {product.ratings}
+                Ratings ⭐: {product.ratings}
               </h6>
               <div className="flex justify-between items-center">
                 <h5>$ {product.price}</h5>
-                <Button onClick={() => handleAddtocart(product)}>
+                {/* Button to add product to cart, disabled if out of stock */}
+                <Button
+                  disabled={product.stock === 0}
+                  onClick={() => handleAddtocart(product)}
+                >
                   Add to cart
                 </Button>
               </div>

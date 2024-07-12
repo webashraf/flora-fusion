@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export const SlideTabsExample = () => {
+export const NavManu = () => {
   return (
     <div className="">
       <SlideTabs />
@@ -27,7 +27,14 @@ const SlideTabs = () => {
       }}
       className="relative mx-auto flex w-fit backdrop-blur-lg p-1"
     >
-      <Tab setPosition={setPosition}>Home</Tab>
+      <NavLink
+        to="/"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "active" : ""
+        }
+      >
+        <Tab setPosition={setPosition}>Home</Tab>
+      </NavLink>
       <NavLink to="/Pricing">
         <Tab setPosition={setPosition}>Pricing</Tab>
       </NavLink>
