@@ -8,6 +8,7 @@ export interface TTreeProductsCategory {
 export interface TProducts {
   _id: string;
   name: string;
+  shortDescription: string;
   description: string;
   price: number;
   category: TTreeProductsCategory;

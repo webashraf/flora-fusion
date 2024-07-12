@@ -1,4 +1,5 @@
 import App from "@/App";
+import CheckOut from "@/pages/CheckOut/CheckOut";
 import Home from "@/pages/Home";
 import ProductPage from "@/pages/ProductPage/ProductPage";
 import SingleProduct from "@/pages/ProductsDetails/SingleProduct";
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <SingleProduct />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/v1/products/${params?.id}`),
+      },
+      {
+        path: "/checkout",
+        element: <CheckOut />,
       },
     ],
   },
