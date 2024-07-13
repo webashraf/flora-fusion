@@ -17,7 +17,7 @@ const Gallery = ({ products }: { products: TProduct | any }) => {
   //   console.log("lightGallery has been initialized");
   // };
   return (
-    <div className="App mt-20">
+    <div className="App section-margin-top">
       <LightGallery
         plugins={[lgZoom]}
         mode="lg-fade"

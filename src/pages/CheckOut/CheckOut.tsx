@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useUpdateTreeStockMutation } from "@/redux/api/baseApi";
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
 import { NavLink } from "react-router-dom";
@@ -15,6 +16,7 @@ import "./CheckOut.css";
 const CheckOut = () => {
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
   console.log(cartProducts);
+  const [updateTreeStock] = useUpdateTreeStockMutation();
 
   let totalAmount: number = 0;
   cartProducts.forEach((item: TProduct) => {
@@ -22,7 +24,7 @@ const CheckOut = () => {
     totalAmount = Number(amount.toFixed(2));
   });
 
-  const handlePlaceOrder = (e: React.FormEvent<HTMLFormElement>) => {
+  const handlePlaceOrder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
@@ -45,7 +47,14 @@ const CheckOut = () => {
       totalAmount,
     };
 
-    console.log("Order placed successfully", orderInfo);
+    try {
+      console.log("Order placed successfully", orderInfo);
+
+      const res = await updateTreeStock(orderInfo).unwrap();
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

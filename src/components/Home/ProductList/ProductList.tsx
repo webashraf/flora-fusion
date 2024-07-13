@@ -4,7 +4,7 @@ import ProductListCard from "./ProductListCard";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProductList = ({ products }: { products: TProduct | any }) => {
   return (
-    <div className="grid grid-cols-4 gap-10">
+    <div className="section-margin-top grid grid-cols-4 gap-10">
       {products?.slice(0, 8).map((product: TProduct) => (
         <ProductListCard product={product} key={product._id} />
       ))}

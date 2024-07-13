@@ -20,7 +20,7 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
   const currentProduct = getRandomProduct();
 
   return (
-    <div className="mt-20 ">
+    <div className="section-margin-top">
       <div className="flex gap-5 items-center">
         <div className="w-1/3 relative">
           <img

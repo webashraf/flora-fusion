@@ -46,7 +46,7 @@ const Products = () => {
   };
 
   return (
-    <div className="mt-20">
+    <div className="section-margin-top">
       <div className="flex justify-between mb-10">
         <div className="">
           {/* Select component for price filter */}

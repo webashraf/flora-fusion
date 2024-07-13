@@ -12,25 +12,25 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home />,
       },
       {
-        path: "/products",
+        path: "products",
         element: <ProductPage />,
       },
       {
-        path: "/single-product/:id",
+        path: "single-product/:id",
         element: <SingleProduct />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/v1/products/${params?.id}`),
       },
       {
-        path: "/checkout",
+        path: "checkout",
         element: <CheckOut />,
       },
       {
-        path: "/cart",
+        path: "cart",
         element: <CartPage />,
       },
     ],

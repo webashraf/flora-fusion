@@ -4,47 +4,57 @@ import { removeCartItem, setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
 import { XMarkIcon } from "@heroicons/react/16/solid";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const CartPage = () => {
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
   const dispatch = useAppDispatch();
-  console.log(cartProducts);
 
-  const qtyRefs = useRef<Map<string, HTMLInputElement>>(new Map());
+  const inputValuesRef = useRef<{ [key: string]: string }>({});
+  const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
 
   let newPrice: number = 0;
   cartProducts.forEach((item: TProduct) => {
     newPrice = item.price * item.qty + newPrice;
   });
 
-  // Function to handle adding a product to the cart
   const handleAddtocart = (product: TProduct) => {
-    const qtyInput = qtyRefs.current.get(product._id);
-    const qty = qtyInput ? Number(qtyInput.value) : 1;
-    console.log(qty);
-    const treeCartItem = { ...product, qty };
-    console.log("tree", treeCartItem);
+    const qtyInput = inputValues[product._id] || "1"; // Default to "1" if no input value found
+    const updatedQty = Math.min(Number(qtyInput), product.stock);
 
-    // Dispatching Redux action setCart to update cart state with new item
+    const treeCartItem = { ...product, qty: updatedQty };
+
     dispatch(setCart(treeCartItem));
-
-    // Reset the input value to 1 after updating the cart
-    if (qtyInput) {
-      qtyInput.value = "1";
-    }
   };
 
   const handleRemove = (item: TProduct) => {
     dispatch(removeCartItem(item._id));
   };
 
-  // Ensure input value is always positive
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [e.target.dataset.productid!]: value,
+    });
+
     const input = e.target;
-    if (Number(input.value) < 1) {
-      input.value = "1";
+    const qty = Number(input.value);
+    const productId = input.dataset.productid || "";
+    const product = cartProducts.find((item) => item._id === productId);
+
+    if (product) {
+      const updatedQty = qty < 1 ? 1 : Math.min(qty, product.stock);
+
+      if (updatedQty === product.stock) {
+        input.value = "0";
+      } else {
+        input.value = String(updatedQty);
+      }
+
+      const updateButton = input.nextElementSibling as HTMLButtonElement;
+      updateButton.disabled = input.value === "0";
     }
   };
 
@@ -67,7 +77,13 @@ const CartPage = () => {
                       <br />
                     </p>
                     <p className="text-slate-300 bg-primary text-center rounded-md text-[14px] w-28">
+                      Stock: <span>{tree.stock}</span>
+                    </p>
+                    <p className="text-slate-300 bg-primary text-center rounded-md text-[14px] w-28">
                       Quantity: <span>{tree.qty}</span>
+                    </p>
+                    <p className="text-slate-300 bg-primary text-center rounded-md text-[14px] w-28">
+                      InputVal: <span>{inputValues[tree._id] || ''}</span>
                     </p>
                   </TableCell>
 
@@ -86,23 +102,26 @@ const CartPage = () => {
                       />
 
                       <input
-                        disabled={tree.stock === 0}
                         type="number"
                         className="w-[55px] h-[40px] pl-3 text-xl rounded-md border-2 border-slate-400"
-                        defaultValue={1}
+                        defaultValue={tree.qty}
                         min={0}
                         onChange={handleInputChange}
                         ref={(el) => {
-                          if (el) qtyRefs.current.set(tree._id, el);
-                          else qtyRefs.current.delete(tree._id);
+                          inputValuesRef.current[tree._id] = el?.value || '';
                         }}
+                        data-productid={tree._id}
+                        value={inputValues[tree._id] || ''}
                       />
                       <Button
-                        disabled={tree.stock === 0}
+                        disabled={
+                          tree.stock <= 0 ||
+                          Number(inputValues[tree._id] || '0') + tree.qty > tree.stock
+                        }
                         onClick={() => handleAddtocart(tree)}
                         className="capitalize"
                       >
-                        Update
+                        Update {Number(inputValues[tree._id] || '0') + tree.qty}
                       </Button>
                     </div>
                   </TableCell>
@@ -120,7 +139,7 @@ const CartPage = () => {
         </div>
         <NavLink to="/checkout">
           <Button type="submit" className="capitalize">
-            Proced to chek-out
+            Proceed to checkout
           </Button>
         </NavLink>
       </div>
