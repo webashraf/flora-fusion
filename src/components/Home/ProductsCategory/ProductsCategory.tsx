@@ -9,6 +9,11 @@ const ProductsCategory = ({
 }) => {
   return (
     <div className="section-margin-top">
+      {/* <CommonHeading
+        title="Explore Our Plant Categories
+subTitle"
+        subTitle="Find Medicinal, Ornamental, and Fruit Trees for Every Need"
+      /> */}
       <div className="w-full">
         <div className="flex flex-wrap gap-8 px-5 items-center">
           <h2 className="text-4xl font-serif uppercase mb-12 ">
@@ -21,7 +26,7 @@ const ProductsCategory = ({
             >
               <p className="font-semibold">{index + 1}</p>
               <h2 className="text-3xl">{category.name}</h2>
-              <Button className="capitalize">View Products by category</Button>
+              <Button className="capitalize btn-2">View Products by category</Button>
             </div>
           ))}
         </div>

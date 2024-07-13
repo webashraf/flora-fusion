@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select";
 
 import { useGetProductsQuery } from "@/redux/api/baseApi";
+import CommonHeading from "@/shared/CommonHeading/CommonHeading";
 import ProductCard from "@/shared/productCard/ProductCard";
 import { TProduct } from "@/types/types";
 import { useState } from "react";
@@ -47,6 +48,10 @@ const Products = () => {
 
   return (
     <div className="section-margin-top">
+      <CommonHeading
+        title="Discover Your Perfect Plants"
+        subTitle="Explore Our Features, Categories, and Detailed Product Information"
+      />
       <div className="flex justify-between mb-10">
         <div className="">
           {/* Select component for price filter */}
@@ -100,7 +105,7 @@ const Products = () => {
 
       <div className="py-5">
         {/* Pagination component */}
-        <Pagination>
+        {/* <Pagination>
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious href="#" />
@@ -121,7 +126,7 @@ const Products = () => {
               <PaginationNext href="#" />
             </PaginationItem>
           </PaginationContent>
-        </Pagination>
+        </Pagination> */}
       </div>
     </div>
   );

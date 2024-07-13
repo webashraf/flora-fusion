@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import CommonHeading from "@/shared/CommonHeading/CommonHeading";
 import { TProduct } from "@/types/types";
 import { NavLink } from "react-router-dom";
 
@@ -21,6 +22,10 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
 
   return (
     <div className="section-margin-top">
+      <CommonHeading
+        title="Plant Details"
+        subTitle="Comprehensive Information on Your Selected Plant"
+      />
       <div className="flex gap-5 items-center">
         <div className="w-1/3 relative">
           <img
@@ -52,9 +57,9 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
               <TableBody key={product._id}>
                 <TableRow>
                   <TableCell className="font-medium">{i}</TableCell>
-                  <TableCell className="uppercase">
+                  <TableCell className="uppercase flex flex-col">
                     <h5 className="text-md font-bold mb-1">{product.name}</h5>
-                    <p className="text-slate-300 bg-primary text-center rounded-md text-[11px] py-[px] w-24">
+                    <p className="mini-active ">
                       {product.category.name}
                     </p>
                   </TableCell>
@@ -70,7 +75,7 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
                   <TableCell className="text-right">
                     {/* Button to view single product details */}
                     <NavLink to={`/single-product/${product._id}`}>
-                      <Button className="">View Items</Button>
+                      <Button className="btn-2">View Items</Button>
                     </NavLink>
                   </TableCell>
                 </TableRow>

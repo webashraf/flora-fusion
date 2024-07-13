@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { TProduct } from "@/types/types";
 import {
   motion,
@@ -61,6 +62,7 @@ const TiltCard = ({ product }: { product: TProduct }) => {
         transformStyle: "preserve-3d",
         transform,
         backgroundImage: `url(${product.imageURL})`,
+        backgroundPosition: "center center",
       }}
       className="relatfsdfsdfive h-96 w-72 rounded-xl overflow-hidden"
     >
@@ -69,7 +71,7 @@ const TiltCard = ({ product }: { product: TProduct }) => {
           transform: "translateZ(75px)",
           transformStyle: "preserve-3d",
         }}
-        className="absolute inset-2 grid place-content-center rounded-xl  shadow-lg backdrop-blur-md h-[100px] mt-auto gap-1"
+        className="absolute inset-2 grid place-content-center rounded-xl  shadow-lg backdrop-blur-md h-[115px] mt-auto gap-1"
       >
         <p
           style={{
@@ -80,12 +82,11 @@ const TiltCard = ({ product }: { product: TProduct }) => {
           {product.name}
         </p>
 
-        <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">
+        {/* <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">
           {product.category.name}
-        </p>
-        <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">
-          ${product.price}
-        </p>
+        </p> */}
+        <p className="mini-active mx-auto">${product.price}</p>
+        <Button className="btn-1">View Details</Button>
       </div>
     </motion.div>
   );

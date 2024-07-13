@@ -7,6 +7,7 @@ import "lightgallery/css/lightgallery.css";
 // import "lightgallery/scss/lg-zoom.scss";
 // import "lightgallery/scss/lightgallery.scss";
 
+import CommonHeading from "@/shared/CommonHeading/CommonHeading";
 import { TProduct } from "@/types/types";
 import lgZoom from "lightgallery/plugins/zoom";
 
@@ -18,6 +19,10 @@ const Gallery = ({ products }: { products: TProduct | any }) => {
   // };
   return (
     <div className="App section-margin-top">
+      <CommonHeading
+        title="Image Gallery"
+        subTitle="A Visual Journey Through Our Plant Collection"
+      />
       <LightGallery
         plugins={[lgZoom]}
         mode="lg-fade"

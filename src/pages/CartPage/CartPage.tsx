@@ -138,7 +138,7 @@ const CartPage = () => {
           <h4 className="font-semibold mr-">Total: ${newPrice.toFixed(2)}</h4>
         </div>
         <NavLink to="/checkout">
-          <Button type="submit" className="capitalize">
+          <Button type="submit" className="capitalize btn-2">
             Proceed to checkout
           </Button>
         </NavLink>

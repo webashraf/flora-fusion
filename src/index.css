@@ -76,19 +76,25 @@
 }
 
 .p-color {
-  color: #698467;
+  color: #e8e8e8;
 }
 .s-color {
   color: #87b670;
 }
 .p-bg {
-  background-color: #698467;
+  background-color: #61815f;
 }
 .s-bg {
-  background-color: #87b670;
+  background-color: #85b86b;
 }
-.hero-btn {
-  @apply uppercase px-10 py-5 rounded-none bg-white text-slate-500 text-xs;
+.btn-1 {
+  @apply uppercase px-10 py-5 rounded-none s-bg text-slate-100 text-xs;
+}
+.btn-2 {
+  @apply uppercase rounded-none p-bg text-slate-100 text-xs;
+}
+.mini-active {
+  @apply text-white p-bg rounded-md text-xs py-[4px] w-28  text-center;
 }
 .active {
   background-color: rgb(0, 0, 0);

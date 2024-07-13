@@ -280,7 +280,7 @@ const CheckOut = () => {
                   <div className="text-center">
                     <button
                       type="submit"
-                      className="text-white font-bold px-16 py-1 rounded-md bg-blue-500 hover:bg-blue-600"
+                      className="text-white font-bold px-16 py-2 rounded-md btn-2 "
                     >
                       Place Order
                     </button>

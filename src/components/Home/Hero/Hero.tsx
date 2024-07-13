@@ -10,7 +10,7 @@ const Hero = ({ products }: { products: TProduct | any }) => {
         <div className="mx-auto flex flex-col justify-center items-center absolute z-10 gap-3 p-5 backdrop-blur-sm w-full h-full ">
           <h1 className="text-4xl p-color">We’re Spring Plant</h1>
           <h2 className="text-6xl font-serif text-white">PLANT BIG SALE</h2>
-          <Button className="hero-btn">Shop Now</Button>
+          <Button className="btn-1">Shop Now</Button>
         </div>
         <div className="h-full">
           <img
@@ -26,7 +26,7 @@ const Hero = ({ products }: { products: TProduct | any }) => {
           <div className=" mx-auto flex flex-col justify-center items-center absolute z-10 gap-3 p-5 backdrop-blur-sm w-full h-full ">
             <h1 className="text-4xl p-color">Holiday Gifts</h1>
             <h2 className="text-6xl font-serif text-white">SPECIAL PLAN</h2>
-            <Button className="hero-btn">Shop Now</Button>
+            <Button className="btn-1">Shop Now</Button>
           </div>
 
           <div className="h-full w-full">
@@ -41,7 +41,7 @@ const Hero = ({ products }: { products: TProduct | any }) => {
           <div className=" mx-auto flex flex-col justify-center items-center absolute z-10 gap-3 p-5 backdrop-blur-sm w-full h-full">
             <h1 className="text-4xl p-color">Spring Sale</h1>
             <h2 className="text-6xl font-serif text-white">UP TO 40% OFF</h2>
-            <Button className="hero-btn">Shop Now</Button>
+            <Button className="btn-1 s-bg">Shop Now</Button>
           </div>
 
           <div className="h-full w-full">

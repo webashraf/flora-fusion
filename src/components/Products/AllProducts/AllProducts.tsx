@@ -45,6 +45,7 @@ const AllProducts = ({ product }: { product: TProduct }) => {
                 <h5>$ {product.price}</h5>
                 {/* Button to add product to cart, disabled if out of stock */}
                 <Button
+                className="btn-2"
                   disabled={product.stock === 0}
                   onClick={() => handleAddtocart(product)}
                 >

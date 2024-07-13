@@ -73,7 +73,7 @@ const CartItems = ({ trees }: { trees: TProduct[] }) => {
                     Total: ${newPrice.toFixed(2)}
                   </h4>
                 </div>
-                <Button type="submit" className="capitalize">
+                <Button type="submit" className="capitalize btn-2">
                   Proced to chek-out
                 </Button>
               </div>
