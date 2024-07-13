@@ -33,7 +33,7 @@ const Home = () => {
     <>
       <Hero products={products.result} />
       <Products />
-      <ProductsCategory categories={categories} />
+      {/* <ProductsCategory categories={categories} /> */}
       <ProductList products={products.result} />
       <ProductsDetails products={products.result} />
       <Gallery products={products.result} />

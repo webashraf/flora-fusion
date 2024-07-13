@@ -7,29 +7,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TProducts } from "@/types/types";
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { TProduct } from "@/types/types";
+import { NavLink } from "react-router-dom";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const ProductsDetails = ({ products }: { products: TProducts | any }) => {
-  const navigate = useNavigate();
-  const [product, setProduct] = useState({});
-
+const ProductsDetails = ({ products }: { products: TProduct | any }) => {
   // Function to get a random product from the list
   const getRandomProduct = (number: number = 10) => {
     return products[Math.floor(Math.random() * number) + 1];
   };
 
   const currentProduct = getRandomProduct();
-
-  // Handle the click event to navigate to the single product page
-  // const handleSingleProduct = (singleProduct) => {
-  //   console.log(singleProduct);
-  //   console.log("Product selected", product);
-  //   setProduct(singleProduct);
-  //   navigate("/single-product", { state: { product: product } });
-  // };
 
   return (
     <div className="mt-20 ">
@@ -54,12 +42,13 @@ const ProductsDetails = ({ products }: { products: TProducts | any }) => {
                 <TableHead>Name & Category</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead>Total Items</TableHead>
+                <TableHead>Price</TableHead>
                 <TableHead className="text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
 
             {/* Map through the products and display each one in a table row */}
-            {products?.map((product: TProducts, i: number) => (
+            {products?.map((product: TProduct, i: number) => (
               <TableBody key={product._id}>
                 <TableRow>
                   <TableCell className="font-medium">{i}</TableCell>
@@ -70,9 +59,14 @@ const ProductsDetails = ({ products }: { products: TProducts | any }) => {
                     </p>
                   </TableCell>
                   <TableCell className="uppercase">
-                    {product.description}
+                    {product.shortDescription}
                   </TableCell>
-                  <TableCell>{product.price}</TableCell>
+                  <TableCell
+                    className={product.stock === 0 ? "text-red-500" : ""}
+                  >
+                    {product.stock}
+                  </TableCell>
+                  <TableCell>${product.price}</TableCell>
                   <TableCell className="text-right">
                     {/* Button to view single product details */}
                     <NavLink to={`/single-product/${product._id}`}>

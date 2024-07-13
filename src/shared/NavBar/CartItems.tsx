@@ -4,17 +4,16 @@ import {
   Dialog,
   DialogContent,
   DialogFooter,
-  DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 
-const CartItems = ({ trees }: { trees: TProducts[] }) => {
+const CartItems = ({ trees }: { trees: TProduct[] }) => {
   // const dispatch = useAppDispatch();
 
   let newPrice: number = 0;
-  trees.forEach((item: TProducts) => {
+  trees.forEach((item: TProduct) => {
     newPrice = item.price * item.qty + newPrice;
   });
   return (
@@ -29,17 +28,11 @@ const CartItems = ({ trees }: { trees: TProducts[] }) => {
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[725px]">
-          <DialogHeader>
-            {/* <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription> */}
-          </DialogHeader>
           <div className="py-4">
             <div className="g">
               {trees.length !== 0 ? (
                 <Table className="grid grid-cols-2 max-h-[600px]">
-                  {trees?.map((tree: TProducts, i: number) => (
+                  {trees?.map((tree: TProduct, i: number) => (
                     <TableBody className="mw-[200px]" key={tree._id}>
                       <TableRow>
                         <TableCell className="font-medium">{i + 1}</TableCell>

@@ -4,13 +4,13 @@ import { setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CommonHero from "@/shared/CommonHero/CommonHero";
 import Loader from "@/shared/Loader/Loader";
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 import { useLoaderData } from "react-router-dom";
 
 const SingleProduct = () => {
   // console.log("Single Product", product);
   const singleProduct: any = useLoaderData();
-  const product: TProducts = singleProduct.result;
+  const product: TProduct = singleProduct.result;
 
   const state = useAppSelector((state) => state.cart.cart);
   const dispatch = useAppDispatch();
@@ -73,7 +73,7 @@ const SingleProduct = () => {
               onClick={handleAddtocart}
               className="capitalize"
             >
-              Add to cart
+              {product.stock === 0 ? "Out Of Stock" : "Add to cart"}
             </Button>
           </div>
           <div></div>

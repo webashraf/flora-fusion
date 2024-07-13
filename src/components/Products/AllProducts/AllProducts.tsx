@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 
-const AllProducts = ({ product }: { product: TProducts }) => {
+const AllProducts = ({ product }: { product: TProduct }) => {
   const dispatch = useAppDispatch();
 
   // Function to handle adding a product to the cart
-  const handleAddtocart = (tree: TProducts) => {
+  const handleAddtocart = (tree: TProduct) => {
     // Creating a new cart item with quantity set to 1
     const treeCartItem = { ...tree, qty: 1 };
     console.log("tree", tree);

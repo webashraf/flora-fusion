@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 import "../Hero/hero.css";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Hero = ({ products }: { products: TProducts | any }) => {
+const Hero = ({ products }: { products: TProduct | any }) => {
   return (
     <div className="h-[80vh] flex gap-10 bg-white">
       <div className="w-1/2  h-full gap-3 flex justify-center hero-banner overflow-hidden relative">

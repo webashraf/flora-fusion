@@ -5,7 +5,7 @@ export interface TTreeProductsCategory {
   imageURL: string;
 }
 
-export interface TProducts {
+export interface TProduct {
   _id: string;
   name: string;
   shortDescription: string;

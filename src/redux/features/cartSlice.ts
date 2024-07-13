@@ -1,8 +1,8 @@
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TInitialState = {
-  cart: TProducts[];
+  cart: TProduct[];
 };
 
 const initialState: TInitialState = {
@@ -13,7 +13,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    setCart(state, action: PayloadAction<TProducts>) {
+    setCart: (state, action: PayloadAction<TProduct>) => {
       const index = state.cart.findIndex(
         (item) => item._id === action.payload._id
       );
@@ -25,8 +25,11 @@ const cartSlice = createSlice({
         state.cart.push({ ...action.payload });
       }
     },
+    removeCartItem: (state, action: PayloadAction<string>) => {
+      state.cart = state.cart.filter((item) => item._id !== action.payload);
+    },
   },
 });
 
-export const { setCart } = cartSlice.actions;
+export const { setCart, removeCartItem } = cartSlice.actions;
 export default cartSlice.reducer;

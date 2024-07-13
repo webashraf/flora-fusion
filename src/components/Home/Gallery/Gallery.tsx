@@ -7,11 +7,11 @@ import "lightgallery/css/lightgallery.css";
 // import "lightgallery/scss/lg-zoom.scss";
 // import "lightgallery/scss/lightgallery.scss";
 
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 import lgZoom from "lightgallery/plugins/zoom";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Gallery = ({ products }: { products: TProducts | any }) => {
+const Gallery = ({ products }: { products: TProduct | any }) => {
   console.log(products);
   // const onInit = () => {
   //   console.log("lightGallery has been initialized");
@@ -33,7 +33,7 @@ const Gallery = ({ products }: { products: TProducts | any }) => {
           rotate: false,
         }}
       >
-        {products?.slice(0, 16).map((product: TProducts) => (
+        {products?.slice(0, 16).map((product: TProduct) => (
           <a
             key={product._id}
             data-lg-size="1000-800"

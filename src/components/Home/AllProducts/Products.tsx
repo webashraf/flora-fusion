@@ -18,21 +18,22 @@ import {
 
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import ProductCard from "@/shared/productCard/ProductCard";
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 import { useState } from "react";
 
 const Products = () => {
   // State to hold search input and price filter
   const [searchInput, setSearchInput] = useState({ searchItem: "", price: 1 });
 
-  // Fetch products based on searchInput state
   const { data: products } = useGetProductsQuery(searchInput);
 
   // Handle search form submission
   const handleSearch = (e: any) => {
     e.preventDefault();
-    const value = e.target.searchInput.value; // Get the search input value
-    setSearchInput((prevState) => ({ ...prevState, searchItem: value })); // Update search input state
+
+    const value = e.target.searchInput.value;
+
+    setSearchInput((prevState) => ({ ...prevState, searchItem: value }));
   };
 
   // Handle filter selection change
@@ -89,10 +90,10 @@ const Products = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Map products from database and display using ProductCard component */}
       <div className="mb-14 grid grid-cols-4 gap-5">
-        {products?.result?.slice(0, 8).map((product: TProducts) => (
+        {products?.result?.slice(0, 8).map((product: TProduct) => (
           <ProductCard key={product?._id} product={product} />
         ))}
       </div>

@@ -1,4 +1,4 @@
-import { TProducts } from "@/types/types";
+import { TProduct } from "@/types/types";
 import {
   motion,
   useMotionTemplate,
@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 
-const ProductCard = ({ product }: { product: TProducts }) => {
+const ProductCard = ({ product }: { product: TProduct }) => {
   // console.log(product);
   return (
     <div className="grid w-full place-content-center bg-gradient-to-br from-[#698467] to-[#74a859f6] py-5 rounded-md text-slate-900 bg-cover">
@@ -19,7 +19,7 @@ const ProductCard = ({ product }: { product: TProducts }) => {
 const ROTATION_RANGE = 32.5;
 const HALF_ROTATION_RANGE = 32.5 / 2;
 
-const TiltCard = ({ product }: { product: TProducts }) => {
+const TiltCard = ({ product }: { product: TProduct }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
