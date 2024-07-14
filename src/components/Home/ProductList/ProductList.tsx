@@ -10,7 +10,7 @@ const ProductList = ({ products }: { products: TProduct | any }) => {
         title="Our Plant Collection"
         subTitle="Browse Our Selection of Medicinal, Ornamental, and Fruit Trees"
       />
-      <div className=" grid grid-cols-4 gap-10">
+      <div className=" flex  flex-wrap items-center justify-center gap-10">
         {products?.slice(0, 8).map((product: TProduct) => (
           <ProductListCard product={product} key={product._id} />
         ))}

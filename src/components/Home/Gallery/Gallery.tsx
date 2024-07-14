@@ -49,7 +49,7 @@ const Gallery = ({ products }: { products: TProduct | any }) => {
             data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@therawhunter' >Massimiliano Morosinotto </a></h4><p> Location - <a href='https://unsplash.com/s/photos/tre-cime-di-lavaredo%2C-italia'>Tre Cime di Lavaredo, Italia</a>This is the Way</p>"
           >
             <img
-              className="img-responsive inline w-[25%] h-[400px] object-cover"
+              className="img-responsive inline lg:w-[25%] md:w-1/2 w-[100%] h-[400px] object-cover"
               src={product.imageURL}
             />
           </a>

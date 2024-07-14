@@ -20,11 +20,18 @@ import { useGetProductsQuery } from "@/redux/api/baseApi";
 import CommonHeading from "@/shared/CommonHeading/CommonHeading";
 import ProductCard from "@/shared/productCard/ProductCard";
 import { TProduct } from "@/types/types";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 const Products = () => {
   // State to hold search input and price filter
-  const [searchInput, setSearchInput] = useState({ searchItem: "", price: 1 });
+  const [searchInput, setSearchInput] = useState({
+    searchItem: "",
+    price: 1,
+    page: 1,
+    limit: "",
+  });
+
+  const [paginate, setPaginate] = useState<number>(1);
 
   const { data: products } = useGetProductsQuery(searchInput);
 
@@ -46,14 +53,42 @@ const Products = () => {
     setSearchInput((prevState) => ({ ...prevState, price: sorting })); // Update price filter state
   };
 
+  // Pagination handling
+  const handlePaginate = (
+    pageNumber: number,
+    nextPrev: string = "",
+    event: MouseEvent<HTMLAnchorElement>
+  ) => {
+    event.preventDefault();
+    setPaginate(pageNumber);
+
+    if (nextPrev === "next") {
+      setPaginate(paginate + 1);
+      console.log(paginate);
+    }
+    if (nextPrev === "prev") {
+      setPaginate(paginate - 1);
+      console.log(paginate);
+    }
+
+    setSearchInput((prevState) => ({
+      ...prevState,
+      page: pageNumber,
+      limit: "8",
+    }));
+    // console.log(pageNumber);
+    // console.log(searchInput);
+  };
+  // console.log(products?.result[1]);
+
   return (
-    <div className="section-margin-top">
+    <div className="section-margin-top px-5 lg:px-0 ">
       <CommonHeading
         title="Discover Your Perfect Plants"
         subTitle="Explore Our Features, Categories, and Detailed Product Information"
       />
       <div className="flex justify-between mb-10">
-        <div className="">
+        <div className="md:w-1/2">
           {/* Select component for price filter */}
           <Select onValueChange={handleFilter}>
             <SelectTrigger className="w-[180px]">
@@ -67,8 +102,8 @@ const Products = () => {
           </Select>
         </div>
 
-        <div className="w-1/3 flex justify-end">
-          <div className="bg-white border rounded-lg w-[60%]">
+        <div className="lg:w-1/3 md:w-1/2 flex justify-end">
+          <div className="bg-white border rounded-lg lg:w-[60%] md:lg-[80%] ">
             {/* Search form */}
             <form onSubmit={handleSearch} className="w-[100%] flex">
               <input
@@ -97,7 +132,7 @@ const Products = () => {
       </div>
 
       {/* Map products from database and display using ProductCard component */}
-      <div className="mb-14 grid grid-cols-4 gap-5">
+      <div className="mb-14 grid lg:grid-cols-4 md:grid-cols-2 gap-5 ">
         {products?.result?.slice(0, 8).map((product: TProduct) => (
           <ProductCard key={product?._id} product={product} />
         ))}
@@ -105,28 +140,50 @@ const Products = () => {
 
       <div className="py-5">
         {/* Pagination component */}
-        {/* <Pagination>
+        <Pagination>
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious href="#" />
+              <PaginationPrevious
+                onClick={(event) => handlePaginate(paginate, "prev", event)}
+                href="#"
+              />
+            </PaginationItem>
+
+            <PaginationItem>
+              <PaginationLink
+                onClick={(event) => handlePaginate(1, "", event)}
+                href="#"
+              >
+                1
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#">1</PaginationLink>
+              <PaginationLink
+                onClick={(event) => handlePaginate(2, "", event)}
+                href="#"
+              >
+                2
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href="#">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="#">3</PaginationLink>
+              <PaginationLink
+                onClick={(event) => handlePaginate(3, "", event)}
+                href="#"
+              >
+                3
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
             <PaginationItem>
-              <PaginationNext href="#" />
+              <PaginationNext
+                onClick={(event) => handlePaginate(paginate, "next", event)}
+                href="#"
+              />
             </PaginationItem>
           </PaginationContent>
-        </Pagination> */}
+        </Pagination>
       </div>
     </div>
   );

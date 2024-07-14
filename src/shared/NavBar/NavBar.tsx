@@ -11,15 +11,15 @@ const NavBar = () => {
   return (
     <nav className="w-full flex flex-col items-center bg-white">
       <div className="flex justify-between gap-10 w-full">
-        <div className="w-[20%] relative bottom-4 ">
-          <img src="/public/Flora_Fusion_logos.png" alt="" />
+        <div className="w-[20%] relative bottom-4 flex items-center">
+          <img src="/Flora_Fusion_logos.png" alt="" />
         </div>
-        <div className="w-[80%] bg-red-5  border">
+        <div className="w-[80%] bg-red-5  border overflow-hidden">
           <div
-            className="w-full  h-[60%] flex items-center justify-between
+            className="w-full  lg:h-[60%] md:py-3 bgblack flex items-center justify-between
           "
           >
-            <div className="w-[30%] text-center ps-1">
+            <div className="lg:w-[30%] text-center ps-1">
               <h4 className="text-base font-serif">
                 FREE GROUND SHIPPING ON ORDERS OVER $129*
               </h4>
@@ -47,27 +47,6 @@ const NavBar = () => {
           </div>
 
           <div className="w-[100%]  h-[40%] flex justify-end items-center border-t">
-            {/* <div className="bg-white border-x rounded-md w-[60%] flex ">
-              <input
-                type="text"
-                className=" py-2 ps-3 w-[880%] "
-                placeholder="What are you looking for?"
-              />
-              <div className="px-5  flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div> */}
             <div className="border-x  px-12 py-3 relative flex justify-center items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

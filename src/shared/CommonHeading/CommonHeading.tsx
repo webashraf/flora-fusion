@@ -6,8 +6,8 @@ const CommonHeading = ({
   subTitle: string;
 }) => {
   return (
-    <div className="text-center space-y-5 pb-20">
-      <h2 className="text-5xl text-center">{title}</h2>
+    <div className="text-center space-y-5 pb-20 p">
+      <h2 className="md:text-5xl text-4xl text-center">{title}</h2>
       <p>{subTitle}</p>
     </div>
   );

@@ -64,7 +64,7 @@ const TiltCard = ({ product }: { product: TProduct }) => {
         backgroundImage: `url(${product.imageURL})`,
         backgroundPosition: "center center",
       }}
-      className="relatfsdfsdfive h-96 w-72 rounded-xl overflow-hidden"
+      className="relative h-96 w-72 rounded-xl overflow-hidden"
     >
       <div
         style={{

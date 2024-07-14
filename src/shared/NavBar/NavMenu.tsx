@@ -68,9 +68,8 @@ const SlideTabs: React.FC = () => {
         <Tab setPosition={setPosition}>Cart</Tab>
       </NavLink>
 
-      <Tab setPosition={setPosition}>Features</Tab>
-      <Tab setPosition={setPosition}>Docs</Tab>
-      <Tab setPosition={setPosition}>Blog</Tab>
+      <Tab setPosition={setPosition}>Manage Items</Tab>
+
 
       <Cursor position={position} />
     </ul>

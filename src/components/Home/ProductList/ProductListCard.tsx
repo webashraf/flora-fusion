@@ -18,11 +18,11 @@ const ProductListCard = ({ product }: { product: TProduct }) => {
   };
 
   return (
-    <div className="relative">
-      <div className="card w-[350px] h-[400px]">
+    <div className="relative ">
+      <div className="card lg:w-[320px] h-[400px]">
         <div className="text text-2xl font-bold">
           <div className="">
-            <div className="h-[370px] mb-5 bg-red-400 overflow-hidden">
+            <div className="h-[470px] w-[300px] mb-5 bg-red-400 overflow-hidden">
               <img
                 className="w-full object-cover h-full"
                 src={product.imageURL}
@@ -45,7 +45,8 @@ const ProductListCard = ({ product }: { product: TProduct }) => {
               <div className="flex justify-between items-center">
                 <h5>$ {product.price}</h5>
                 {/* Button to add product to cart, disabled if out of stock */}
-                <Button className="btn-2"
+                <Button
+                  className="btn-2"
                   disabled={product.stock === 0}
                   onClick={() => handleAddtocart(product)}
                 >

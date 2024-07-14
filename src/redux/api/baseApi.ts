@@ -6,6 +6,21 @@ export const baseApi = createApi({
   tagTypes: ["cart", "products", "categories"],
   endpoints: (builder) => ({
     getProducts: builder.query({
+      query: ({ searchItem = "", price = 1, page = 1, limit }) => {
+        console.log("Parameters received in getProducts query:", {
+          searchItem,
+          price,
+          page,
+          limit,
+        });
+        return {
+          method: "GET",
+          url: `/products?searchItem=${searchItem}&price=${price}&page=${page}&limit=${limit}`,
+          invalidatesTags: ["products"],
+        };
+      },
+    }),
+    getProductsByQuery: builder.query({
       query: ({ searchItem = "", price = 1 }) => {
         console.log("Parameters received in getProducts query:", {
           searchItem,
@@ -13,7 +28,7 @@ export const baseApi = createApi({
         });
         return {
           method: "GET",
-          url: `/products?searchItem=${searchItem}&price=${price}`,
+          url: `/products?searchItem=${searchItem}&price=${price}&page=1&limit=5`,
           invalidatesTags: ["products"],
         };
       },
@@ -38,6 +53,7 @@ export const baseApi = createApi({
 
 export const {
   useGetProductsQuery,
+  useGetProductsByQueryQuery,
   useGetCategoriesQuery,
   useUpdateTreeStockMutation,
 } = baseApi;
