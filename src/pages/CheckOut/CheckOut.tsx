@@ -11,7 +11,6 @@ import { useUpdateTreeStockMutation } from "@/redux/api/baseApi";
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
 import { NavLink } from "react-router-dom";
-import "./CheckOut.css";
 
 const CheckOut = () => {
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);

@@ -68,8 +68,14 @@ const SlideTabs: React.FC = () => {
         <Tab setPosition={setPosition}>Cart</Tab>
       </NavLink>
 
-      <Tab setPosition={setPosition}>Manage Items</Tab>
-
+      <NavLink
+        to="/manage-products"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "active" : ""
+        }
+      >
+        <Tab setPosition={setPosition}>Manage Items</Tab>
+      </NavLink>
 
       <Cursor position={position} />
     </ul>

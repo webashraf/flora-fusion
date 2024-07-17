@@ -18,7 +18,7 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
   const [pImg, setPImg] = useState(products[0]);
   // Function to get a random product from the list
   const getRandomProduct = (number: number = 10) => {
-    return products[Math.floor(Math.random() * number) + 1];
+    return products[number];
   };
 
   // setPImg(getRandomProduct());
@@ -61,7 +61,7 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
             {products?.map((product: TProduct, i: number) => (
               <TableBody
                 key={product._id}
-                onMouseEnter={() => setPImg(getRandomProduct())}
+                onMouseEnter={() => setPImg(getRandomProduct(i))}
               >
                 <TableRow>
                   <TableCell className="font-medium">{i}</TableCell>
