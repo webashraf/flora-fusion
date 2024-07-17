@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
-  tagTypes: ["cart", "products", "categories"],
+  tagTypes: ["items"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: ({ searchItem = "", price = 1, page = 1, limit }) => {
@@ -16,7 +16,7 @@ export const baseApi = createApi({
         return {
           method: "GET",
           url: `/products?searchItem=${searchItem}&price=${price}&page=${page}&limit=${limit}`,
-          invalidatesTags: ["products"],
+          providesTags: ["products"],
         };
       },
     }),
@@ -29,7 +29,7 @@ export const baseApi = createApi({
         return {
           method: "GET",
           url: `/products?searchItem=${searchItem}&price=${price}&page=1&limit=5`,
-          invalidatesTags: ["products"],
+          providesTags: ["items"],
         };
       },
     }),
@@ -37,7 +37,7 @@ export const baseApi = createApi({
       query: () => ({
         url: "/categories",
         method: "GET",
-        invalidatesTags: ["categories"],
+        providesTags: ["items"],
       }),
     }),
     updateTreeStock: builder.mutation({
@@ -46,7 +46,22 @@ export const baseApi = createApi({
         method: "POST",
         body: orderInfo,
       }),
-      invalidatesTags: ["cart", "products", "categories"],
+      invalidatesTags: ["items"],
+    }),
+    createTree: builder.mutation({
+      query: (payload) => ({
+        url: "/products/add-product",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["items"],
+    }),
+    deleteTree: builder.mutation({
+      query: (params) => ({
+        url: `/products/${params}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["items"],
     }),
   }),
 });
@@ -56,4 +71,6 @@ export const {
   useGetProductsByQueryQuery,
   useGetCategoriesQuery,
   useUpdateTreeStockMutation,
+  useCreateTreeMutation,
+  useDeleteTreeMutation,
 } = baseApi;

@@ -1,4 +1,20 @@
+import {
+  useCreateTreeMutation,
+  useGetCategoriesQuery,
+} from "@/redux/api/baseApi";
+import Loader from "@/shared/Loader/Loader";
+import { TTreeProductsCategory } from "@/types/types";
+
 const AddTree = () => {
+  const { data: categories } = useGetCategoriesQuery({});
+  // console.log("🚀 ~ AddTree ~ categories:", categories);
+
+  const [createTree] = useCreateTreeMutation();
+
+  if (!categories) {
+    return <Loader />;
+  }
+
   const handleAddProduct = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -7,31 +23,26 @@ const AddTree = () => {
       name: formData.get("name") as string,
       price: formData.get("price") as string,
       stock: formData.get("stock") as string,
-      // mobileNumber: formData.get("mobileNumber") as string,
+      ratings: formData.get("ratings") as string,
       shortDescription: formData.get("shortDescription") as string,
-      detailsDescription: formData.get("detailsDescription") as string,
-      paymentMethod: formData.get("paymentMethod") as string,
+      description: formData.get("detailsDescription") as string,
+      imageURL: formData.get("imageURL") as string,
+
       category: formData.get("category") as string,
-      // products: cartProducts.map((product) => ({
-      //   _id: product._id,
-      //   name: product.name,
-      //   qty: product.qty,
-      //   price: product.price,
-      //   category: product.category.name,
-      // })),
-      // totalAmount,
+      isAvailable: true,
     };
 
     console.log(orderInfo);
 
-    // try {
-    //   console.log("Order placed successfully", orderInfo);
+    try {
+      console.log("Order placed successfully", orderInfo);
 
-    //   const res = await updateTreeStock(orderInfo).unwrap();
-    //   console.log(res);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+      const res = await createTree(orderInfo);
+      
+      console.log("🚀 ~ handleAddProduct ~ res:", res);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div>
@@ -74,6 +85,44 @@ const AddTree = () => {
 
         <div>
           <label
+            htmlFor="imageURL"
+            className="block text-gray-500 text-sm font-medium"
+          >
+            Image Url <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="url"
+            id="imageURL"
+            name="imageURL"
+            placeholder="Give your image url https://"
+            className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="category"
+            className="block text-gray-500 text-sm font-medium"
+          >
+            Category<span className="text-red-500">*</span>
+          </label>
+          <select
+            id="category"
+            name="category"
+            className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+            required
+          >
+            <option value="">Select Category...</option>
+            {categories &&
+              categories.map((category: TTreeProductsCategory) => (
+                <option value={category._id}>{category.name}</option>
+              ))}
+          </select>
+        </div>
+
+        <div>
+          <label
             htmlFor="stock"
             className="block text-gray-500 text-sm font-medium"
           >
@@ -89,22 +138,24 @@ const AddTree = () => {
           />
         </div>
 
-        {/* <div>
+        <div>
           <label
-            htmlFor="mobileNumber"
+            htmlFor="ratings"
             className="block text-gray-500 text-sm font-medium"
           >
-            Mobile Number <span className="text-red-500">*</span>
+            Ratings <span className="text-red-500">*</span>
           </label>
           <input
-            type="text"
-            id="mobileNumber"
-            name="mobileNumber"
+            type="number"
+            min={1}
+            max={5}
+            id="ratings"
+            name="ratings"
             placeholder="Mobile number"
             className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
             required
           />
-        </div> */}
+        </div>
 
         <div>
           <label
@@ -139,53 +190,6 @@ const AddTree = () => {
             className="w-full h-20 ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
             required
           ></textarea>
-        </div>
-
-        {/* <div>
-          <label className="block text-gray-500 text-sm font-medium">
-            Payment Method <span className="text-red-500">*</span>
-          </label>
-          <div className="mt-1 flex space-x-3">
-            <label
-              htmlFor="cashOnDelivery"
-              className="flex-1 flex space-x-2 justify-between items-center rounded-md px-2 py-1 border border-gray-400"
-            >
-              <span>Cash on Delivery</span>
-              <input
-                type="radio"
-                defaultChecked
-                id="cashOnDelivery"
-                name="paymentMethod"
-                value="cashOnDelivery"
-                required
-              />
-            </label>
-          </div>
-        </div> */}
-
-        <div>
-          <label
-            htmlFor="category"
-            className="block text-gray-500 text-sm font-medium"
-          >
-            Category<span className="text-red-500">*</span>
-          </label>
-          <select
-            id="category"
-            name="category"
-            className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
-            required
-          >
-            <option value="">Select category...</option>
-            <option value="Barishal">Barishal</option>
-            <option value="Chattogram">Chattogram</option>
-            <option value="Dhaka">Dhaka</option>
-            <option value="Khulna">Khulna</option>
-            <option value="Rajshahi">Rajshahi</option>
-            <option value="Rangpur">Rangpur</option>
-            <option value="Mymensingh">Mymensingh</option>
-            <option value="Sylhet">Sylhet</option>
-          </select>
         </div>
 
         <div className="text-center">
