@@ -1,12 +1,30 @@
 import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
+import { useEffect } from "react";
 import CartItems from "./CartItems";
 import NavMenu from "./NavMenu";
 // import { NavMenu } from "/src/shared/NavBar/NavMenu";
 
 const NavBar = () => {
   const items = useAppSelector((state) => state.cart.cart);
-  // console.log(items);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (items.length !== 0) {
+        const warningMessage =
+          "Your cart has some items. Are you sure to reload?😒";
+        event.returnValue = warningMessage;
+        return warningMessage;
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [items]);
 
   return (
     <nav className="w-full flex flex-col items-center bg-white">
@@ -42,7 +60,9 @@ const NavBar = () => {
                 </svg>
               </span>
               <h4 className="text-sm font-l">CALL TO ORDER!</h4>
-              <p className="font-mono text-sm">844-348-8971</p>
+              <p className="font-mono text-sm">
+                <a href="tel:+844-348-8971">844-348-8971</a>
+              </p>
             </div>
           </div>
 
@@ -65,13 +85,16 @@ const NavBar = () => {
               </div>
             </div>
             <span className="px-12">
-              <UserCircleIcon className="h-6 w-6 text-black" />
+              <UserCircleIcon className="h-6 w-6 text-[#61815f]" />
             </span>
           </div>
         </div>
       </div>
 
-      <div className="w-full px-10 text-center py-3 bg-[#698467] text-white">
+      <div
+        id="nav-menu-top"
+        className="w-full px-10 text-center py-3 bg-gradient-to-r from-[#61815f] to-[#80a97e] text-white "
+      >
         <NavMenu />
       </div>
     </nav>

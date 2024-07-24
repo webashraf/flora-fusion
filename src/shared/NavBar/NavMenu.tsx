@@ -36,7 +36,7 @@ const SlideTabs: React.FC = () => {
       <NavLink
         to="/"
         className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "active" : ""
+          isPending ? "pending" : isActive ? "activeNav" : ""
         }
       >
         <Tab setPosition={setPosition}>Home</Tab>
@@ -121,7 +121,7 @@ const Cursor: React.FC<CursorProps> = ({ position }) => {
       animate={{
         ...position,
       }}
-      className="absolute z-0 h-7 rounded-sm bg-black md:h-12"
+      className="absolute z-0 h-7 rounded-sm bg-[#182218] md:h-12"
     />
   );
 };

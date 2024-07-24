@@ -90,13 +90,15 @@
 .btn-1 {
   @apply uppercase px-10 py-5 rounded-none s-bg text-slate-100 text-xs;
 }
+
 .btn-2 {
   @apply uppercase rounded-none p-bg text-slate-100 text-xs;
 }
+
 .mini-active {
-  @apply text-white p-bg rounded-md text-xs py-[4px] w-28  text-center;
+  @apply text-white bg-gradient-to-r from-[#34543a] to-[#80a97e] rounded-md text-xs py-[4px] w-28  text-center;
 }
-.active {
+.activeNav {
   background-color: rgb(0, 0, 0);
   border-radius: 4px;
 }

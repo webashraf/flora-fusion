@@ -7,12 +7,6 @@ export const baseApi = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: ({ searchItem = "", price = 1, page = 1, limit }) => {
-        console.log("Parameters received in getProducts query:", {
-          searchItem,
-          price,
-          page,
-          limit,
-        });
         return {
           method: "GET",
           url: `/products?searchItem=${searchItem}&price=${price}&page=${page}&limit=${limit}`,

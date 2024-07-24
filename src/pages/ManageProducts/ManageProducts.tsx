@@ -9,6 +9,7 @@ const tabs = [
 ];
 const ManageProducts = () => {
   const [selected, setSelected] = useState(tabs[0].name);
+  const [isActive, setIsActive] = useState(true);
 
   return (
     <div className="px-4 py-14">
@@ -33,11 +34,7 @@ const Chip = ({ name, selected, setSelected, path }) => {
     <NavLink
       to={`/manage-products/${path}`}
       className={({ isActive, isPending }) =>
-        isPending
-          ? "text-white"
-          : isActive
-          ? "text-slate-900 hover:text-slate-200 hover:bg-slate-700 hover:rounded-lg"
-          : ""
+        isActive ? setSelected(name) : ""
       }
     >
       <button
@@ -45,7 +42,7 @@ const Chip = ({ name, selected, setSelected, path }) => {
         className={`${
           selected
             ? "text-white"
-            : "text-slate-900 hover:text-slate-200 hover:bg-slate-700"
+            : "text-slate-900 hover:text-slate-200 hover:bg-[#61815f]"
         } text-sm transition-colors px-2.5 py-0.5 rounded-md relative`}
       >
         <span className="relative z-10">{name}</span>
@@ -53,7 +50,7 @@ const Chip = ({ name, selected, setSelected, path }) => {
           <motion.span
             layoutId="pill-tab"
             transition={{ type: "spring", duration: 0.5 }}
-            className="absolute inset-0 z-0 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-md"
+            className="absolute inset-0 z-0 bg-gradient-to-r from-[#34543a] to-[#80a97e] rounded-md"
           ></motion.span>
         )}
       </button>

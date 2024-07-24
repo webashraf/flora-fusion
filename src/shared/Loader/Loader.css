@@ -2,8 +2,8 @@
   width: fit-content;
   font-weight: bold;
   font-family: monospace;
-  font-size: 70px;
-  background: radial-gradient(circle closest-side, #698467 94%, #0000)
+  font-size: 50px;
+  background: radial-gradient(circle closest-side, #80ae7c 94%, #0000)
     right/calc(200% - 1em) 100%;
   animation: l24 1s infinite alternate linear;
 }

@@ -56,14 +56,14 @@ const CheckOut = () => {
     }
   };
 
-  return (
-    <div className="py-20">
+  return cartProducts?.length > 0 ? (
+    <div className="py-20 mx-5">
       <h2 className="text-5xl uppercase pb-10">Check-out process</h2>
 
-      <div className="flex justify-between items-center ">
-        <div className="w-[60]">
+      <div className="flex justify-between items-center lg:flex-row flex-col">
+        <div className="w-[60] ">
           <div className=" w-full ml-auto">
-            <Table className="w-[600px]">
+            <Table className="lg:w-[600px]">
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[100px]">Serial</TableHead>
@@ -109,9 +109,9 @@ const CheckOut = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/2 flex flex-col items-center justify-center">
+        <div className="lg:w-1/2 w-full flex flex-col items-center justify-center">
           <div className="">
-            <div className="mx-auto w-[500px] bg-white rounded-md shadow-2xl drop-shadow-md">
+            <div className="lg:mx-auto lg:w-[500px] w-full px-5 bg-white rounded-md shadow-2xl drop-shadow-md">
               <div className="px-4 py-3 flex justify-between">
                 <div>
                   <h2 className="font-bold text-[32xl]">Checkout</h2>
@@ -291,6 +291,10 @@ const CheckOut = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <h2 className="text-5xl uppercase py-14">
+      First add to cart some products!!
+    </h2>
   );
 };
 

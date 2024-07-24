@@ -138,8 +138,8 @@ const Products = () => {
         ))}
       </div>
 
+      {/* Pagination component */}
       <div className="py-5">
-        {/* Pagination component */}
         <Pagination>
           <PaginationContent>
             <PaginationItem>

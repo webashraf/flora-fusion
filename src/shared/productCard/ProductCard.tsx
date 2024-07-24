@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { setCart } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
 import {
   motion,
@@ -6,7 +8,10 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
+import { BaggageClaim, LucideEye, ScanLineIcon } from "lucide-react";
 import { useRef } from "react";
+import { NavLink } from "react-router-dom";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
   // console.log(product);
@@ -52,6 +57,17 @@ const TiltCard = ({ product }: { product: TProduct }) => {
     x.set(0);
     y.set(0);
   };
+  const dispatch = useAppDispatch();
+  // Function to handle adding a product to the cart
+  const handleAddtocart = (tree: TProduct) => {
+    // Creating a new cart item with quantity set to 1
+    const treeCartItem = { ...tree, qty: 1 };
+    console.log("tree", tree);
+
+    // Dispatching Redux action setCart to update cart state with new item
+    dispatch(setCart(treeCartItem));
+    toast.success("Product add to  cart successfully!!");
+  };
 
   return (
     <motion.div
@@ -82,11 +98,33 @@ const TiltCard = ({ product }: { product: TProduct }) => {
           {product.name}
         </p>
 
-        {/* <p className="text-slate-300 bg-primary text-center rounded-md text-xs py-[4px] w-28 mx-auto">
-          {product.category.name}
-        </p> */}
         <p className="mini-active mx-auto">${product.price}</p>
-        <Button className="btn-1">View Details</Button>
+        <div className="flex gap-3 justify-between mt-1 w-full bg-blac absolute -top-5">
+          <NavLink
+            to={`single-product/${product._id}`}
+            className="hue-rotate-60"
+          >
+            <Button className="bg-[#587c47] rounded-md ">
+              <LucideEye className="text-white" />
+            </Button>
+          </NavLink>
+          <Button
+            disabled={product?.stock === 0}
+            onClick={() => handleAddtocart(product)}
+            className={
+              product.stock == 0
+                ? "bg-red-600"
+                : "bg-[#356121] hue-rotate-60 rounded-lg"
+            }
+          >
+            {product?.stock === 0 ? (
+              <ScanLineIcon className="text-white" />
+            ) : (
+              //  <h2></h2>
+              <BaggageClaim className="text-white" />
+            )}
+          </Button>
+        </div>
       </div>
     </motion.div>
   );

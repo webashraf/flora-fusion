@@ -23,7 +23,6 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
 
   // setPImg(getRandomProduct());
 
-  console.log(pImg);
 
   return (
     <div className="section-margin-top">

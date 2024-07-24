@@ -13,10 +13,6 @@ import lgZoom from "lightgallery/plugins/zoom";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Gallery = ({ products }: { products: TProduct | any }) => {
-  console.log(products);
-  // const onInit = () => {
-  //   console.log("lightGallery has been initialized");
-  // };
   return (
     <div className="App section-margin-top">
       <CommonHeading

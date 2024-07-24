@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
+import { toast } from "sonner";
 import "./ProductList.css";
 
 const ProductListCard = ({ product }: { product: TProduct }) => {
@@ -15,6 +16,7 @@ const ProductListCard = ({ product }: { product: TProduct }) => {
 
     // Dispatching Redux action setCart to update cart state with new item
     dispatch(setCart(treeCartItem));
+    toast.success("Product add to cart successfully!!");
   };
 
   return (
@@ -50,7 +52,7 @@ const ProductListCard = ({ product }: { product: TProduct }) => {
                   disabled={product.stock === 0}
                   onClick={() => handleAddtocart(product)}
                 >
-                  {product.stock === 0 ? "Out of stock" : " Add to cart"}
+                  {product.stock === 0 ? "Out of stock" : " Add to cart 🛍️"}
                 </Button>
               </div>
             </div>

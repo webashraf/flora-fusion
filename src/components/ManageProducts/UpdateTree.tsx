@@ -2,8 +2,8 @@ import {
   useDeleteTreeMutation,
   useGetProductsQuery,
 } from "@/redux/api/baseApi";
+import AlertDialogCustom from "@/shared/AlertDialog/AlertDialog";
 import CommonHeading from "@/shared/CommonHeading/CommonHeading";
-import Loader from "@/shared/Loader/Loader";
 import { TProduct } from "@/types/types";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -33,7 +33,7 @@ const UpdateTree = () => {
   const [pImg, setPImg] = useState(products && products?.result[0]);
 
   if (!products) {
-    return <Loader />;
+    // return <Loader />;
   }
   //* Function to get a random product from the list
   const getRandomProduct = (number: number = 10) => {
@@ -135,11 +135,11 @@ const UpdateTree = () => {
                           <AlertDialogContent>
                             <AlertDialogHeader>
                               <AlertDialogTitle>
-                                Are you absolutely sure?
+                                Are you absolutely sure to delete this item?
                               </AlertDialogTitle>
                               <AlertDialogDescription>
                                 This action cannot be undone. This will
-                                permanently delete your account and remove your
+                                permanently delete this item and remove your
                                 data from our servers.
                               </AlertDialogDescription>
                             </AlertDialogHeader>
@@ -154,26 +154,41 @@ const UpdateTree = () => {
                           </AlertDialogContent>
                         </AlertDialog>
 
-                        <div>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="size-6 stroke-[#72b06e] hover:stroke-[#61815f]"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                            />
-                          </svg>
-                        </div>
+                        <div></div>
                       </TableCell>
                     </TableRow>
                   </TableBody>
                 ))}
+              <TableBody
+              // onMouseEnter={() => setPImg(getRandomProduct(i))}
+              >
+                <TableRow>
+                  <TableCell className="font-medium">54</TableCell>
+                  <TableCell className="uppercase flex flex-col">
+                    <h5 className="text-md font-bold mb-1">dsfsdf</h5>
+                    <p className="mini-active ">fdsfadf</p>
+                  </TableCell>
+                  <TableCell className="uppercase">fdsfdsf</TableCell>
+                  <TableCell
+                  // className={product.stock === 0 ? "text-red-500" : ""}
+                  >
+                    ffs
+                  </TableCell>
+                  <TableCell>fdsfsdf</TableCell>
+                  <TableCell className="text-right flex gap-2 items-center justify-center">
+                    {/* Delete Button  */}
+                    <AlertDialog>
+                      <AlertDialogCustom />
+                    </AlertDialog>
+
+                    <div>
+                      <AlertDialog>
+                        <AlertDialogCustom id={"dafjdhsfahsdfaiosf"} />
+                      </AlertDialog>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
           </div>
         </div>
