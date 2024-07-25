@@ -1,0 +1,24 @@
+.bin-button {
+  @apply flex flex-col items-center justify-center size-11 bg-black rounded-full bg-red-400 cursor-pointer border border-2 border-pink-100 duration-300 relative overflow-hidden;
+}
+
+.bin-button:hover .bin-top {
+  transform: rotate(45deg);
+}
+
+.garbage {
+  transition: all 0.3s;
+}
+.bin-button:hover .garbage {
+  animation: throw 0.4s linear;
+}
+@keyframes throw {
+  from {
+    transform: translate(-400%, -700%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+}

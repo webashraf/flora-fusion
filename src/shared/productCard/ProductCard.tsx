@@ -8,7 +8,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { BaggageClaim, LucideEye, ScanLineIcon } from "lucide-react";
+import { LucideEye, ScanLineIcon, ShoppingCart } from "lucide-react";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
@@ -87,7 +87,7 @@ const TiltCard = ({ product }: { product: TProduct }) => {
           transform: "translateZ(75px)",
           transformStyle: "preserve-3d",
         }}
-        className="absolute inset-2 grid place-content-center rounded-xl  shadow-lg backdrop-blur-md h-[115px] mt-auto gap-1"
+        className="absolute inset-2 grid place-content-center rounded-xl  shadow-lg backdrop-blur- hue-rotate-30 bg-[#35612186] h-[115px] mt-auto gap-1"
       >
         <p
           style={{
@@ -100,11 +100,8 @@ const TiltCard = ({ product }: { product: TProduct }) => {
 
         <p className="mini-active mx-auto">${product.price}</p>
         <div className="flex gap-3 justify-between mt-1 w-full bg-blac absolute -top-5">
-          <NavLink
-            to={`single-product/${product._id}`}
-            className="hue-rotate-60"
-          >
-            <Button className="bg-[#587c47] rounded-md ">
+          <NavLink to={`single-product/${product._id}`} className="hue-rotate-">
+            <Button className="btn-1 rounded-md ">
               <LucideEye className="text-white" />
             </Button>
           </NavLink>
@@ -114,14 +111,14 @@ const TiltCard = ({ product }: { product: TProduct }) => {
             className={
               product.stock == 0
                 ? "bg-red-600"
-                : "bg-[#356121] hue-rotate-60 rounded-lg"
+                : "btn-1 hue-rotate-60 rounded-lg"
             }
           >
             {product?.stock === 0 ? (
               <ScanLineIcon className="text-white" />
             ) : (
               //  <h2></h2>
-              <BaggageClaim className="text-white" />
+              <ShoppingCart className="text-white hover:animate-bounce" />
             )}
           </Button>
         </div>

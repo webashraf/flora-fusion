@@ -29,11 +29,6 @@
   font-size: 1.2em;
 }
 
-.subtitle {
-  font-size: 0.6em;
-  font-weight: 300;
-  color: rgb(37, 194, 160);
-}
 
 .card:hover::before {
   width: 140px;

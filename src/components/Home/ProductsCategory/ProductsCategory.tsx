@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { TTreeProductsCategory } from "@/types/types";
+import { NavLink } from "react-router-dom";
 import "./ProductsCategory.css";
 
 const ProductsCategory = ({
@@ -26,9 +27,11 @@ subTitle"
             >
               <p className="font-semibold">{index + 1}</p>
               <h2 className="text-3xl">{category.name}</h2>
-              <Button className="capitalize btn-2">
-                View Products by category
-              </Button>
+              <NavLink to={`/products-by-category/${category?._id}`}>
+                <Button className="capitalize btn-2">
+                  View Products by category
+                </Button>
+              </NavLink>
             </div>
           ))}
         </div>

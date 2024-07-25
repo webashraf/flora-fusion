@@ -7,6 +7,7 @@ import CheckOut from "@/pages/CheckOut/CheckOut";
 import Home from "@/pages/Home";
 import ManageProducts from "@/pages/ManageProducts/ManageProducts";
 import ProductPage from "@/pages/ProductPage/ProductPage";
+import ProductsByCategory from "@/pages/ProductsByCategory/ProductsByCategory";
 import SingleProduct from "@/pages/ProductsDetails/SingleProduct";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
         element: <SingleProduct />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/api/v1/products/${params?.id}`),
+      },
+      {
+        path: "products-by-category/:id",
+        element: <ProductsByCategory />,
+        loader: ({ params }) =>
+          fetch(
+            `http://localhost:5000/api/v1/products?categoryId=${params?.id}`
+          ),
       },
       {
         path: "checkout",

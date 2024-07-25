@@ -1,9 +1,9 @@
+import DeleteBtn from "@/components/customUi/DeleteBtn/DeleteBtn";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { removeCartItem, setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
-import { Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
@@ -106,12 +106,16 @@ const CartPage = () => {
                       {/* <div>
                      
                    </div> */}
-                      <Button className="btn-3 border-2 bg-red-700 rounded-md h-9 text-slate-100 hover:text-white absolute top-0 right-0">
-                        <Trash2
+                      <div
+                        onClick={() => handleRemove(tree)}
+                        className=" absolute top-0 right-0"
+                      >
+                        {/* <Trash2
                           onClick={() => handleRemove(tree)}
                           className="w-5  hover:text-whit"
-                        />
-                      </Button>
+                        /> */}
+                        <DeleteBtn />
+                      </div>
 
                       <input
                         type="number"

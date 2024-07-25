@@ -73,6 +73,7 @@ const SingleProduct = () => {
               name=""
               id="qty-input"
             />
+            
             <Button
               disabled={product.stock === 0}
               onClick={handleAddtocart}
