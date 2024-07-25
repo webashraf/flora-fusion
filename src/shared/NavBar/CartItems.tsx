@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { TProduct } from "@/types/types";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { NavLink } from "react-router-dom";
 
 const CartItems = ({ trees }: { trees: TProduct[] }) => {
   // const dispatch = useAppDispatch();
@@ -73,9 +75,14 @@ const CartItems = ({ trees }: { trees: TProduct[] }) => {
                     Total: ${newPrice.toFixed(2)}
                   </h4>
                 </div>
-                <Button type="submit" className="capitalize btn-2">
-                  Proced to chek-out
-                </Button>
+
+                <DialogClose asChild>
+                  <NavLink to="/checkout">
+                    <Button type="submit" className="capitalize btn-2">
+                      Proced to chek-out
+                    </Button>
+                  </NavLink>
+                </DialogClose>
               </div>
             ) : (
               ""

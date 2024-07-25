@@ -48,14 +48,19 @@ const SingleProduct = () => {
         <div className=" w-1/2 pl-10 space-y-4">
           <h2 className="text-4xl uppercase">{product.name}</h2>
           <h2 className="text-7xl">${product.price}</h2>
-          <h4>Ratings⭐: {product.ratings}</h4>
-          <p className="text-slate-700 text-lg">
-            Description: {product.description}
+          <h4 className="font-bold">
+            Ratings⭐: <span className="font-normal">{product.ratings}</span>
+          </h4>
+          <p className="text-slate-700 text-lg font-bold">
+            Description:{" "}
+            <span className="font-normal">{product.description}</span>
           </p>
-          <p>Stock: {product.stock}</p>
-          <p className=" rounded-md text-md uppercase">
+          <p className="font-bold">
+            Stock: <span className="font-normal">{product.stock}</span>
+          </p>
+          <p className=" rounded-md text-md uppercase font-bold">
             Category:
-            <span className="bg-black inline-block px-1 text-sm capitalize text-white rounded-md ml-3">
+            <span className="mini-active px-2 ml-1 font-normal">
               {product.category.name}
             </span>
           </p>
@@ -63,7 +68,7 @@ const SingleProduct = () => {
             <input
               disabled={product.stock === 0}
               type="number"
-              className="w-[55px] h-[40px] pl-3 text-xl rounded-md border-2 border-slate-400"
+              className="w-[55px] h-[40px] pl-4 text-xl rounded-none border-2 border-[#4e674c]"
               defaultValue={1}
               name=""
               id="qty-input"
@@ -71,7 +76,7 @@ const SingleProduct = () => {
             <Button
               disabled={product.stock === 0}
               onClick={handleAddtocart}
-              className="capitalize"
+              className="capitalize btn-2"
             >
               {product.stock === 0 ? "Out Of Stock" : "Add to cart"}
             </Button>

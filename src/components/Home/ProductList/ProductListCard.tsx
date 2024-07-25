@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 import { setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
-import { toast } from "sonner";
 import "./ProductList.css";
+import { toast } from "sonner";
 
 const ProductListCard = ({ product }: { product: TProduct }) => {
   const dispatch = useAppDispatch();

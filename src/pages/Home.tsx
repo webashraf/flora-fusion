@@ -5,6 +5,7 @@ import Hero from "@/components/Home/Hero/Hero";
 import ProductList from "@/components/Home/ProductList/ProductList";
 import ProductsCategory from "@/components/Home/ProductsCategory/ProductsCategory";
 import ProductsDetails from "@/components/Home/ProductsDetails/ProductsDetails";
+import SlideAdds from "@/components/Home/SlideAdds/SlideAdds";
 import {
   useGetCategoriesQuery,
   useGetProductsQuery,
@@ -47,6 +48,7 @@ const Home = () => {
       <Products />
       <ProductsCategory categories={categories} />
       <ProductList products={products.result} />
+      <SlideAdds />
       <ProductsDetails products={products.result} />
       <Gallery products={products.result} />
     </>

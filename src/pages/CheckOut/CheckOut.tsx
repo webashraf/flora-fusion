@@ -61,7 +61,7 @@ const CheckOut = () => {
       <h2 className="text-5xl uppercase pb-10">Check-out process</h2>
 
       <div className="flex justify-between items-center lg:flex-row flex-col">
-        <div className="w-[60] ">
+        <div className="lg:w-[60] w-full">
           <div className=" w-full ml-auto">
             <Table className="lg:w-[600px]">
               <TableHeader>
@@ -81,9 +81,7 @@ const CheckOut = () => {
                     <TableCell className="font-medium">{i}</TableCell>
                     <TableCell className="uppercase">
                       <h5 className="text-md font-bold mb-1">{product.name}</h5>
-                      <p className="text-slate-300 bg-primary text-center rounded-md text-[11px] py-[px] w-24">
-                        {product.category.name}
-                      </p>
+                      <p className="mini-active">{product.category.name}</p>
                     </TableCell>
 
                     <TableCell
@@ -95,7 +93,7 @@ const CheckOut = () => {
                     <TableCell className="text-right">
                       {/* Button to view single product details */}
                       <NavLink to={`/single-product/${product._id}`}>
-                        <Button className="">View Items</Button>
+                        <Button className="btn-2">View Items</Button>
                       </NavLink>
                     </TableCell>
                   </TableRow>

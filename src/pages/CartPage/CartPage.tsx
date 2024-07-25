@@ -3,10 +3,10 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { removeCartItem, setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
-import { XMarkIcon } from "@heroicons/react/16/solid";
 import { Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "sonner";
 
 // !! This page must be fix after the found data
 
@@ -29,6 +29,9 @@ const CartPage = () => {
     const treeCartItem = { ...product, qty: updatedQty };
 
     dispatch(setCart(treeCartItem));
+    toast.success("Quantity is increased" + qtyInput);
+    console.log(inputValues);
+    // setInputValues("1");
   };
 
   const handleRemove = (item: TProduct) => {
@@ -61,126 +64,66 @@ const CartPage = () => {
     }
   };
 
-  // ! cartProducts.length == 0 it will be updated as cartProducts.length > 0
-  return cartProducts.length == 0 ? (
+  return cartProducts.length > 0 ? (
     <div className="py-20 px-5">
       <div className="">
         <h2 className="text-5xl uppercase pb-10">Cart Page</h2>
-        <Table className="flex justify-between flex-wrap gap-2">
-          <TableBody className="lg:w-[48%] md:w-[48%] sm:w-full  my-5 bg-[#6984671e] relative">
-            <TableRow className=" w-full">
-              <TableCell className="">
-                <img
-                  className="h-[100px] w-[80px] border border-[#61815f] object-cover mx-auto"
-                  src=""
-                  alt="fds"
-                />
-              </TableCell>
-              <TableCell className="border border-[#61815f] w-[30%]">
-                <h5 className="text-lg  font-semibold mb-1 ">1. test</h5>
-              </TableCell>
-              <TableCell className="uppercase  flex flex-col gap-1 items-center justify-center border border-[#61815f] mt-3">
-                <p className="mini-active">
-                  Price: 12
-                  <br />
-                </p>
-                <p className="mini-active">
-                  Stock: <span>5</span>
-                </p>
-                <p className="mini-active">
-                  Quantity: <span>2</span>
-                </p>
-              </TableCell>
-
-              <TableCell>
-                <div className="flex items-center justify-center gap-5 border-2 border-black ">
-                  {/* <div>
-                  
-                </div> */}
-                  <Button className="btn-3 border-2 border-red-600 hover:bg-red-600 hover:outline-none outline-offset-2 bg-slate-100 outlince-b rounded-none h-9 text-red-600 hover:text-white absolute top-0 right-0">
-                    <Trash2
-                      onClick={() => handleRemove({})}
-                      className=" w-7  hover:text-whit"
-                    />
-                  </Button>
-
-                  <input
-                    type="number"
-                    className="w-[55px] h-[40px] pl-3 text-xl  border-2 rounded-none border-[#61815f] "
-                    defaultValue={54}
-                    min={0}
-                    onChange={handleInputChange}
-                    // ref={(el) => {
-                    //   inputValuesRef.current[tree._id] = el?.value || "";
-                    // }}
-                    // data-productid={tree._id}
-                    // value={inputValues[tree._id] || ""}
-                  />
-                  <Button
-                    // disabled={
-                    //   tree.stock <= 0 ||
-                    //   Number(inputValues[tree._id] || "0") + tree.qty > tree.stock
-                    // }
-                    onClick={() => handleAddtocart({})}
-                    className="capitalize btn-2"
-                  >
-                    Update
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        {/* <Table className="flex justify-between flex-wrap gap-2">
+         
+        </Table> */}
         {cartProducts?.length !== 0 ? (
-          <Table className="flex justify-between flex-wrap max-h-[600px] gap-2">
+          <Table className="flex lg:flex-row flex-col lg:justify-between flex-wrap gap-2 rounded-md items-center justify-center">
             {cartProducts?.map((tree: TProduct, i: number) => (
-              <TableBody className="w-[48%] bg-[#6984671e]" key={tree._id}>
-                <TableRow className="w-full bg-blak">
-                  <TableCell className="font-medium">{i + 1}</TableCell>
-                  <TableCell className="uppercase min-w-[150px] bg-bla">
-                    <h5 className="text-md font-bold mb-1">{tree.name}</h5>
+              <TableBody className="lg:w-[48%] md:w-[80%] sm:w-full bg-[#6984671e] relative">
+                <TableRow className=" w-full">
+                  <TableCell className="">
+                    <img
+                      className="h-[100px] w-[80px]  object-cover mx-auto"
+                      src={tree.imageURL}
+                      alt="fds"
+                    />
                   </TableCell>
-                  <TableCell className="uppercase w-[0%] bg-b">
-                    <p className="text-slate-300 bg-primary text-center rounded-md text-[14px] w-28 mb-1">
+                  <TableCell className=" w-[30%]">
+                    <h5 className="text-lg  font-semibold mb-1 ">
+                      {i + 1}. {tree.name}
+                    </h5>
+                  </TableCell>
+                  <TableCell className="uppercase  flex flex-col gap-1 items-center justify-center mt-3">
+                    <p className="mini-active">
                       Price: ${tree.price}
                       <br />
                     </p>
-                    <p className="text-slate-300 bg-primary text-center rounded-md text-[14px] w-28">
+                    <p className="mini-active">
                       Stock: <span>{tree.stock}</span>
                     </p>
-                    <p className="text-slate-300 bg-primary text-center rounded-md text-[14px] w-28">
+                    <p className="mini-active">
                       Quantity: <span>{tree.qty}</span>
-                    </p>
-                    <p className="text-slate-300 bg-primary text-center rounded-md text-[14px] w-28">
-                      InputVal: <span>{inputValues[tree._id] || ""}</span>
                     </p>
                   </TableCell>
 
-                  <TableCell className="w-[40%]">
-                    <img
-                      className="h-[90px] w-[60px] object-cover mx-auto"
-                      src={tree.imageURL}
-                      alt=""
-                    />
-                  </TableCell>
                   <TableCell>
-                    <div className="flex items-center justify-center gap-5">
-                      <XMarkIcon
-                        onClick={() => handleRemove(tree)}
-                        className="h-7 w-7 text-red-500 hover:text-red-900"
-                      />
+                    <div className="flex items-center justify-center gap-5  ">
+                      {/* <div>
+                     
+                   </div> */}
+                      <Button className="btn-3 border-2 bg-red-700 rounded-md h-9 text-slate-100 hover:text-white absolute top-0 right-0">
+                        <Trash2
+                          onClick={() => handleRemove(tree)}
+                          className="w-5  hover:text-whit"
+                        />
+                      </Button>
 
                       <input
                         type="number"
-                        className="w-[55px] h-[40px] pl-3 text-xl rounded-md border-2 border-slate-400"
-                        defaultValue={tree.qty}
-                        min={0}
+                        className="w-[55px] h-[40px] pl-4 text-xl  border-2 rounded-none border-[#61815f] "
+                        defaultValue={1}
+                        min={1}
                         onChange={handleInputChange}
                         ref={(el) => {
-                          inputValuesRef.current[tree._id] = el?.value || "";
+                          inputValuesRef.current[tree._id] = el?.value || "1";
                         }}
                         data-productid={tree._id}
-                        value={inputValues[tree._id] || ""}
+                        value={inputValues[tree._id] || "1"}
                       />
                       <Button
                         disabled={
@@ -189,9 +132,9 @@ const CartPage = () => {
                             tree.stock
                         }
                         onClick={() => handleAddtocart(tree)}
-                        className="capitalize"
+                        className="capitalize btn-2"
                       >
-                        Update {Number(inputValues[tree._id] || "0") + tree.qty}
+                        Update
                       </Button>
                     </div>
                   </TableCell>
