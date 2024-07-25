@@ -28,7 +28,7 @@ const CheckOut = () => {
       <h2 className="text-5xl uppercase pb-10">Check-out process</h2>
 
       <div className="flex justify-between items-center lg:flex-row flex-col">
-        <div className="lg:w-[60] w-full">
+        <div className="lg:w-[60%] w-full">
           <div className=" w-full ml-auto">
             <Table className="lg:w-[600px]">
               <TableHeader>

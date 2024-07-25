@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router-dom";
 
 const ProductsByCategory = () => {
   const products: any = useLoaderData();
-  console.log(products);
+  console.log(products?.result[0].category.name);
   // Display a loader if products data is not yet available
   if (!products) {
     return <Loader />;
@@ -17,8 +17,10 @@ const ProductsByCategory = () => {
 
   return (
     <>
-      <CommonHero title="Products Page" />
-      <div className="grid grid-cols-4 gap-5 py-20">
+      <CommonHero
+        title={products?.result[0].category.name + " " + "Category"}
+      />
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-5 py-20">
         {products?.result.map((product: TProduct) => (
           <AllProducts key={product._id} product={product} />
         ))}

@@ -1,17 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Footer from "@/shared/Footer/Footer";
 import NavBar from "@/shared/NavBar/NavBar";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div
-      id="full-body"
-      className="lg:w-[1440px] md:max-w-full mx-auto overflow-x-hidden bg-red-00 relative"
-    >
-      <NavBar />
-      <Outlet />
-      <Footer />
-    </div>
+    <>
+      <div
+        id="full-body"
+        className="lg:w-[1440px] md:max-w-full mx-auto overflow-x-hidden bg-red-00 relative"
+      >
+        <NavBar />
+        <Outlet />
+        <Footer />
+      </div>
+    </>
   );
 };
 

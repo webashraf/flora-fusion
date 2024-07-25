@@ -43,7 +43,7 @@ const Home = () => {
   // console.log("products", products);
 
   return (
-    <>
+    <div data-scroll-section>
       <Hero products={products.result} />
       <Products />
       <ProductsCategory categories={categories} />
@@ -51,7 +51,7 @@ const Home = () => {
       <SlideAdds />
       <ProductsDetails products={products.result} />
       <Gallery products={products.result} />
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 .bin-button {
-  @apply flex flex-col items-center justify-center size-11 bg-black rounded-full bg-red-400 cursor-pointer border border-2 border-pink-100 duration-300 relative overflow-hidden;
+  @apply flex flex-col items-center justify-center size-11 rounded-full cursor-pointer duration-300 relative overflow-hidden;
 }
 
 .bin-button:hover .bin-top {

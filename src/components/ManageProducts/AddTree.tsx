@@ -4,6 +4,7 @@ import {
 } from "@/redux/api/baseApi";
 import Loader from "@/shared/Loader/Loader";
 import { TTreeProductsCategory } from "@/types/types";
+import { toast } from "sonner";
 
 const AddTree = () => {
   const { data: categories } = useGetCategoriesQuery({});
@@ -38,10 +39,13 @@ const AddTree = () => {
       console.log("Order placed successfully", orderInfo);
 
       const res = await createTree(orderInfo);
-      
+      if (res.data.success === true) {
+        toast.success("Product added successfully");
+      }
       console.log("🚀 ~ handleAddProduct ~ res:", res);
     } catch (err) {
       console.log(err);
+      toast.error("Something went wrong!!");
     }
   };
   return (

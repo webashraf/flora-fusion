@@ -118,7 +118,7 @@ const TiltCard = ({ product }: { product: TProduct }) => {
               <ScanLineIcon className="text-white" />
             ) : (
               //  <h2></h2>
-              <ShoppingCart className="text-white hover:animate-bounce" />
+              <ShoppingCart className="text-white " />
             )}
           </Button>
         </div>

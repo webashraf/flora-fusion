@@ -27,6 +27,16 @@ export const baseApi = createApi({
         };
       },
     }),
+    getSingleProductById: builder.query({
+      query: (params) => {
+        console.log(params);
+        return {
+          method: "GET",
+          url: `/products/${params}`,
+          providesTags: ["items"],
+        };
+      },
+    }),
     getCategories: builder.query({
       query: () => ({
         url: "/categories",
@@ -63,6 +73,7 @@ export const baseApi = createApi({
 export const {
   useGetProductsQuery,
   useGetProductsByQueryQuery,
+  useGetSingleProductByIdQuery,
   useGetCategoriesQuery,
   useUpdateTreeStockMutation,
   useCreateTreeMutation,

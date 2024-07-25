@@ -50,13 +50,11 @@ const AllProducts = ({ product }: { product: TProduct }) => {
               <h5>$ {product.price}</h5>
               <div className="flex justify-between items-center">
                 <NavLink
-                  to={`single-product/${product._id}`}
+                  to={`/single-product/${product._id}`}
                   className="hue-rotate-60 bg-[#587c4777 rounded-non text-xs hover:underline font-normal flex items-center gap-1 "
                 >
-                  {/* <a className=""> */}
                   <LucideEye className="text-white" />
                   View Details
-                  {/* </a> */}
                 </NavLink>
                 {/* Button to add product to cart, disabled if out of stock */}
                 <Button
