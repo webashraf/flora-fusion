@@ -120,7 +120,9 @@ const AddTree = () => {
             <option value="">Select Category...</option>
             {categories &&
               categories.map((category: TTreeProductsCategory) => (
-                <option value={category._id}>{category.name}</option>
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
               ))}
           </select>
         </div>

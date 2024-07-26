@@ -1,4 +1,4 @@
-import { useUpdateTreeStockMutation } from "@/redux/api/baseApi";
+import { useCreateOrderMutation } from "@/redux/api/baseApi";
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
 import { toast } from "sonner";
@@ -6,7 +6,7 @@ import { toast } from "sonner";
 const CheckOutForm = () => {
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
 
-  const [updateTreeStock] = useUpdateTreeStockMutation();
+  const [createOrder] = useCreateOrderMutation();
 
   let totalAmount: number = 0;
   cartProducts.forEach((item: TProduct) => {
@@ -40,7 +40,7 @@ const CheckOutForm = () => {
     try {
       console.log("Order placed successfully", orderInfo);
 
-      const res = await updateTreeStock(orderInfo).unwrap();
+      const res = await createOrder(orderInfo).unwrap();
       if (res.success === true) {
         toast.success("Order placed successfully!!");
       }
@@ -53,7 +53,7 @@ const CheckOutForm = () => {
 
   return (
     <>
-      <div className="lg:mx-auto lg:w-[500px] w-full px-5 bg-white rounded-md shadow-2xl drop-shadow-md">
+      <div className="lg:mx-auto w-full px-5 bg-white rounded-md shadow-2xl drop-shadow-md">
         <div className="px-4 py-3 flex justify-between">
           <div>
             <h2 className="font-bold text-[32xl]">Checkout</h2>
@@ -101,38 +101,40 @@ const CheckOutForm = () => {
               </div>
             </div>
 
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-gray-500 text-sm font-medium"
-              >
-                Email Address <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email address"
-                className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
-                required
-              />
-            </div>
+            <div className="flex space-x-3">
+              <div className="flex-1">
+                <label
+                  htmlFor="email"
+                  className="block text-gray-500 text-sm font-medium"
+                >
+                  Email Address <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email address"
+                  className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+                  required
+                />
+              </div>
 
-            <div>
-              <label
-                htmlFor="mobileNumber"
-                className="block text-gray-500 text-sm font-medium"
-              >
-                Mobile Number <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="mobileNumber"
-                name="mobileNumber"
-                placeholder="Mobile number"
-                className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
-                required
-              />
+              <div className="flex-1">
+                <label
+                  htmlFor="mobileNumber"
+                  className="block text-gray-500 text-sm font-medium"
+                >
+                  Mobile Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="mobileNumber"
+                  name="mobileNumber"
+                  placeholder="Mobile number"
+                  className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+                  required
+                />
+              </div>
             </div>
 
             <div>
@@ -214,16 +216,16 @@ const CheckOutForm = () => {
             </div>
 
             <div>
-              <div className="flex flex-col justify-around bg-slate-800 p-4 border border-white border-opacity-30 rounded-lg shadow-md max-w-xs mx-auto">
+              <div className="flex flex-col justify-around bg-[#3b6550e8] hue-rotate-30 p-4 border border-white border-opacity-30 rounded-xl shadow-md max-w-xs">
                 <div className="flex flex-row items-center justify-between mb-3">
                   <input
-                    className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2 mb-3 flex-grow"
+                    className="w-full h-10 border-none outline-none text-sm bg-[#539d7922] text-white font-semibold caret-orange-500 pl-2 mb-3 flex-grow"
                     type="text"
                     name="cardName"
                     id="cardName"
                     placeholder="Full Name"
                   />
-                  <div className="flex items-center justify-center relative w-14 h-9 bg-gray-800 border border-white border-opacity-20 rounded-md">
+                  <div className="flex items-center justify-center relative w-14 h-9 bg-[#539d7922] border border-white border-opacity-20 rounded-md ml-2">
                     <svg
                       className="text-white fill-current"
                       xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +250,7 @@ const CheckOutForm = () => {
                 </div>
                 <div className="flex flex-col space-y-3">
                   <input
-                    className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+                    className="w-full h-10 border-none outline-none text-sm bg-[#539d7922] text-white font-semibold caret-orange-500 pl-2"
                     type="text"
                     name="cardNumber"
                     id="cardNumber"
@@ -256,14 +258,14 @@ const CheckOutForm = () => {
                   />
                   <div className="flex flex-row justify-between">
                     <input
-                      className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+                      className="w-full h-10 border-none outline-none text-sm bg-[#539d7922] text-white font-semibold caret-orange-500 pl-2"
                       type="text"
                       name="expiryDate"
                       id="expiryDate"
                       placeholder="MM/AA"
                     />
                     <input
-                      className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+                      className="w-full h-10 border-none outline-none text-sm bg-[#539d7922] text-white font-semibold caret-orange-500 pl-2"
                       type="text"
                       name="cvv"
                       id="cvv"

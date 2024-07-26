@@ -27,8 +27,8 @@ const CheckOut = () => {
     <div className="py-20 mx-5">
       <h2 className="text-5xl uppercase pb-10">Check-out process</h2>
 
-      <div className="flex justify-between items-center lg:flex-row flex-col">
-        <div className="lg:w-[60%] w-full">
+      <div className="flex justify-between items-center lg:flex-row flex-col gap-20">
+        <div className="lg:w-1/2 w-full">
           <div className=" w-full ml-auto">
             <Table className="lg:w-[600px]">
               <TableHeader>

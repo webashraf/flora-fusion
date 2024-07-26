@@ -44,7 +44,7 @@ export const baseApi = createApi({
         providesTags: ["items"],
       }),
     }),
-    updateTreeStock: builder.mutation({
+    createOrder: builder.mutation({
       query: (orderInfo) => ({
         url: "/create-order",
         method: "POST",
@@ -59,6 +59,17 @@ export const baseApi = createApi({
         body: payload,
       }),
       invalidatesTags: ["items"],
+    }),
+    updateTree: builder.mutation({
+      query: (payload) => {
+        console.log("🚀 ~ treeId:", payload);
+
+        return {
+          url: `/products/${payload?.treeID}`,
+          method: "PATCH",
+          body: payload?.updatedData,
+        };
+      },
     }),
     deleteTree: builder.mutation({
       query: (params) => ({
@@ -75,7 +86,8 @@ export const {
   useGetProductsByQueryQuery,
   useGetSingleProductByIdQuery,
   useGetCategoriesQuery,
-  useUpdateTreeStockMutation,
+  useCreateOrderMutation,
   useCreateTreeMutation,
+  useUpdateTreeMutation,
   useDeleteTreeMutation,
 } = baseApi;

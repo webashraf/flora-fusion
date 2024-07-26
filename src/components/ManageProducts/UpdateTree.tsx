@@ -8,7 +8,6 @@ import Loader from "@/shared/Loader/Loader";
 import { TProduct } from "@/types/types";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
 import DeleteBtn from "../customUi/DeleteBtn/DeleteBtn";
 import {
@@ -34,6 +33,9 @@ const UpdateTree = () => {
   const { data: products } = useGetProductsQuery({});
   const [deleteTree] = useDeleteTreeMutation();
   const [pImg, setPImg] = useState(products && products?.result[0]);
+
+  
+
 
   if (!products) {
     return <Loader />;
@@ -146,13 +148,11 @@ const UpdateTree = () => {
                           </AlertDialogContent>
                         </AlertDialog>
 
-                        <NavLink to={``}>
-                          <div className="">
-                            <AlertDialog>
-                              <AlertDialogCustom id={product._id} />
-                            </AlertDialog>
-                          </div>
-                        </NavLink>
+                        <div className="">
+                          <AlertDialog>
+                            <AlertDialogCustom id={product._id} />
+                          </AlertDialog>
+                        </div>
                       </TableCell>
                     </TableRow>
                   </TableBody>

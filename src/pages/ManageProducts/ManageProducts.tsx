@@ -9,7 +9,7 @@ const tabs = [
 ];
 const ManageProducts = () => {
   const [selected, setSelected] = useState(tabs[0].name);
-  const [isActive, setIsActive] = useState(true);
+  // const [isActive, setIsActive] = useState(true);
 
   return (
     <div className="px-4 py-14">
@@ -33,9 +33,7 @@ const Chip = ({ name, selected, setSelected, path }) => {
   return (
     <NavLink
       to={`/manage-products/${path}`}
-      className={({ isActive, isPending }) =>
-        isActive ? setSelected(name) : ""
-      }
+      className={({ isActive }) => (isActive ? setSelected(name) : "")}
     >
       <button
         onClick={() => setSelected(name)}
