@@ -10,7 +10,7 @@ const StripeCheckOutForm = () => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch(`http://localhost:5000/create-payment-intent`, {
+    fetch("http://localhost:5000/api/v1/order/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price: 1200 }),
@@ -22,18 +22,12 @@ const StripeCheckOutForm = () => {
   console.log({ clientSecret });
 
   const handleSubmit = async (event) => {
-    // Block native form submission.
     event.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
 
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
     const card = elements.getElement(CardElement);
 
     if (card == null) {
@@ -52,6 +46,23 @@ const StripeCheckOutForm = () => {
     } else {
       console.log("[PaymentMethod]", paymentMethod);
       setError("");
+    }
+
+    // Confirm Payment
+
+    const { paymentIntent, error: cardConfirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card,
+          billing_details: {
+            name: "x",
+          },
+        },
+      });
+    if (cardConfirmError) {
+      console.log({ cardConfirmError });
+    } else {
+      console.log({ paymentIntent });
     }
   };
 
