@@ -10,7 +10,7 @@ const Footer = () => {
           "
           >
             <img
-              src="/public/Flora_Fusion_logos.png"
+              src="/Flora_Fusion_logos.png"
               className="w-[300px] mx-auto"
               alt=""
             />

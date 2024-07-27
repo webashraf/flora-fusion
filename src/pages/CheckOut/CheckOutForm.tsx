@@ -1,3 +1,4 @@
+import StripePayment from "@/components/Payment/StripePayment";
 import { useCreateOrderMutation } from "@/redux/api/baseApi";
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
@@ -215,6 +216,8 @@ const CheckOutForm = () => {
               </div>
             </div>
 
+            {/*! Pyament card  */}
+
             <div>
               <div className="flex flex-col justify-around bg-[#3b6550e8] hue-rotate-30 p-4 border border-white border-opacity-30 rounded-xl shadow-md max-w-xs">
                 <div className="flex flex-row items-center justify-between mb-3">
@@ -276,6 +279,8 @@ const CheckOutForm = () => {
               </div>
             </div>
 
+            {/* ---------------------------- */}
+
             <div className="text-center">
               <button
                 type="submit"
@@ -285,6 +290,7 @@ const CheckOutForm = () => {
               </button>
             </div>
           </form>
+          <StripePayment />
         </div>
       </div>
     </>
