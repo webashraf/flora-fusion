@@ -1,7 +1,8 @@
 import AllProducts from "@/components/Products/AllProducts/AllProducts";
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import CommonHero from "@/shared/CommonHero/CommonHero";
-import Loader from "@/shared/Loader/Loader";
+import Loader from "@/shared/Loader/loader/Loader";
+
 import { TProduct } from "@/types/types";
 
 const ProductPage = () => {

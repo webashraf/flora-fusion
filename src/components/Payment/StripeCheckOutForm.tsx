@@ -1,3 +1,5 @@
+import useTotalAmount from "@/hooks/useTotalAmount";
+import { usePaymentMutation } from "@/redux/api/baseApi";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 
@@ -8,16 +10,16 @@ const StripeCheckOutForm = () => {
 
   const [clientSecret, setClientSecret] = useState("");
 
+  const [payment] = usePaymentMutation();
+
+  const amount = useTotalAmount();
+
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/api/v1/order/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ price: 1200 }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+    const res = payment({ amount });
+    res.then((data) => {
+      console.log(data);
+    });
+  }, [payment, amount]);
 
   console.log({ clientSecret });
 
@@ -84,13 +86,19 @@ const StripeCheckOutForm = () => {
           },
         }}
       />
-      <button
-        className="bg-[#37b176] px-4 py-1 text-slate-100 rounded-sm"
-        type="submit"
-        disabled={!stripe || !clientSecret}
-      >
-        Pay
-      </button>
+
+      <div className="flex justify-center items-center mt-10">
+        <button
+          className={` text-white font-bold px-16 py-1 rounded-md  ${
+            !stripe || !clientSecret ? "bg-red-600" : "btn-2"
+          }`}
+          type="submit"
+          disabled={!stripe || !clientSecret}
+        >
+          Place order
+        </button>
+      </div>
+
       <p className="text-red-500">{error}</p>
     </form>
   );

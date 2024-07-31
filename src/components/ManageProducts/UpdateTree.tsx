@@ -4,7 +4,8 @@ import {
 } from "@/redux/api/baseApi";
 import AlertDialogCustom from "@/shared/AlertDialog/AlertDialog";
 import CommonHeading from "@/shared/CommonHeading/CommonHeading";
-import Loader from "@/shared/Loader/Loader";
+
+
 import { TProduct } from "@/types/types";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { useState } from "react";
@@ -28,14 +29,12 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import Loader from "@/shared/Loader/loader/Loader";
 
 const UpdateTree = () => {
   const { data: products } = useGetProductsQuery({});
   const [deleteTree] = useDeleteTreeMutation();
   const [pImg, setPImg] = useState(products && products?.result[0]);
-
-  
-
 
   if (!products) {
     return <Loader />;

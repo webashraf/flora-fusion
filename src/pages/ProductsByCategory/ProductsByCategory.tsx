@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AllProducts from "@/components/Products/AllProducts/AllProducts";
 import CommonHero from "@/shared/CommonHero/CommonHero";
-import Loader from "@/shared/Loader/Loader";
+import Loader from "@/shared/Loader/loader/Loader";
+
 import { TProduct } from "@/types/types";
 import { useLoaderData } from "react-router-dom";
 

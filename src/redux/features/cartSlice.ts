@@ -25,11 +25,23 @@ const cartSlice = createSlice({
         state.cart.push({ ...action.payload });
       }
     },
+    decreseCartItem: (state, action: PayloadAction<TProduct>) => {
+      const index = state.cart.findIndex(
+        (item) => item._id === action.payload._id
+      );
+      console.log("index", state, index);
+
+      if (index !== -1) {
+        state.cart[index].qty -= action.payload.qty;
+      } else if (index === -1) {
+        state.cart.push({ ...action.payload });
+      }
+    },
     removeCartItem: (state, action: PayloadAction<string>) => {
       state.cart = state.cart.filter((item) => item._id !== action.payload);
     },
   },
 });
 
-export const { setCart, removeCartItem } = cartSlice.actions;
+export const { setCart, decreseCartItem, removeCartItem } = cartSlice.actions;
 export default cartSlice.reducer;

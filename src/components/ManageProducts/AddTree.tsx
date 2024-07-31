@@ -2,7 +2,10 @@ import {
   useCreateTreeMutation,
   useGetCategoriesQuery,
 } from "@/redux/api/baseApi";
-import Loader from "@/shared/Loader/Loader";
+import Loader from "@/shared/Loader/loader/Loader";
+
+
+
 import { TTreeProductsCategory } from "@/types/types";
 import { toast } from "sonner";
 

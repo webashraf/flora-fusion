@@ -6,10 +6,7 @@ import StripeCheckOutForm from "./StripeCheckOutForm";
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
 const StripePayment = () => {
-  // const options = {
-  //   // passing the client secret obtained from the server
-  //   clientSecret: "{{CLIENT_SECRET}}",
-  // };
+
   return (
     <Elements stripe={stripePromise}>
       <StripeCheckOutForm />

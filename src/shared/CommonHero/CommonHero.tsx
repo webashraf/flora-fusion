@@ -1,5 +1,5 @@
 import { useGetProductsQuery } from "@/redux/api/baseApi";
-import { Loader } from "lucide-react";
+import Loader from "../Loader/loader/Loader";
 
 const CommonHero = ({ title }: { title: string }) => {
   // Fetch products data using the useGetProductsQuery hook

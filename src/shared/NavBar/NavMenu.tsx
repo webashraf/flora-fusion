@@ -44,7 +44,7 @@ const SlideTabs: React.FC = () => {
       <NavLink
         to="/products"
         className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "active" : ""
+          isPending ? "pending" : isActive ? "activeNav" : ""
         }
       >
         <Tab setPosition={setPosition}>Products</Tab>
@@ -53,7 +53,7 @@ const SlideTabs: React.FC = () => {
       <NavLink
         to="/checkout"
         className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "active" : ""
+          isPending ? "pending" : isActive ? "activeNav" : ""
         }
       >
         <Tab setPosition={setPosition}>ChekOut</Tab>
@@ -62,7 +62,7 @@ const SlideTabs: React.FC = () => {
       <NavLink
         to="/cart"
         className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "active" : ""
+          isPending ? "pending" : isActive ? "activeNav" : ""
         }
       >
         <Tab setPosition={setPosition}>Cart</Tab>
@@ -71,7 +71,7 @@ const SlideTabs: React.FC = () => {
       <NavLink
         to="/manage-products"
         className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "active" : ""
+          isPending ? "pending" : isActive ? "activeNav" : ""
         }
       >
         <Tab setPosition={setPosition}>Manage Items</Tab>

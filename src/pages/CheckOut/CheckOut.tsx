@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useTotalAmount from "@/hooks/useTotalAmount";
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
 import { NavLink } from "react-router-dom";
@@ -14,14 +15,10 @@ import CheckOutForm from "./CheckOutForm";
 
 const CheckOut = () => {
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
-  // console.log(cartProducts);
-  // const [updateTreeStock] = useUpdateTreeStockMutation();
 
-  let totalAmount: number = 0;
-  cartProducts.forEach((item: TProduct) => {
-    const amount = item.price * item.qty + totalAmount;
-    totalAmount = Number(amount.toFixed(2));
-  });
+  console.log(useTotalAmount());
+
+  const amount = useTotalAmount();
 
   return cartProducts?.length > 0 ? (
     <div className="py-20 mx-5">
@@ -68,9 +65,7 @@ const CheckOut = () => {
               ))}
             </Table>
             <div className="border-t-2 border-black py-5 pr-5 text-end">
-              <h4 className="font-semibold text-xl">
-                Amount: ${totalAmount.toFixed(2)}
-              </h4>
+              <h4 className="font-semibold text-xl">Amount: ${amount}</h4>
             </div>
           </div>
         </div>

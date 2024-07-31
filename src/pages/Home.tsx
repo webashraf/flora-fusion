@@ -10,7 +10,7 @@ import {
   useGetCategoriesQuery,
   useGetProductsQuery,
 } from "@/redux/api/baseApi";
-import Loader from "@/shared/Loader/Loader";
+import Loader from "@/shared/Loader/loader/Loader";
 
 const Home = () => {
   // Fetch products data

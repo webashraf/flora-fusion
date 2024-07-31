@@ -1,9 +1,14 @@
 import DeleteBtn from "@/components/customUi/DeleteBtn/DeleteBtn";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { removeCartItem, setCart } from "@/redux/features/cartSlice";
+import {
+  decreseCartItem,
+  removeCartItem,
+  setCart,
+} from "@/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
@@ -25,13 +30,27 @@ const CartPage = () => {
   const handleAddtocart = (product: TProduct) => {
     const qtyInput = inputValues[product._id] || "1"; // Default to "1" if no input value found
     const updatedQty = Math.min(Number(qtyInput), product.stock);
+    console.log(updatedQty);
 
     const treeCartItem = { ...product, qty: updatedQty };
+
+    console.log(treeCartItem);
 
     dispatch(setCart(treeCartItem));
     toast.success("Quantity is increased" + qtyInput);
     console.log(inputValues);
-    // setInputValues("1");
+  };
+  console.log({ inputValues });
+
+  const handleMinustocart = (product: TProduct) => {
+    const qtyInput = inputValues[product._id] || "1"; // Default to "1" if no input value found
+    const updatedQty = Math.min(Number(qtyInput), product.stock);
+
+    const treeCartItem = { ...product, qty: updatedQty };
+
+    dispatch(decreseCartItem(treeCartItem));
+    toast.success("Quantity is decresed" + qtyInput);
+    console.log(inputValues);
   };
 
   const handleRemove = (item: TProduct) => {
@@ -130,6 +149,14 @@ const CartPage = () => {
                         value={inputValues[tree._id] || "1"}
                       />
                       <Button
+                        disabled={tree.stock <= 0 || tree?.qty <= 1}
+                        onClick={() => handleMinustocart(tree)}
+                        className="capitalize btn-2"
+                      >
+                        {/* - */}
+                        <MinusIcon />
+                      </Button>
+                      <Button
                         disabled={
                           tree.stock <= 0 ||
                           Number(inputValues[tree._id] || "0") + tree.qty >
@@ -138,7 +165,7 @@ const CartPage = () => {
                         onClick={() => handleAddtocart(tree)}
                         className="capitalize btn-2"
                       >
-                        Update
+                        <PlusIcon />
                       </Button>
                     </div>
                   </TableCell>

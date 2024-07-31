@@ -7,12 +7,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
+import { ShoppingBagIcon } from "@heroicons/react/16/solid";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { NavLink } from "react-router-dom";
 
-const CartItems = ({ trees }: { trees: TProduct[] }) => {
+const CartItems = () => {
   // const dispatch = useAppDispatch();
+  const trees = useAppSelector((state) => state.cart.cart);
 
   let newPrice: number = 0;
   trees.forEach((item: TProduct) => {
@@ -22,11 +25,8 @@ const CartItems = ({ trees }: { trees: TProduct[] }) => {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            className="bg-transparent w-[40px] rounded-full"
-          >
-            Edit
+          <Button className="bg-transparent hover:bg-transparent w-[40px] rounded-full p-2">
+            <ShoppingBagIcon color="#85b86b" scale="1" />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[725px]">
@@ -42,11 +42,11 @@ const CartItems = ({ trees }: { trees: TProduct[] }) => {
                           <h5 className="text-md font-bold mb-1">
                             {tree.name}
                           </h5>
-                          <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28 mb-1">
+                          <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28 mb-1 mini-active">
                             Price: {tree.price}
                             <br />
                           </p>
-                          <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28">
+                          <p className="text-slate-300 bg-primary text-center rounded-md text-[14px]  w-28 mini-active">
                             quantity: <span className="">{tree.qty}</span>
                           </p>
                         </TableCell>

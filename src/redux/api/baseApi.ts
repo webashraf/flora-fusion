@@ -52,6 +52,18 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ["items"],
     }),
+    payment: builder.mutation({
+      query: (price) => {
+        console.log("BaseAPi", price);
+
+        return {
+          url: "/order/create-payment-intent",
+          method: "POST",
+          body: { price },
+        };
+      },
+      invalidatesTags: ["items"],
+    }),
     createTree: builder.mutation({
       query: (payload) => ({
         url: "/products/add-product",
@@ -87,6 +99,7 @@ export const {
   useGetSingleProductByIdQuery,
   useGetCategoriesQuery,
   useCreateOrderMutation,
+  usePaymentMutation,
   useCreateTreeMutation,
   useUpdateTreeMutation,
   useDeleteTreeMutation,

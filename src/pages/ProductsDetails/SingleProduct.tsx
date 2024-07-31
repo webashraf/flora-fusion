@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { setCart } from "@/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CommonHero from "@/shared/CommonHero/CommonHero";
-import Loader from "@/shared/Loader/Loader";
+import Loader from "@/shared/Loader/loader/Loader";
+
 import { TProduct } from "@/types/types";
 import { useLoaderData } from "react-router-dom";
 
@@ -73,7 +74,7 @@ const SingleProduct = () => {
               name=""
               id="qty-input"
             />
-            
+
             <Button
               disabled={product.stock === 0}
               onClick={handleAddtocart}
