@@ -3,6 +3,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
 import CartItems from "./CartItems";
+import { CartSheet } from "./CartSheet";
 import NavMenu from "./NavMenu";
 // import { NavMenu } from "/src/shared/NavBar/NavMenu";
 
@@ -34,7 +35,7 @@ const NavBar = () => {
         <div className="lg:w-[20%] md:w-[40%] mx-auto relative bottom-4 flex items-center">
           <img
             src="/Flora_Fusion_logos.png"
-            className="bg-red-5 h-[150px] object-cover w-full"
+            className="bg-red-5 lg:h-auto"
             alt=""
           />
         </div>
@@ -81,7 +82,8 @@ const NavBar = () => {
               </div>
 
               <div className="absolute">
-                <CartItems color="#87b670" />
+                {/* <CartItems color="#87b670" /> */}
+                <CartSheet color={"#87b670"} />
               </div>
             </div>
             <span className="px-12">

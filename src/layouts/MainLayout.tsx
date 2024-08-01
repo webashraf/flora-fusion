@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import CartModal from "@/components/customUi/CartModal/CartModal";
 import { Button } from "@/components/ui/button";
 import Footer from "@/shared/Footer/Footer";
+import { CartSheet } from "@/shared/NavBar/CartSheet";
 import NavBar from "@/shared/NavBar/NavBar";
 import { Outlet } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const MainLayout = () => {
               className="size-14 rounded-full absolute right-4 "
               aria-label="Shopping Cart"
             >
-              <CartModal />
+              <CartSheet />
             </Button>
           </div>
         </div>

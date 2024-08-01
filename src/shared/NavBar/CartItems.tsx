@@ -13,7 +13,7 @@ import { ShoppingBagIcon } from "@heroicons/react/16/solid";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { NavLink } from "react-router-dom";
 
-const CartItems = ({ color }: { color: string } = "#85b86b") => {
+const CartItems = ({ color }: { color: string }) => {
   // const dispatch = useAppDispatch();
   const trees = useAppSelector((state) => state.cart.cart);
 
