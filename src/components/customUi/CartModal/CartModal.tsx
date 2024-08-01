@@ -10,7 +10,7 @@ const CartModal = () => {
       <input className="checkbox opacity-0 " type="checkbox" />
       <span className="button-menu">
         <ShoppingBagIcon color="#85b86b" scale="1" />
-        <span className="absolute -top-7 right-5 h-[30px] w-[30px] rounded-xl items-center s-bg flex justify-center">
+        <span className="absolute -top-7 right-5 h-[30px] w-[30px] rounded-xl items-center s-bg flex justify-center scale-75">
           {trees.length}
         </span>
       </span>
@@ -24,12 +24,16 @@ const CartModal = () => {
           </div>
         ))}
 
-        <NavLink to="/checkout">
-          {/* <Button type="submit" className="capitalize btn-2"> */}
-          <button className="btn-2 mt-2 px-5 py-2">chek-out</button>
+        {trees.length === 0 ? (
+          <h2 className="text-slate-900 text-xl">Cart is empty!!</h2>
+        ) : (
+          <NavLink to="/checkout">
+            {/* <Button type="submit" className="capitalize btn-2"> */}
+            <button className="btn-2 mt-2 px-5 py-2">chek-out</button>
 
-          {/* </Button> */}
-        </NavLink>
+            {/* </Button> */}
+          </NavLink>
+        )}
       </div>
     </>
   );

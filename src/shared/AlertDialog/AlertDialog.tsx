@@ -143,9 +143,13 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
                     >
                       <option value="">Select Category...</option>
                       {product &&
-                        categories?.map((category: TTreeProductsCategory) => (
-                          <option value={category._id}>{category.name}</option>
-                        ))}
+                        categories?.result?.map(
+                          (category: TTreeProductsCategory) => (
+                            <option value={category._id}>
+                              {category.name}
+                            </option>
+                          )
+                        )}
                     </select>
                   </div>
 

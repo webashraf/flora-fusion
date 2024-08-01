@@ -13,10 +13,10 @@ const MainLayout = () => {
 
         <Outlet />
 
-        <div className="fixed bottom-16 right-0 w-full flex justify-center">
+        <div className="fixed bottom-16 right-0 w-full flex justify-center z-20">
           <div className="max-w-[1440px] w-full relative">
             <Button
-              className="size-12 p-2 rounded-full absolute right-4"
+              className="size-14 rounded-full absolute right-4 "
               aria-label="Shopping Cart"
             >
               <CartModal />

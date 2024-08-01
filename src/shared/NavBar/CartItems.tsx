@@ -13,7 +13,7 @@ import { ShoppingBagIcon } from "@heroicons/react/16/solid";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { NavLink } from "react-router-dom";
 
-const CartItems = () => {
+const CartItems = ({ color }: { color: string } = "#85b86b") => {
   // const dispatch = useAppDispatch();
   const trees = useAppSelector((state) => state.cart.cart);
 
@@ -26,7 +26,7 @@ const CartItems = () => {
       <Dialog>
         <DialogTrigger asChild>
           <Button className="bg-transparent hover:bg-transparent w-[40px] rounded-full p-2">
-            <ShoppingBagIcon color="#85b86b" scale="1" />
+            <ShoppingBagIcon color={color} scale="1" />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[725px]">

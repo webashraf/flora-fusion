@@ -37,33 +37,6 @@ export const baseApi = createApi({
         };
       },
     }),
-    getCategories: builder.query({
-      query: () => ({
-        url: "/categories",
-        method: "GET",
-        providesTags: ["items"],
-      }),
-    }),
-    createOrder: builder.mutation({
-      query: (orderInfo) => ({
-        url: "/order",
-        method: "POST",
-        body: orderInfo,
-      }),
-      invalidatesTags: ["items"],
-    }),
-    payment: builder.mutation({
-      query: (price) => {
-        console.log("BaseAPi", price);
-
-        return {
-          url: "/order/create-payment-intent",
-          method: "POST",
-          body: { price },
-        };
-      },
-      invalidatesTags: ["items"],
-    }),
     createTree: builder.mutation({
       query: (payload) => ({
         url: "/products/add-product",
@@ -90,6 +63,44 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ["items"],
     }),
+    getCategories: builder.query({
+      query: () => ({
+        url: "/categories",
+        method: "GET",
+        providesTags: ["items"],
+      }),
+    }),
+    updateCategory: builder.mutation({
+      query: (payload) => {
+        console.log("🚀 ~ payload:", payload);
+
+        return {
+          url: `/categories/${payload?.categoryId}`,
+          method: "PUT",
+          body: payload?.updatedData,
+        };
+      },
+    }),
+    createOrder: builder.mutation({
+      query: (orderInfo) => ({
+        url: "/order",
+        method: "POST",
+        body: orderInfo,
+      }),
+      invalidatesTags: ["items"],
+    }),
+    payment: builder.mutation({
+      query: (price) => {
+        console.log("BaseAPi", price);
+
+        return {
+          url: "/order/create-payment-intent",
+          method: "POST",
+          body: { price },
+        };
+      },
+      invalidatesTags: ["items"],
+    }),
   }),
 });
 
@@ -103,4 +114,5 @@ export const {
   useCreateTreeMutation,
   useUpdateTreeMutation,
   useDeleteTreeMutation,
+  useUpdateCategoryMutation,
 } = baseApi;

@@ -4,8 +4,6 @@ import {
 } from "@/redux/api/baseApi";
 import Loader from "@/shared/Loader/loader/Loader";
 
-
-
 import { TTreeProductsCategory } from "@/types/types";
 import { toast } from "sonner";
 
@@ -122,7 +120,7 @@ const AddTree = () => {
           >
             <option value="">Select Category...</option>
             {categories &&
-              categories.map((category: TTreeProductsCategory) => (
+              categories?.data?.map((category: TTreeProductsCategory) => (
                 <option key={category._id} value={category._id}>
                   {category.name}
                 </option>

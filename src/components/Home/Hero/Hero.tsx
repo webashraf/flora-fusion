@@ -6,7 +6,7 @@ import "../Hero/hero.css";
 const Hero = ({ products }: { products: TProduct | any }) => {
   return (
     <div className="lg:h-[80vh] md:h-[0v] lg:flex gap-10 bg-white">
-      <div className="lg:w-1/2 md:w-full  h-full gap-3 flex justify-center hero-banner overflow-hidden relative">
+      <div className="lg:w-1/2 md:w-full  lg:h-full h-[70vh] gap-3 flex justify-center hero-banner overflow-hidden relative">
         <div className="mx-auto flex flex-col justify-center items-center absolute z-10 gap-3 p-5 backdrop-blur-sm w-full h-full ">
           <h1 className="text-4xl p-color">We’re Spring Plant</h1>
           <h2 className="text-6xl font-serif text-white">PLANT BIG SALE</h2>
@@ -21,7 +21,7 @@ const Hero = ({ products }: { products: TProduct | any }) => {
         </div>
       </div>
 
-      <div className="lg:w-1/2 md:w-full flex lg:flex-col lg:gap-10 h-full">
+      <div className="lg:w-1/2 md:w-full lg:flex lg:flex-col lg:gap-10 h-full hidden">
         <div className="w-full h-full bg-blue-100  gap-3 flex justify-center items-center hero-banner overflow-hidden relative">
           <div className=" mx-auto flex flex-col justify-center items-center absolute z-10 gap-3 p-5 backdrop-blur-sm w-full h-full  md:text-center">
             <h1 className="text-4xl p-color">Holiday Gifts</h1>

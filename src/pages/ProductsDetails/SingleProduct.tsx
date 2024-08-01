@@ -39,9 +39,9 @@ const SingleProduct = () => {
     <div>
       <CommonHero title="Single Product" />
       <div className="flex justify-center gap-10 py-20 bg-slat-200 border">
-        <div className=" h-[600px] overflow-hidden">
+        <div className=" h-[600px] w-[400px] overflow-hidden">
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transform transition-transform duration-500 ease-in-out hover:scale-[1.40] cursor-zoom-in"
             src={product.imageURL}
             alt=""
           />

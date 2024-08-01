@@ -1,23 +1,47 @@
-import { useGetCategoriesQuery } from "@/redux/api/baseApi";
+import {
+  useGetCategoriesQuery,
+  useUpdateCategoryMutation,
+} from "@/redux/api/baseApi";
 import { TTreeProductsCategory } from "@/types/types";
+import { toast } from "sonner";
 
 const ManageCategory = () => {
   const { data: categories } = useGetCategoriesQuery({});
+  // console.log("🚀 ~ ManageCategory ~ categories:", categories);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [updateCategory] = useUpdateCategoryMutation();
+
+  // * Handle update category
+  const handleUpdateCategory = async (
+    e: React.FormEvent<HTMLFormElement>,
+    categoryId: string
+  ) => {
     e.preventDefault();
-    console.log("clicked on category");
-    const formData = new FormData(e.target);
-    const formObject = Object.fromEntries(formData.entries());
-    console.log("Form data:", formObject);
+    // console.log("clicked on category", categoryId);
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const updatedData = Object.fromEntries(formData.entries());
+    // console.log("Form data:", formObject);
+
+    //* Use the updateCategory mutation here with the formObject and categoryId
+    const res = await updateCategory({
+      categoryId,
+      updatedData,
+    }).unwrap();
+    if (res?.success) {
+      toast.success("Category updated successfully");
+    } else {
+      toast.error("Something went wrong happened!");
+    }
+    console.log(res?.success);
   };
 
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-      {categories?.map((category: TTreeProductsCategory, i: string) => (
+      {categories?.result?.map((category: TTreeProductsCategory, i: number) => (
         <form
-          key={category._id} // Ensure each form has a unique key
-          onSubmit={handleSubmit}
+          key={category._id}
+          onSubmit={(e) => handleUpdateCategory(e, category._id)}
           className="space-y-4 mt-10 shadow-md p-8 rounded-md"
         >
           <h3 className="uppercase text-xl font-semibold">

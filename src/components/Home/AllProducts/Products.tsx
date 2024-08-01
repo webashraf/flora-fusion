@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { SkeletonCard } from "@/components/customUi/SkeletonLoading/SkeletonLoading";
 import {
   Pagination,
   PaginationContent,
@@ -33,8 +34,15 @@ const Products = () => {
 
   const [paginate, setPaginate] = useState<number>(1);
 
-  const { data: products } = useGetProductsQuery(searchInput);
+  const { data: products, isLoading } = useGetProductsQuery(searchInput);
 
+  if (isLoading) {
+    return (
+      <div className="my-36 ">
+        <SkeletonCard />
+      </div>
+    );
+  }
   // Handle search form submission
   const handleSearch = (e: any) => {
     e.preventDefault();
@@ -88,7 +96,7 @@ const Products = () => {
         subTitle="Explore Our Features, Categories, and Detailed Product Information"
       />
       <div className="flex justify-between mb-10">
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 mx-1">
           {/* Select component for price filter */}
           <Select onValueChange={handleFilter}>
             <SelectTrigger className="w-[180px]">

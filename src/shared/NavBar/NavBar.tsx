@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
@@ -9,7 +10,7 @@ const NavBar = () => {
   const items = useAppSelector((state) => state.cart.cart);
 
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       if (items.length !== 0) {
         const warningMessage =
           "Your cart has some items. Are you sure to reload?😒";
@@ -29,10 +30,17 @@ const NavBar = () => {
   return (
     <nav className="w-full flex flex-col items-center bg-white">
       <div className="flex justify-between gap-10 w-full">
-        <div className="w-[20%] relative bottom-4 flex items-center">
-          <img src="/Flora_Fusion_logos.png" alt="" />
+        {/* Nav Logo */}
+        <div className="lg:w-[20%] md:w-[40%] mx-auto relative bottom-4 flex items-center">
+          <img
+            src="/Flora_Fusion_logos.png"
+            className="bg-red-5 h-[150px] object-cover w-full"
+            alt=""
+          />
         </div>
-        <div className="w-[80%] bg-red-5  border overflow-hidden">
+
+        {/* Nav contact */}
+        <div className="w-[80%] bg-red-5  border overflow-hidden lg:block hidden">
           <div
             className="w-full  lg:h-[60%] md:py-3 bgblack flex items-center justify-between
           "
@@ -68,20 +76,12 @@ const NavBar = () => {
 
           <div className="w-[100%]  h-[40%] flex justify-end items-center border-t">
             <div className="border-x  px-12 py-3 relative flex justify-center items-center">
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-6 fill-[#87b670] hover:fill-[#334d31]"
-              >
-                <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
-              </svg> */}
               <div className="bg-[#87b670] text-white w-[20px] h-[20px] flex justify-center items-center rounded-md relative bottom-3 -right-5">
                 <h4 className="text-sm">{items?.length}</h4>
               </div>
 
               <div className="absolute">
-                <CartItems />
+                <CartItems color="#87b670" />
               </div>
             </div>
             <span className="px-12">
@@ -90,10 +90,25 @@ const NavBar = () => {
           </div>
         </div>
       </div>
+      {/* Mobile menu */}
+      <div className="flex justify-between w-full relative bg-[#58923b] lg:hidden md:hidden">
+        <div className=" relative">
+          <h4 className="text-lg absolute -top-0 right-0 text-white">
+            {items?.length}
+          </h4>
+          <div className="">
+            <CartItems color="white" />
+          </div>
+        </div>
+        <div>
+          <Button>fj</Button>
+        </div>
+      </div>
 
+      {/* large Nav Menu */}
       <div
         id="nav-menu-top"
-        className="w-full px-10 text-center py-3 bg-gradient-to-r from-[#61815f] to-[#80a97e] text-white "
+        className="w-full px-10 text-center py-3 bg-gradient-to-r from-[#61815f] to-[#80a97e] text-white lg:block md:block hidden"
       >
         <NavMenu />
       </div>

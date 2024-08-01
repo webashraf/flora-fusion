@@ -23,7 +23,7 @@ const ProductListCard = ({ product }: { product: TProduct }) => {
 
   return (
     <div className="relative ">
-      <div className="card lg:w-[340px] h-[400px]">
+      <div className="card w-[340px] h-[400px]">
         <div className="text text-2xl w-full overflow-hidden font-bold">
           <div className="w-full ">
             <div className="h-[370px] w-full mb-5 bg-red-400 overflow-hidden">
