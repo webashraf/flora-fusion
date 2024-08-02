@@ -27,7 +27,7 @@ import { NavLink } from "react-router-dom";
 import { toast } from "sonner";
 
 export function CartSheet({ color }: { color: string }) {
-  const trees = useAppSelector((state) => state.cart.cart);
+  const cartTrees = useAppSelector((state) => state.cart.cart);
 
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
   const dispatch = useAppDispatch();
@@ -113,7 +113,11 @@ export function CartSheet({ color }: { color: string }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <ShoppingBagIcon className="size-8" color={color} scale="1" />
+        <ShoppingBagIcon
+          className="size-14 p-2 rounded-full  "
+          color={color}
+          scale="1"
+        />
         {/* <Button></Button> */}
       </SheetTrigger>
       <SheetContent>
@@ -129,11 +133,11 @@ export function CartSheet({ color }: { color: string }) {
         <div className="p-3">
           <div className="h-[70vh] overflow-hidden hover:overflow-y-auto hover:transition-all hover:duration-300 custom-scrollbar">
             <div className="">
-              {trees.length !== 0 ? (
+              {cartTrees.length !== 0 ? (
                 <Table className="">
-                  {trees?.map((tree: TProduct, i: number) => (
+                  {cartTrees?.map((tree: TProduct, i: number) => (
                     <TableBody
-                      className="mw-[200px] mb-5 hover:bg-slate-100 h-[180px] relative"
+                      className="mw-[200px] mb-5 hover:bg-slate-100 h-[170px] relative"
                       key={tree._id}
                     >
                       <TableRow>
@@ -223,7 +227,7 @@ export function CartSheet({ color }: { color: string }) {
             </div>
           </div>
           <div className="">
-            {trees?.length !== 0 ? (
+            {cartTrees?.length !== 0 ? (
               <div>
                 <div className="my-8 border-t-2 border-black pt-2">
                   <h4 className="font-semibold text-right">
@@ -239,9 +243,13 @@ export function CartSheet({ color }: { color: string }) {
 
         <SheetFooter>
           <SheetClose asChild>
-            <NavLink to="/checkout">
-              <Button className="capitalize btn-2">Proced to chek-out</Button>
-            </NavLink>
+            {cartTrees?.length > 0 ? (
+              <NavLink to="/checkout">
+                <Button className="capitalize btn-2">Proced to chek-out</Button>
+              </NavLink>
+            ) : (
+              ""
+            )}
           </SheetClose>
         </SheetFooter>
       </SheetContent>

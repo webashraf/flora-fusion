@@ -16,7 +16,7 @@ import { toast } from "sonner";
 const ProductCard = ({ product }: { product: TProduct }) => {
   // console.log(product);
   return (
-    <div className="grid w-full place-content-center bg-gradient-to-br from-[#698467] to-[#74a859f6] py-5 rounded-md text-slate-900 bg-cover">
+    <div className="grid lg:w-full  place-content-center bg-gradient-to-br from-[#698467] to-[#74a859f6] py-5 rounded-md text-slate-900 bg-cover ">
       <TiltCard product={product} />
     </div>
   );

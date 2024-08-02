@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
 import CartItems from "./CartItems";
 import { CartSheet } from "./CartSheet";
 import NavMenu from "./NavMenu";
+import OffCanvusMenu from "./OffCanvusMenu/OffCanvusMenu";
 // import { NavMenu } from "/src/shared/NavBar/NavMenu";
 
 const NavBar = () => {
@@ -32,7 +32,7 @@ const NavBar = () => {
     <nav className="w-full flex flex-col items-center bg-white">
       <div className="flex justify-between gap-10 w-full">
         {/* Nav Logo */}
-        <div className="lg:w-[20%] md:w-[40%] mx-auto relative bottom-4 flex items-center">
+        <div className="lg:w-[20%] md:w-[40%] w-[40%] mx-auto relative lg:bottom-4 flex items-center">
           <img
             src="/Flora_Fusion_logos.png"
             className="bg-red-5 lg:h-auto"
@@ -92,8 +92,17 @@ const NavBar = () => {
           </div>
         </div>
       </div>
+
+      {/* large Nav Menu */}
+      <div
+        id="nav-menu-top"
+        className="w-full px-10 text-center py-3 bg-gradient-to-r from-[#61815f] to-[#80a97e] text-white lg:block md:block hidden"
+      >
+        <NavMenu />
+      </div>
+
       {/* Mobile menu */}
-      <div className="flex justify-between w-full relative bg-[#58923b] lg:hidden md:hidden">
+      <div className="flex justify-between w-full relative bg-gradient-to-r from-[#61815f] to-[#80a97e] lg:hidden md:hidden pr-2">
         <div className=" relative">
           <h4 className="text-lg absolute -top-0 right-0 text-white">
             {items?.length}
@@ -103,16 +112,9 @@ const NavBar = () => {
           </div>
         </div>
         <div>
-          <Button>fj</Button>
+          {/* <OffCanvasBurger /> */}
+          <OffCanvusMenu />
         </div>
-      </div>
-
-      {/* large Nav Menu */}
-      <div
-        id="nav-menu-top"
-        className="w-full px-10 text-center py-3 bg-gradient-to-r from-[#61815f] to-[#80a97e] text-white lg:block md:block hidden"
-      >
-        <NavMenu />
       </div>
     </nav>
   );

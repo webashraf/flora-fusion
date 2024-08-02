@@ -8,7 +8,7 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => {
   return (
     <>
-      <div className="max-w-[1440px] w-full mx-auto overflow-x-hidden bg-red-00 relative">
+      <div className="lg:max-w-[1440px] w-full mx-auto overflow-x-hidden overflow-hidden relative">
         <NavBar />
 
         <Outlet />
@@ -16,10 +16,10 @@ const MainLayout = () => {
         <div className="fixed bottom-16 right-0 w-full flex justify-center z-20">
           <div className="max-w-[1440px] w-full relative">
             <Button
-              className="size-14 rounded-full absolute right-4 "
+              className=" rounded-full absolute right-4 p-0 size-14"
               aria-label="Shopping Cart"
             >
-              <CartSheet />
+              <CartSheet color="" />
             </Button>
           </div>
         </div>
