@@ -5,7 +5,7 @@ import {
 import AlertDialogCustom from "@/shared/AlertDialog/AlertDialog";
 import CommonHeading from "@/shared/CommonHeading/CommonHeading";
 
-
+import Loader from "@/shared/Loader/loader/Loader";
 import { TProduct } from "@/types/types";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { useState } from "react";
@@ -29,7 +29,6 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import Loader from "@/shared/Loader/loader/Loader";
 
 const UpdateTree = () => {
   const { data: products } = useGetProductsQuery({});
@@ -61,11 +60,8 @@ const UpdateTree = () => {
   return (
     <div>
       {" "}
-      <div className="section-margin-top">
-        <CommonHeading
-          title="Plant Details"
-          subTitle="Comprehensive Information on Your Selected Plant"
-        />
+      <div className="mt-10">
+        <CommonHeading title="Update Tree" subTitle="" />
         <div className="lg:flex gap-5 items-center">
           <div className="lg:w-1/3 relative overflow-hidden">
             <img

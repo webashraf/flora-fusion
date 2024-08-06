@@ -90,7 +90,7 @@ const Products = () => {
   // console.log(products?.result[1]);
 
   return (
-    <div className="section-margin-top px-5 lg:px-0 ">
+    <div className="section-margin-top px-5 lg:px-0 md:px-20">
       <CommonHeading
         title="Discover Your Perfect Plants"
         subTitle="Explore Our Features, Categories, and Detailed Product Information"

@@ -34,11 +34,12 @@ export function CartSheet({ color }: { color: string }) {
 
   const inputValuesRef = useRef<{ [key: string]: string }>({});
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
-  console.log(
-    "🚀 ~ CartSheet ~ inputValues:",
-    Number(inputValues["668e49375956bee8a5c61a5a"]) > 3,
-    inputValues["668e49375956bee8a5c61a5a"]
-  );
+
+  // console.log(
+  //   "🚀 ~ CartSheet ~ inputValues:",
+  //   Number(inputValues["668e49375956bee8a5c61a5a"]) > 3,
+  //   inputValues["668e49375956bee8a5c61a5a"]
+  // );
 
   let newPrice: number = 0;
   cartProducts.forEach((item: TProduct) => {
@@ -62,7 +63,7 @@ export function CartSheet({ color }: { color: string }) {
     console.log(inputValues);
   };
 
-  console.log({ inputValues });
+  // console.log({ inputValues });
 
   //   * Handle minus to cart
   const handleMinustocart = (product: TProduct) => {
@@ -114,7 +115,7 @@ export function CartSheet({ color }: { color: string }) {
     <Sheet>
       <SheetTrigger asChild>
         <ShoppingBagIcon
-          className="size-14 p-2 rounded-full  "
+          className="size-12 p-2 rounded-full  "
           color={color}
           scale="1"
         />
@@ -177,7 +178,7 @@ export function CartSheet({ color }: { color: string }) {
                           <div className="flex gap-5 justify-start">
                             <Button
                               disabled={
-                                tree.stock <= 1 ||
+                                tree?.stock <= 1 ||
                                 tree?.qty <= 1 ||
                                 Number(inputValues[tree?._id] || "0") >
                                   tree?.qty
@@ -208,7 +209,8 @@ export function CartSheet({ color }: { color: string }) {
                                 tree.stock <= 0 ||
                                 Number(inputValues[tree._id] || "0") +
                                   tree.qty >
-                                  tree.stock
+                                  tree.stock ||
+                                tree.stock == tree.qty
                               }
                               onClick={() => handleAddtocart(tree)}
                               className="capitalize btn-2 h-[30px]"

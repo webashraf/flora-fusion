@@ -19,7 +19,7 @@ const ProductPage = () => {
   return (
     <>
       <CommonHero title="Products Page" />
-      <div className="grid lg:grid-cols-4 grid-cols-2 gap-5 py-20">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 py-20 mx-auto">
         {products.result.map((product: TProduct) => (
           <AllProducts key={product._id} product={product} />
         ))}

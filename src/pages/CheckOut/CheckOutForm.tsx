@@ -1,31 +1,31 @@
+import StripePayment from "@/components/Payment/StripePayment";
 import useTotalAmount from "@/hooks/useTotalAmount";
-import {
-  useCreateOrderMutation,
-  usePaymentMutation,
-} from "@/redux/api/baseApi";
+import { useCreateOrderMutation } from "@/redux/api/baseApi";
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
-import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const CheckOutForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("cashOn");
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
   const [createOrder] = useCreateOrderMutation();
+  const [bActive, setBactive] = useState(false);
   const navigate = useNavigate();
-  const [payment] = usePaymentMutation();
+  // const [payment] = usePaymentMutation();
   const amount = useTotalAmount();
-  console.log(amount);
+  // console.log("🚀 ~ CheckOutForm ~ amount:", amount);
+  // console.log(amount);
 
   // const amount = useTotalAmount();
 
-  useEffect(() => {
-    const res = payment(amount);
-    res.then((data) => {
-      console.log(data);
-    });
-  }, [payment, amount]);
+  // useEffect(() => {
+  //   const res = payment(amount);
+  //   res.then((data) => {
+  //     console.log(data);
+  //   });
+  // }, [payment, amount]);
 
   const paymentOption = (value: string) => {
     setPaymentMethod(value);
@@ -35,7 +35,7 @@ const CheckOutForm = () => {
     } else if (paymentMethod === "card") {
       navigate("/checkout/cardPayment");
     }
-    console.log(paymentMethod);
+    // console.log(paymentMethod);
   };
 
   // console.log({ paymentMethod });
@@ -52,7 +52,7 @@ const CheckOutForm = () => {
       mobileNumber: formData.get("mobileNumber") as string,
 
       address: formData.get("address") as string,
-      paymentMethod: formData.get("paymentMethod") as string,
+      paymentMethod,
       division: formData.get("division") as string,
       products: cartProducts.map((product) => ({
         _id: product._id,
@@ -224,8 +224,9 @@ const CheckOutForm = () => {
                       type="radio"
                       id="cashOnDelivery"
                       onClick={() => {
-                        paymentOption("cashOn");
-                        navigate("/checkout/cashOn");
+                        // paymentOption("cashOn");
+                        // navigate("/checkout/cashOn");
+                        setPaymentMethod("cashOn");
                       }}
                       value="cashOnDelivery"
                       name="cashOnDelivery"
@@ -239,8 +240,9 @@ const CheckOutForm = () => {
                       type="radio"
                       id="cardPayment"
                       onClick={() => {
-                        paymentOption("card");
-                        navigate("/checkout/cardPayment");
+                        // paymentOption("card");
+                        // navigate("/checkout/cardPayment");
+                        setPaymentMethod("card");
                       }}
                       value="cardPayment"
                       name="cardPayment"
@@ -252,11 +254,7 @@ const CheckOutForm = () => {
               </div>
             </div>
 
-            {/*! Pyament card  */}
 
-            <div className="pt-4 w-[60%] mx-auto">
-              <Outlet />
-            </div>
 
             {/* ---------------------------- */}
 
@@ -272,7 +270,15 @@ const CheckOutForm = () => {
               </button>
             </div>
           </form>
-          {/* <StripePayment /> */}
+          <div
+            onClick={() => setBactive(!bActive)}
+            className={`pt-4 w-[60%] mx-auto ${
+              paymentMethod == "card" ? "block" : "hidden"
+            }`}
+          >
+            {/*! Pyament card  */}
+            <StripePayment />
+          </div>
         </div>
       </div>
     </>

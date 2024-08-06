@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { setCart } from "@/redux/features/cartSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
 import {
   motion,
@@ -57,12 +57,29 @@ const TiltCard = ({ product }: { product: TProduct }) => {
     x.set(0);
     y.set(0);
   };
+
+  const cartProducts = useAppSelector((state) => state.cart.cart);
+
   const dispatch = useAppDispatch();
   // Function to handle adding a product to the cart
   const handleAddtocart = (tree: TProduct) => {
     // Creating a new cart item with quantity set to 1
     const treeCartItem = { ...tree, qty: 1 };
     console.log("tree", tree);
+
+    let isExisting = [{ qty: 0 }];
+
+    isExisting = cartProducts.filter((item: TProduct) => tree._id === item._id);
+    console.log(
+      "🚀 ~ handleAddtocart ~ isExisting:",
+      isExisting[0]?.qty,
+      tree.stock
+    );
+
+    if (isExisting[0]?.qty >= tree?.stock) {
+      toast.error(`You all ready catch the max stock of ${tree.name}.`);
+      return;
+    }
 
     // Dispatching Redux action setCart to update cart state with new item
     dispatch(setCart(treeCartItem));

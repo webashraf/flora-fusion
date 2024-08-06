@@ -96,7 +96,7 @@
 }
 
 .mini-active {
-  @apply text-white bg-gradient-to-r from-[#243a26b0] to-[#80a97ea8] rounded-md text-xs py-[4px] w-28  text-center hue-rotate-30;
+  @apply text-white bg-gradient-to-r from-[#243a26b0] to-[#80a97ecb] rounded-md text-xs py-[4px] w-28  text-center hue-rotate-30;
 }
 .activeNav {
   background-color: rgb(0, 0, 0);

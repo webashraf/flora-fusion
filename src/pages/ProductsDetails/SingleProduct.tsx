@@ -7,15 +7,16 @@ import Loader from "@/shared/Loader/loader/Loader";
 
 import { TProduct } from "@/types/types";
 import { useLoaderData } from "react-router-dom";
+import { toast } from "sonner";
 
 const SingleProduct = () => {
   // console.log("Single Product", product);
   const singleProduct: any = useLoaderData();
   const product: TProduct = singleProduct.result;
 
-  const state = useAppSelector((state) => state.cart.cart);
+  const cartProducts = useAppSelector((state) => state.cart.cart);
   const dispatch = useAppDispatch();
-  console.log(state);
+  console.log(cartProducts);
 
   if (!product) {
     return <Loader />;
@@ -26,9 +27,23 @@ const SingleProduct = () => {
     // Creating a new cart item with quantity set to 1
     const qtyInput = document.getElementById("qty-input") as HTMLInputElement;
     const qty = Number(qtyInput.value);
-    console.log(qty);
     const treeCartItem = { ...product, qty };
-    console.log("tree", treeCartItem);
+
+    let isExisting = [{ qty: 0 }];
+
+    isExisting = cartProducts.filter(
+      (item: TProduct) => product._id === item._id
+    );
+    console.log(
+      "🚀 ~ handleAddtocart ~ isExisting:",
+      isExisting[0]?.qty,
+      product.stock
+    );
+
+    if (isExisting[0]?.qty >= product?.stock) {
+      toast.error(`You all ready catch the max stock of ${product.name}.`);
+      return;
+    }
 
     // Dispatching Redux action setCart to update cart state with new item
     dispatch(setCart(treeCartItem));

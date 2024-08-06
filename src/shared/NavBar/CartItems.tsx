@@ -25,8 +25,8 @@ const CartItems = ({ color }: { color: string }) => {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="bg-transparent hover:bg-transparent w-[40px] rounded-full p-2">
-            <ShoppingBagIcon color={color} scale="1" />
+          <Button className="bg-transparent h-full hover:bg-transparent rounded-full p-2">
+            <ShoppingBagIcon color={color} className="size-8" />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[725px]">

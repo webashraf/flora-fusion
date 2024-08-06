@@ -2,6 +2,7 @@ import useTotalAmount from "@/hooks/useTotalAmount";
 import { usePaymentMutation } from "@/redux/api/baseApi";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const StripeCheckOutForm = () => {
   const [error, setError] = useState("");
@@ -9,22 +10,28 @@ const StripeCheckOutForm = () => {
   const elements = useElements();
 
   const [clientSecret, setClientSecret] = useState("");
+  const [process, setProcess] = useState(false);
 
   const [payment] = usePaymentMutation();
 
   const amount = useTotalAmount();
 
   useEffect(() => {
-    const res = payment({ amount });
-    res.then((data) => {
-      console.log(data);
-    });
+    const fetchClientSecret = async () => {
+      const res = await payment({ amount });
+      setClientSecret(res.data.clientSecret);
+      console.log(res);
+    };
+    fetchClientSecret();
   }, [payment, amount]);
 
-  console.log({ clientSecret });
+  console.log("🚀 ~ StripeCheckOutForm ~ clientSecret:", clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    event.stopPropagation();
+    setProcess(true);
+    console.log(process);
 
     if (!stripe || !elements) {
       return;
@@ -51,7 +58,6 @@ const StripeCheckOutForm = () => {
     }
 
     // Confirm Payment
-
     const { paymentIntent, error: cardConfirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -62,45 +68,52 @@ const StripeCheckOutForm = () => {
         },
       });
     if (cardConfirmError) {
+      setProcess(false);
+      toast.error("Payment error: " + cardConfirmError?.message);
       console.log({ cardConfirmError });
-    } else {
+    } else if (paymentIntent.status) {
+      toast.success("Payment confirm successfully");
       console.log({ paymentIntent });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
+    <div>
+      <form onSubmit={handleSubmit}>
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
+                },
+              },
+              invalid: {
+                color: "#9e2146",
               },
             },
-            invalid: {
-              color: "#9e2146",
-            },
-          },
-        }}
-      />
+          }}
+        />
 
-      <div className="flex justify-center items-center mt-10">
-        <button
-          className={` text-white font-bold px-16 py-1 rounded-md  ${
-            !stripe || !clientSecret ? "bg-red-600" : "btn-2"
-          }`}
-          type="submit"
-          disabled={!stripe || !clientSecret}
-        >
-          Place order
-        </button>
-      </div>
+        <div className="flex justify-center items-center mt-10">
+          <button
+            className={`text-white font-bold px-16 rounded-md btn-2 py-2 ${
+              !stripe || !clientSecret || process
+                ? "cursor-not-allowed"
+                : " hover:bg-black "
+            }`}
+            disabled={!stripe || !clientSecret || process}
+            type="submit"
+          >
+            Place order
+          </button>
+        </div>
 
-      <p className="text-red-500">{error}</p>
-    </form>
+        <p className="text-red-500">{error}</p>
+      </form>
+    </div>
   );
 };
 

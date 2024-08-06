@@ -54,13 +54,13 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
 
   return (
     <>
-      <>
+      <div className="mx-2">
         <AlertDialogTrigger>
           <div>
             <EditBtn />
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="lg:w-full w-[90%] rounded-md">
           <AlertDialogHeader>
             <AlertDialogTitle>
               Are you sure to update this product?.result?
@@ -70,8 +70,11 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
             </AlertDialogCancel>
             <AlertDialogDescription>
               <div>
-                <form onSubmit={handleUpdate} className="space-y-4">
-                  <div className="space-x-3 flex">
+                <form
+                  onSubmit={handleUpdate}
+                  className="space-y-4 text-left mx-"
+                >
+                  <div className="space-x-3 flex text-left">
                     <div className="flex-1">
                       <label
                         htmlFor="name"
@@ -109,48 +112,50 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
                     </div>
                   </div>
 
-                  <div>
-                    <label
-                      htmlFor="imageURL"
-                      className="block text-gray-500 text-sm font-medium"
-                    >
-                      Image Url <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="url"
-                      defaultValue={product?.result?.imageURL}
-                      id="imageURL"
-                      name="imageURL"
-                      placeholder="Give your image url https://"
-                      className="w-full ring-1 text-slate-800 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
-                      required
-                    />
-                  </div>
+                  <div className="flex gap-3 lg:flex-co flex-row-reverse">
+                    <div className="w-1/2">
+                      <label
+                        htmlFor="imageURL"
+                        className="block text-gray-500 text-sm font-medium"
+                      >
+                        Image Url <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="url"
+                        defaultValue={product?.result?.imageURL}
+                        id="imageURL"
+                        name="imageURL"
+                        placeholder="Give your image url https://"
+                        className="w-full ring-1 text-slate-800 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+                        required
+                      />
+                    </div>
 
-                  <div>
-                    <label
-                      htmlFor="category"
-                      className="block text-gray-500 text-sm font-medium"
-                    >
-                      Category<span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      id="category"
-                      defaultValue={product?.result?.category?._id}
-                      name="category"
-                      className="w-full ring-1 text-slate-800 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
-                      required
-                    >
-                      <option value="">Select Category...</option>
-                      {product &&
-                        categories?.result?.map(
-                          (category: TTreeProductsCategory) => (
-                            <option value={category._id}>
-                              {category.name}
-                            </option>
-                          )
-                        )}
-                    </select>
+                    <div className="w-1/2">
+                      <label
+                        htmlFor="category"
+                        className="block text-gray-500 text-sm font-medium"
+                      >
+                        Category<span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        id="category"
+                        defaultValue={product?.result?.category?._id}
+                        name="category"
+                        className="w-full ring-1 text-slate-800 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+                        required
+                      >
+                        <option value="">Select Category...</option>
+                        {product &&
+                          categories?.result?.map(
+                            (category: TTreeProductsCategory) => (
+                              <option value={category._id}>
+                                {category.name}
+                              </option>
+                            )
+                          )}
+                      </select>
+                    </div>
                   </div>
 
                   <div>
@@ -272,7 +277,7 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
           </AlertDialogHeader>
           <AlertDialogFooter></AlertDialogFooter>
         </AlertDialogContent>
-      </>
+      </div>
     </>
   );
 };

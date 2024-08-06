@@ -22,7 +22,9 @@ const CheckOut = () => {
 
   return cartProducts?.length > 0 ? (
     <div className="py-20 mx-5">
-      <h2 className="text-5xl uppercase pb-10">Check-out process</h2>
+      <h2 className="lg:text-5xl text-4xl uppercase pb-10">
+        Check-out process
+      </h2>
 
       <div className="flex justify-between items-center lg:flex-row flex-col gap-20">
         <div className="lg:w-1/2 w-full">

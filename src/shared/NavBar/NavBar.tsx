@@ -1,7 +1,6 @@
 import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
-import CartItems from "./CartItems";
 import { CartSheet } from "./CartSheet";
 import NavMenu from "./NavMenu";
 import OffCanvusMenu from "./OffCanvusMenu/OffCanvusMenu";
@@ -77,8 +76,8 @@ const NavBar = () => {
 
           <div className="w-[100%]  h-[40%] flex justify-end items-center border-t">
             <div className="border-x  px-12 py-3 relative flex justify-center items-center">
-              <div className="bg-[#87b670] text-white w-[20px] h-[20px] flex justify-center items-center rounded-md relative bottom-3 -right-5">
-                <h4 className="text-sm">{items?.length}</h4>
+              <div className="bg-[#87b670 bg-red-500 text-white w-[20px] h-[20px] flex justify-center items-center rounded-full relative bottom-3 -right-5">
+                <h4 className="text-sm ">{items?.length}</h4>
               </div>
 
               <div className="absolute">
@@ -108,7 +107,7 @@ const NavBar = () => {
             {items?.length}
           </h4>
           <div className="">
-            <CartItems color="white" />
+            <CartSheet color="white" />
           </div>
         </div>
         <div>

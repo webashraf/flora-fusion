@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/redux/hooks";
 import Footer from "@/shared/Footer/Footer";
 import { CartSheet } from "@/shared/NavBar/CartSheet";
 import NavBar from "@/shared/NavBar/NavBar";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
+  const items = useAppSelector((state) => state.cart.cart);
   return (
     <>
-      <div className="lg:max-w-[1440px] w-full mx-auto overflow-x-hidden overflow-hidden relative">
+      <div className="lg:max-w-[1440px] md:w-[98%] w-full mx-auto overflow-x-hidden overflow-hidden relative">
         <NavBar />
 
         <Outlet />
@@ -19,6 +21,9 @@ const MainLayout = () => {
               className=" rounded-full absolute right-4 p-0 size-14"
               aria-label="Shopping Cart"
             >
+              <p className="bg-red-500 size-5 absolute rounded-full -top-2 right-0">
+                {items.length}
+              </p>
               <CartSheet color="" />
             </Button>
           </div>

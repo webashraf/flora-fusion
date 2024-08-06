@@ -13,6 +13,8 @@ const AddTree = () => {
 
   const [createTree] = useCreateTreeMutation();
 
+  console.log(categories);
+
   if (!categories) {
     return <Loader />;
   }
@@ -51,8 +53,11 @@ const AddTree = () => {
   };
   return (
     <div>
-      <h2 className="text-4xl pb-12">Add Products</h2>
-      <form onSubmit={handleAddProduct} className="space-y-4">
+      <form
+        onSubmit={handleAddProduct}
+        className="space-y-4 mx- shadow-2xl rounded-md p-5"
+      >
+        <h2 className="text-4xl pb-12 ">Add Products</h2>
         <div className="space-x-3 flex">
           <div className="flex-1">
             <label
@@ -88,44 +93,52 @@ const AddTree = () => {
           </div>
         </div>
 
-        <div>
-          <label
-            htmlFor="imageURL"
-            className="block text-gray-500 text-sm font-medium"
-          >
-            Image Url <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="url"
-            id="imageURL"
-            name="imageURL"
-            placeholder="Give your image url https://"
-            className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
-            required
-          />
-        </div>
+        <div className="flex gap-3 lg:flex-co flex-row-reverse">
+          <div className="w-1/2">
+            <label
+              htmlFor="imageURL"
+              className="block text-gray-500 text-sm font-medium"
+            >
+              Image Url <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="url"
+              id="imageURL"
+              name="imageURL"
+              placeholder="Give your image url https://"
+              className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+              required
+            />
+          </div>
 
-        <div>
-          <label
-            htmlFor="category"
-            className="block text-gray-500 text-sm font-medium"
-          >
-            Category<span className="text-red-500">*</span>
-          </label>
-          <select
-            id="category"
-            name="category"
-            className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
-            required
-          >
-            <option value="">Select Category...</option>
-            {categories &&
-              categories?.data?.map((category: TTreeProductsCategory) => (
-                <option key={category._id} value={category._id}>
-                  {category.name}
-                </option>
-              ))}
-          </select>
+          <div className="w-1/2">
+            <label
+              htmlFor="category"
+              className="block text-gray-500 text-sm font-medium"
+            >
+              Category<span className="text-red-500">*</span>
+            </label>
+            <select
+              id="category"
+              name="category"
+              className="w-full ring-1 ring-gray-400 rounded-md text-md  py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
+              required
+            >
+              <option value="" className="w-[100px]">
+                Select Category...
+              </option>
+              {categories &&
+                categories?.result?.map((category: TTreeProductsCategory) => (
+                  <option
+                    className="w-[100px]"
+                    key={category._id}
+                    value={category._id}
+                  >
+                    {category.name}
+                  </option>
+                ))}
+            </select>
+          </div>
         </div>
 
         <div>
