@@ -29,14 +29,22 @@ const Products = () => {
     searchItem: "",
     price: 1,
     page: 1,
-    limit: "",
+    limit: "8",
   });
 
   const [paginate, setPaginate] = useState<number>(1);
 
   const { data: products, isLoading } = useGetProductsQuery(searchInput);
+  const { data: paginateTotal, isLoading: paginateLoading } =
+    useGetProductsQuery({});
 
-  if (isLoading) {
+  const totalProducts = paginateTotal?.result?.length;
+  console.log("🚀 ~ Products ~ totalProducts:", totalProducts);
+
+  const totalPage = Array.from({ length: Math.ceil(totalProducts / 8) });
+  console.log("🚀 ~ Products ~ totalPage:", totalPage);
+
+  if (isLoading || paginateLoading) {
     return (
       <div className="my-36 ">
         <SkeletonCard />
@@ -62,12 +70,13 @@ const Products = () => {
   };
 
   // Pagination handling
-  const handlePaginate = (
+  const handlePagination = (
     pageNumber: number,
     nextPrev: string = "",
     event: MouseEvent<HTMLAnchorElement>
   ) => {
     event.preventDefault();
+
     setPaginate(pageNumber);
 
     if (nextPrev === "next") {
@@ -152,41 +161,27 @@ const Products = () => {
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious
-                onClick={(event) => handlePaginate(paginate, "prev", event)}
+                onClick={(event) => handlePagination(paginate, "prev", event)}
                 href="#"
               />
             </PaginationItem>
 
-            <PaginationItem>
-              <PaginationLink
-                onClick={(event) => handlePaginate(1, "", event)}
-                href="#"
-              >
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                onClick={(event) => handlePaginate(2, "", event)}
-                href="#"
-              >
-                2
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                onClick={(event) => handlePaginate(3, "", event)}
-                href="#"
-              >
-                3
-              </PaginationLink>
-            </PaginationItem>
+            {totalPage.map((_, i) => (
+              <PaginationItem>
+                <PaginationLink
+                  onClick={(event) => handlePagination(i + 1, "", event)}
+                  href="#"
+                >
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
             <PaginationItem>
               <PaginationEllipsis />
             </PaginationItem>
             <PaginationItem>
               <PaginationNext
-                onClick={(event) => handlePaginate(paginate, "next", event)}
+                onClick={(event) => handlePagination(paginate, "next", event)}
                 href="#"
               />
             </PaginationItem>
