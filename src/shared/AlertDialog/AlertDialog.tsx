@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import EditBtn from "@/components/customUi/EditBtn/EditBtn";
+import { SkeletonCard } from "@/components/customUi/SkeletonLoading/SkeletonLoading";
 import {
   AlertDialogCancel,
   AlertDialogContent,
@@ -26,7 +27,7 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const { data: product } = useGetSingleProductByIdQuery(treeID);
-  const { data: categories } = useGetCategoriesQuery({});
+  const { data: categories, isLoading } = useGetCategoriesQuery({});
 
   const [updateTree] = useUpdateTreeMutation();
 
@@ -52,6 +53,14 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="my-36 ">
+        <SkeletonCard />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="mx-2">
@@ -63,7 +72,7 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
         <AlertDialogContent className="lg:w-full w-[90%] rounded-md">
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Are you sure to update this product?.result?
+              Are you sure to update this product?
             </AlertDialogTitle>
             <AlertDialogCancel className="rounded-none text-red-500 absolute right-0 top-0 border-none">
               ❌
@@ -149,7 +158,7 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
                         {product &&
                           categories?.result?.map(
                             (category: TTreeProductsCategory) => (
-                              <option value={category._id}>
+                              <option key={categories._id} value={category._id}>
                                 {category.name}
                               </option>
                             )

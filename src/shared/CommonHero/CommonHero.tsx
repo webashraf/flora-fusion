@@ -19,7 +19,9 @@ const CommonHero = ({ title }: { title: string }) => {
       }}
     >
       <div className="w-full h-full backdrop-blur-sm flex items-center justify-center">
-        <h2 className="text-7xl underline uppercase text-slate-300">{title}</h2>
+        <h2 className="lg:text-7xl lg:text-left text-5xl text-center underline uppercase text-slate-300">
+          {title}
+        </h2>
       </div>
     </div>
   );

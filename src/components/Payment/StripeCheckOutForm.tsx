@@ -1,8 +1,10 @@
 import useTotalAmount from "@/hooks/useTotalAmount";
 import { usePaymentMutation } from "@/redux/api/baseApi";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { DollarSign } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import "./StripePay.css";
 
 const StripeCheckOutForm = () => {
   const [error, setError] = useState("");
@@ -11,6 +13,7 @@ const StripeCheckOutForm = () => {
 
   const [clientSecret, setClientSecret] = useState("");
   const [process, setProcess] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const [payment] = usePaymentMutation();
 
@@ -31,6 +34,7 @@ const StripeCheckOutForm = () => {
     event.preventDefault();
     event.stopPropagation();
     setProcess(true);
+    setLoad(true);
     console.log(process);
 
     if (!stripe || !elements) {
@@ -72,6 +76,7 @@ const StripeCheckOutForm = () => {
       toast.error("Payment error: " + cardConfirmError?.message);
       console.log({ cardConfirmError });
     } else if (paymentIntent.status) {
+      setLoad(false);
       toast.success("Payment confirm successfully");
       console.log({ paymentIntent });
     }
@@ -96,10 +101,10 @@ const StripeCheckOutForm = () => {
             },
           }}
         />
-
+        <div></div>
         <div className="flex justify-center items-center mt-10">
           <button
-            className={`text-white font-bold px-16 rounded-md btn-2 py-2 ${
+            className={`text-white font-bold px-16 rounded-md btn-2 py-2 flex gap-2 items-center ${
               !stripe || !clientSecret || process
                 ? "cursor-not-allowed"
                 : " hover:bg-black "
@@ -107,6 +112,13 @@ const StripeCheckOutForm = () => {
             disabled={!stripe || !clientSecret || process}
             type="submit"
           >
+            {load ? (
+              <div className="pay_loader"></div>
+            ) : (
+              <div>
+                <DollarSign size={15} />
+              </div>
+            )}
             Place order
           </button>
         </div>

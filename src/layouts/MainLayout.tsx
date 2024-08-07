@@ -16,9 +16,9 @@ const MainLayout = () => {
         <Outlet />
 
         <div className="fixed bottom-16 right-0 w-full flex justify-center z-20">
-          <div className="max-w-[1440px] w-full relative">
+          <div className="max-w-[1440px] w-full relative z-50">
             <Button
-              className=" rounded-full absolute right-4 p-0 size-14"
+              className=" rounded-full absolute z-50 right-4 p-0 size-14"
               aria-label="Shopping Cart"
             >
               <p className="bg-red-500 size-5 absolute rounded-full -top-2 right-0">

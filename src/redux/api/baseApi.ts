@@ -10,22 +10,16 @@ export const baseApi = createApi({
         return {
           method: "GET",
           url: `/products?searchItem=${searchItem}&price=${price}&page=${page}&limit=${limit}`,
-          providesTags: ["products"],
+          providesTags: ["items"],
         };
       },
     }),
     getProductsByQuery: builder.query({
-      query: ({ searchItem = "", price = 1 }) => {
-        console.log("Parameters received in getProducts query:", {
-          searchItem,
-          price,
-        });
-        return {
-          method: "GET",
-          url: `/products?searchItem=${searchItem}&price=${price}&page=1&limit=5`,
-          providesTags: ["items"],
-        };
-      },
+      query: ({ searchItem = "", price = 1 }) => ({
+        method: "GET",
+        url: `/products?searchItem=${searchItem}&price=${price}&page=1&limit=5`,
+        providesTags: ["items"],
+      }),
     }),
     getSingleProductById: builder.query({
       query: (params) => {
@@ -46,15 +40,12 @@ export const baseApi = createApi({
       invalidatesTags: ["items"],
     }),
     updateTree: builder.mutation({
-      query: (payload) => {
-        console.log("🚀 ~ treeId:", payload);
-
-        return {
-          url: `/products/${payload?.treeID}`,
-          method: "PATCH",
-          body: payload?.updatedData,
-        };
-      },
+      query: (payload) => ({
+        url: `/products/${payload?.treeID}`,
+        method: "PATCH",
+        body: payload?.updatedData,
+      }),
+      invalidatesTags: ["items"],
     }),
     deleteTree: builder.mutation({
       query: (params) => ({
@@ -80,6 +71,7 @@ export const baseApi = createApi({
           body: payload?.updatedData,
         };
       },
+      invalidatesTags: ["items"],
     }),
     createOrder: builder.mutation({
       query: (orderInfo) => ({

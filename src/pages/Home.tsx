@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SkeletonCard } from "@/components/customUi/SkeletonLoading/SkeletonLoading";
 import Products from "@/components/Home/AllProducts/Products";
 import Gallery from "@/components/Home/Gallery/Gallery";
 import Hero from "@/components/Home/Hero/Hero";
@@ -29,15 +28,11 @@ const Home = () => {
     );
   }
 
-
   // Display a loader if categories data is not yet available
   if (!categories) {
     return (
       <div>
-        <Loader />;
-        <div>
-          <h1 className="">20% Discount of every fruit trees</h1>
-        </div>
+        <Loader />
       </div>
     );
   }

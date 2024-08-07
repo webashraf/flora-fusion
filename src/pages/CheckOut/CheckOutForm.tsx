@@ -254,8 +254,6 @@ const CheckOutForm = () => {
               </div>
             </div>
 
-
-
             {/* ---------------------------- */}
 
             <div className="text-center">
@@ -272,7 +270,7 @@ const CheckOutForm = () => {
           </form>
           <div
             onClick={() => setBactive(!bActive)}
-            className={`pt-4 w-[60%] mx-auto ${
+            className={`pt-4 lg:w-[60%] md:w-[70%] mx-auto ${
               paymentMethod == "card" ? "block" : "hidden"
             }`}
           >
