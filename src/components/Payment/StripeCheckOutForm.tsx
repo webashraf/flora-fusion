@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import RoundedLoad from "../customUi/RoundedLoad/RoundedLoad";
 
-const StripeCheckOutForm = ({ setPurchase }) => {
+const StripeCheckOutForm = ({ setPurchase, userInfo }) => {
+  console.log(userInfo);
   const [error, setError] = useState("");
   const stripe = useStripe();
   const elements = useElements();
@@ -23,12 +24,12 @@ const StripeCheckOutForm = ({ setPurchase }) => {
 
   useEffect(() => {
     const fetchClientSecret = async () => {
-      const res = await payment({ amount });
+      const res = await payment( userInfo );
       setClientSecret(res.data.clientSecret);
       console.log(res);
     };
     fetchClientSecret();
-  }, [payment, amount]);
+  }, [payment, amount, userInfo]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -65,7 +66,10 @@ const StripeCheckOutForm = ({ setPurchase }) => {
         payment_method: {
           card,
           billing_details: {
-            name: "x",
+            name: "Ali",
+            address: {},
+            email: "",
+            phone: "",
           },
         },
       });

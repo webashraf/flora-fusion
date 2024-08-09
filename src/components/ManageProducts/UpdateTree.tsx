@@ -1,6 +1,7 @@
 import {
   useDeleteTreeMutation,
   useGetProductsQuery,
+  useRetriveAllDeleteTreesMutation,
 } from "@/redux/api/baseApi";
 import AlertDialogCustom from "@/shared/AlertDialog/AlertDialog";
 import CommonHeading from "@/shared/CommonHeading/CommonHeading";
@@ -21,6 +22,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import {
   Table,
   TableBody,
@@ -34,6 +36,8 @@ const UpdateTree = () => {
   const { data: products } = useGetProductsQuery({});
   const [deleteTree] = useDeleteTreeMutation();
   const [pImg, setPImg] = useState(products && products?.result[0]);
+
+  const [retriveAllDeleteTrees] = useRetriveAllDeleteTreesMutation();
 
   if (!products) {
     return <Loader />;
@@ -49,7 +53,7 @@ const UpdateTree = () => {
       const res = await deleteTree(id);
       console.log("🚀 ~ handleDeleteTree ~ res:", res.data.success);
       if (res.data.success === true) {
-        toast.success("Delete Success fully");
+        toast.success("Delete Succesfully");
       }
     } catch (err) {
       console.log(err);
@@ -62,6 +66,14 @@ const UpdateTree = () => {
       {" "}
       <div className="mt-10">
         <CommonHeading title="Update Tree" subTitle="" />
+        <div className="flex justify-end">
+          <Button
+            onClick={async () => await retriveAllDeleteTrees({})}
+            className="btn-2 mb-2 rounded-none"
+          >
+            Retrive All Trees
+          </Button>
+        </div>
         <div className="lg:flex gap-5 items-center">
           <div className="lg:w-1/3 relative overflow-hidden">
             <img
@@ -80,7 +92,7 @@ const UpdateTree = () => {
               <TableHeader className="h-[100px]">
                 <TableRow className="">
                   <TableHead className="w-[100px]">Serial</TableHead>
-                  <TableHead>Name & Category</TableHead>
+                  <TableHead>Title & Category</TableHead>
                   <TableHead>Description</TableHead>
                   <TableHead>Total Items</TableHead>
                   <TableHead>Price</TableHead>

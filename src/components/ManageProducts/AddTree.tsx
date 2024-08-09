@@ -64,13 +64,13 @@ const AddTree = () => {
               htmlFor="name"
               className="block text-gray-500 text-sm font-medium"
             >
-              Name <span className="text-red-500">*</span>
+              Title <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               id="name"
               name="name"
-              placeholder="Tree name"
+              placeholder="Title"
               className="w-full ring-1 ring-gray-400 rounded-md text-md px-2 py-2 outline-none bg-gray-100 focus:placeholder-gray-500"
               required
             />
@@ -146,7 +146,7 @@ const AddTree = () => {
             htmlFor="stock"
             className="block text-gray-500 text-sm font-medium"
           >
-            Stock <span className="text-red-500">*</span>
+            Quantity <span className="text-red-500">*</span>
           </label>
           <input
             type="number"

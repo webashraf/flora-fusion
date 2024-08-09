@@ -10,7 +10,7 @@ const StripePayment = ({ userInfo, setPurchase }) => {
 
   return (
     <Elements stripe={stripePromise}>
-      <StripeCheckOutForm setPurchase={setPurchase} />
+      <StripeCheckOutForm userInfo={userInfo} setPurchase={setPurchase} />
     </Elements>
   );
 };

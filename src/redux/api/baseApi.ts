@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
-  tagTypes: ["items"],
+  tagTypes: ["trees"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: ({
@@ -16,9 +16,9 @@ export const baseApi = createApi({
         return {
           method: "GET",
           url: `/products?searchItem=${searchItem}&price=${price}&page=${page}&limit=${limit}&categoryId=${category}`,
-          providesTags: ["items"],
         };
       },
+      providesTags: ["trees"],
     }),
     // getProductsByQuery: builder.query({
     //   query: ({ searchItem = "", price = 1 }) => ({
@@ -32,9 +32,9 @@ export const baseApi = createApi({
         return {
           method: "GET",
           url: `/products/${params}`,
-          providesTags: ["items"],
         };
       },
+      providesTags: ["trees"],
     }),
     createTree: builder.mutation({
       query: (payload) => ({
@@ -42,7 +42,7 @@ export const baseApi = createApi({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["items"],
+      invalidatesTags: ["trees"],
     }),
     updateTree: builder.mutation({
       query: (payload) => ({
@@ -50,20 +50,26 @@ export const baseApi = createApi({
         method: "PATCH",
         body: payload?.updatedData,
       }),
-      invalidatesTags: ["items"],
+      invalidatesTags: ["trees"],
     }),
     deleteTree: builder.mutation({
       query: (params) => ({
         url: `/products/${params}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["items"],
+      invalidatesTags: ["trees"],
+    }),
+    retriveAllDeleteTrees: builder.mutation({
+      query: () => ({
+        url: "/products",
+        method: "PUT",
+      }),
+      invalidatesTags: ["trees"],
     }),
     getCategories: builder.query({
       query: () => ({
         url: "/categories",
         method: "GET",
-        providesTags: ["items"],
       }),
     }),
     updateCategory: builder.mutation({
@@ -74,7 +80,6 @@ export const baseApi = createApi({
           body: payload?.updatedData,
         };
       },
-      invalidatesTags: ["items"],
     }),
     createOrder: builder.mutation({
       query: (orderInfo) => ({
@@ -82,17 +87,17 @@ export const baseApi = createApi({
         method: "POST",
         body: orderInfo,
       }),
-      invalidatesTags: ["items"],
+      invalidatesTags: ["trees"],
     }),
     payment: builder.mutation({
-      query: (price) => {
+      query: (payload) => {
         return {
           url: "/order/create-payment-intent",
           method: "POST",
-          body: { price },
+          body: { payload },
         };
       },
-      invalidatesTags: ["items"],
+      invalidatesTags: ["trees"],
     }),
   }),
 });
@@ -101,10 +106,11 @@ export const {
   useGetProductsQuery,
   useGetSingleProductByIdQuery,
   useGetCategoriesQuery,
+  useUpdateTreeMutation,
+  useDeleteTreeMutation,
+  useRetriveAllDeleteTreesMutation,
   useCreateOrderMutation,
   usePaymentMutation,
   useCreateTreeMutation,
-  useUpdateTreeMutation,
-  useDeleteTreeMutation,
   useUpdateCategoryMutation,
 } = baseApi;

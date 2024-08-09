@@ -121,7 +121,7 @@ const Products = () => {
           {/* Select component for price filter */}
           <Select onValueChange={handleFilter}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter and category" />
+              <SelectValue placeholder="Sort and filter" />
             </SelectTrigger>
             <SelectContent>
               <Select defaultOpen>Filter</Select>
