@@ -6,24 +6,29 @@ export const baseApi = createApi({
   tagTypes: ["items"],
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ searchItem = "", price = 1, page = 1, limit }) => {
+      query: ({
+        searchItem = "",
+        price = 1,
+        page = 1,
+        limit,
+        category = "",
+      }) => {
         return {
           method: "GET",
-          url: `/products?searchItem=${searchItem}&price=${price}&page=${page}&limit=${limit}`,
+          url: `/products?searchItem=${searchItem}&price=${price}&page=${page}&limit=${limit}&categoryId=${category}`,
           providesTags: ["items"],
         };
       },
     }),
-    getProductsByQuery: builder.query({
-      query: ({ searchItem = "", price = 1 }) => ({
-        method: "GET",
-        url: `/products?searchItem=${searchItem}&price=${price}&page=1&limit=5`,
-        providesTags: ["items"],
-      }),
-    }),
+    // getProductsByQuery: builder.query({
+    //   query: ({ searchItem = "", price = 1 }) => ({
+    //     method: "GET",
+    //     url: `/products?searchItem=${searchItem}&price=${price}&page=1&limit=5&$`,
+    //     providesTags: ["items"],
+    //   }),
+    // }),
     getSingleProductById: builder.query({
       query: (params) => {
-        console.log(params);
         return {
           method: "GET",
           url: `/products/${params}`,
@@ -63,8 +68,6 @@ export const baseApi = createApi({
     }),
     updateCategory: builder.mutation({
       query: (payload) => {
-        console.log("🚀 ~ payload:", payload);
-
         return {
           url: `/categories/${payload?.categoryId}`,
           method: "PUT",
@@ -83,8 +86,6 @@ export const baseApi = createApi({
     }),
     payment: builder.mutation({
       query: (price) => {
-        console.log("BaseAPi", price);
-
         return {
           url: "/order/create-payment-intent",
           method: "POST",
@@ -98,7 +99,6 @@ export const baseApi = createApi({
 
 export const {
   useGetProductsQuery,
-  useGetProductsByQueryQuery,
   useGetSingleProductByIdQuery,
   useGetCategoriesQuery,
   useCreateOrderMutation,

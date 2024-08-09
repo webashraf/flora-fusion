@@ -5,11 +5,12 @@ import StripeCheckOutForm from "./StripeCheckOutForm";
 // TODO: Add publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
-const StripePayment = () => {
+const StripePayment = ({ userInfo, setPurchase }) => {
+  console.log(userInfo);
 
   return (
     <Elements stripe={stripePromise}>
-      <StripeCheckOutForm />
+      <StripeCheckOutForm setPurchase={setPurchase} />
     </Elements>
   );
 };

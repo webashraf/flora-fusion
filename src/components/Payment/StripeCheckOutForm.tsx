@@ -1,12 +1,14 @@
 import useTotalAmount from "@/hooks/useTotalAmount";
 import { usePaymentMutation } from "@/redux/api/baseApi";
+import { clearCart } from "@/redux/features/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { DollarSign } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import "./StripePay.css";
+import RoundedLoad from "../customUi/RoundedLoad/RoundedLoad";
 
-const StripeCheckOutForm = () => {
+const StripeCheckOutForm = ({ setPurchase }) => {
   const [error, setError] = useState("");
   const stripe = useStripe();
   const elements = useElements();
@@ -16,8 +18,8 @@ const StripeCheckOutForm = () => {
   const [load, setLoad] = useState(false);
 
   const [payment] = usePaymentMutation();
-
   const amount = useTotalAmount();
+  const cartDispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchClientSecret = async () => {
@@ -28,14 +30,11 @@ const StripeCheckOutForm = () => {
     fetchClientSecret();
   }, [payment, amount]);
 
-  console.log("🚀 ~ StripeCheckOutForm ~ clientSecret:", clientSecret);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
     setProcess(true);
     setLoad(true);
-    console.log(process);
 
     if (!stripe || !elements) {
       return;
@@ -57,7 +56,6 @@ const StripeCheckOutForm = () => {
       console.log("[error]", error);
       setError(error?.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
       setError("");
     }
 
@@ -73,9 +71,14 @@ const StripeCheckOutForm = () => {
       });
     if (cardConfirmError) {
       setProcess(false);
+      setLoad(false);
       toast.error("Payment error: " + cardConfirmError?.message);
-      console.log({ cardConfirmError });
+      // console.log({ cardConfirmError });
     } else if (paymentIntent.status) {
+      cartDispatch(clearCart());
+      setPurchase(
+        ` Order placed succesfully😊. TransectionId:  ${paymentIntent.id}`
+      );
       setLoad(false);
       toast.success("Payment confirm successfully");
       console.log({ paymentIntent });
@@ -113,7 +116,7 @@ const StripeCheckOutForm = () => {
             type="submit"
           >
             {load ? (
-              <div className="pay_loader"></div>
+              <RoundedLoad />
             ) : (
               <div>
                 <DollarSign size={15} />
@@ -124,6 +127,7 @@ const StripeCheckOutForm = () => {
         </div>
 
         <p className="text-red-500">{error}</p>
+        {/* <p className="text-green-700 text-center text-xs mt-2">{purchase}</p> */}
       </form>
     </div>
   );

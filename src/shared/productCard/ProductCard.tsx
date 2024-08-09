@@ -114,6 +114,14 @@ const TiltCard = ({ product }: { product: TProduct }) => {
         >
           {product.name}
         </p>
+        <p
+          style={{
+            transform: "translateZ(50px)",
+          }}
+          className="text-[#65ff5d] text-xs mx-auto"
+        >
+          {product.category.name}
+        </p>
 
         <p className="mini-active mx-auto">${product.price}</p>
         <div className="flex gap-3 justify-between mt-1 w-full bg-blac absolute -top-5">

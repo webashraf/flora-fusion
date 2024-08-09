@@ -17,32 +17,38 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useGetProductsQuery } from "@/redux/api/baseApi";
+import {
+  useGetCategoriesQuery,
+  useGetProductsQuery,
+} from "@/redux/api/baseApi";
 import CommonHeading from "@/shared/CommonHeading/CommonHeading";
 import ProductCard from "@/shared/productCard/ProductCard";
-import { TProduct } from "@/types/types";
+import { TProduct, TTreeProductsCategory } from "@/types/types";
 import { MouseEvent, useState } from "react";
 
 const Products = () => {
   // State to hold search input and price filter
-  const [searchInput, setSearchInput] = useState({
+  const [queryInput, setQueryInput] = useState({
     searchItem: "",
     price: 1,
     page: 1,
     limit: "8",
+    category: "",
   });
+
+  const { data: categories } = useGetCategoriesQuery({});
+  // console.log(categories?.result);
 
   const [paginate, setPaginate] = useState<number>(1);
 
-  const { data: products, isLoading } = useGetProductsQuery(searchInput);
+  const { data: products, isLoading } = useGetProductsQuery(queryInput);
+
   const { data: paginateTotal, isLoading: paginateLoading } =
     useGetProductsQuery({});
 
   const totalProducts = paginateTotal?.result?.length;
-  console.log("🚀 ~ Products ~ totalProducts:", totalProducts);
 
   const totalPage = Array.from({ length: Math.ceil(totalProducts / 8) });
-  console.log("🚀 ~ Products ~ totalPage:", totalPage);
 
   if (isLoading || paginateLoading) {
     return (
@@ -57,7 +63,7 @@ const Products = () => {
 
     const value = e.target.searchInput.value;
 
-    setSearchInput((prevState) => ({ ...prevState, searchItem: value }));
+    setQueryInput((prevState) => ({ ...prevState, searchItem: value }));
   };
 
   // Handle filter selection change
@@ -66,7 +72,15 @@ const Products = () => {
     if (e === "1") {
       sorting = 1; // Set sorting to ascending if value is "1"
     }
-    setSearchInput((prevState) => ({ ...prevState, price: sorting })); // Update price filter state
+    //  Handle
+    console.log(e);
+    if (e.length > 2) {
+      // console.log("object");
+      console.log(e);
+      setQueryInput({ ...queryInput, category: e });
+      console.log(queryInput);
+    }
+    setQueryInput((prevState) => ({ ...prevState, price: sorting })); // Update price filter state
   };
 
   // Pagination handling
@@ -81,14 +95,12 @@ const Products = () => {
 
     if (nextPrev === "next") {
       setPaginate(paginate + 1);
-      console.log(paginate);
     }
     if (nextPrev === "prev") {
       setPaginate(paginate - 1);
-      console.log(paginate);
     }
 
-    setSearchInput((prevState) => ({
+    setQueryInput((prevState) => ({
       ...prevState,
       page: pageNumber,
       limit: "8",
@@ -109,12 +121,17 @@ const Products = () => {
           {/* Select component for price filter */}
           <Select onValueChange={handleFilter}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter" />
+              <SelectValue placeholder="Filter and category" />
             </SelectTrigger>
             <SelectContent>
               <Select defaultOpen>Filter</Select>
               <SelectItem value="1">Price: Low-High</SelectItem>
               <SelectItem value="-1">Price: High-Low</SelectItem>
+              {categories?.result.map((category: TTreeProductsCategory) => (
+                <SelectItem key={category._id} value={category?._id}>
+                  {category?.name}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>

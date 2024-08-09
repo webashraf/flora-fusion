@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   const items = useAppSelector((state) => state.cart.cart);
+
   return (
     <>
       <div className="lg:max-w-[1440px] md:w-[98%] w-full mx-auto overflow-x-hidden overflow-hidden relative">

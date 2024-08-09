@@ -14,7 +14,6 @@ const ProductPage = () => {
     return <Loader />;
   }
 
-  console.log("products", products);
 
   return (
     <>

@@ -1,6 +1,7 @@
 export interface TTreeProductsCategory {
   _id: string;
   name: string;
+  slug: string;
   description: string;
   imageURL: string;
 }

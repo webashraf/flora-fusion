@@ -21,11 +21,11 @@ const AllProducts = ({ product }: { product: TProduct }) => {
     let isExisting = [{ qty: 0 }];
 
     isExisting = cartProducts.filter((item: TProduct) => tree._id === item._id);
-    console.log(
-      "🚀 ~ handleAddtocart ~ isExisting:",
-      isExisting[0]?.qty,
-      tree.stock
-    );
+    // console.log(
+    //   "🚀 ~ handleAddtocart ~ isExisting:",
+    //   isExisting[0]?.qty,
+    //   tree.stock
+    // );
 
     if (isExisting[0]?.qty >= tree?.stock) {
       toast.error(`You all ready catch the max stock of ${tree.name}.`);

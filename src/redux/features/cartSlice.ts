@@ -8,7 +8,6 @@ type TInitialState = {
 const initialState: TInitialState = {
   cart: [],
 };
-
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -17,7 +16,6 @@ const cartSlice = createSlice({
       const index = state.cart.findIndex(
         (item) => item._id === action.payload._id
       );
-      console.log("index", state, index);
 
       if (index !== -1) {
         state.cart[index].qty += action.payload.qty;
@@ -40,8 +38,12 @@ const cartSlice = createSlice({
     removeCartItem: (state, action: PayloadAction<string>) => {
       state.cart = state.cart.filter((item) => item._id !== action.payload);
     },
+    clearCart: (state) => {
+      state.cart = [];
+    },
   },
 });
 
-export const { setCart, decreseCartItem, removeCartItem } = cartSlice.actions;
+export const { setCart, decreseCartItem, removeCartItem, clearCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;

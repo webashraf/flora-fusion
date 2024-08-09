@@ -10,13 +10,14 @@ import {
 import useTotalAmount from "@/hooks/useTotalAmount";
 import { useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import CheckOutForm from "./CheckOutForm";
 
 const CheckOut = () => {
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
-
-  console.log(useTotalAmount());
+  const [purchase, setPurchase] = useState("");
+  console.log(purchase);
 
   const amount = useTotalAmount();
 
@@ -42,23 +43,25 @@ const CheckOut = () => {
 
               {/* Map through the products and display each one in a table row */}
               {cartProducts?.map((product: TProduct, i: number) => (
-                <TableBody key={product._id}>
+                <TableBody key={product?._id}>
                   <TableRow>
                     <TableCell className="font-medium">{i}</TableCell>
                     <TableCell className="uppercase">
-                      <h5 className="text-md font-bold mb-1">{product.name}</h5>
-                      <p className="mini-active">{product.category.name}</p>
+                      <h5 className="text-md font-bold mb-1">
+                        {product?.name}
+                      </h5>
+                      <p className="mini-active">{product?.category?.name}</p>
                     </TableCell>
 
                     <TableCell
-                      className={product.stock === 0 ? "text-red-500" : ""}
+                      className={product?.stock === 0 ? "text-red-500" : ""}
                     >
-                      {product.qty}
+                      {product?.qty}
                     </TableCell>
-                    <TableCell>${product.price}</TableCell>
+                    <TableCell>${product?.price}</TableCell>
                     <TableCell className="text-right">
                       {/* Button to view single product details */}
-                      <NavLink to={`/single-product/${product._id}`}>
+                      <NavLink to={`/single-product/${product?._id}`}>
                         <Button className="btn-2">View Items</Button>
                       </NavLink>
                     </TableCell>
@@ -72,13 +75,15 @@ const CheckOut = () => {
           </div>
         </div>
         <div className="lg:w-1/2 w-full flex flex-col items-center justify-center">
-          <CheckOutForm />
+          <CheckOutForm setPurchase={setPurchase} />
         </div>
       </div>
     </div>
+  ) : purchase ? (
+    <h2 className="text-2xl py-14 text-nowrap">{purchase}</h2>
   ) : (
     <h2 className="text-5xl uppercase py-14">
-      First add to cart some products!!
+      First add to cart some products!!😒
     </h2>
   );
 };

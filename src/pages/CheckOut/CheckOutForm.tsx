@@ -1,48 +1,30 @@
+import RoundedLoad from "@/components/customUi/RoundedLoad/RoundedLoad";
 import StripePayment from "@/components/Payment/StripePayment";
 import useTotalAmount from "@/hooks/useTotalAmount";
 import { useCreateOrderMutation } from "@/redux/api/baseApi";
-import { useAppSelector } from "@/redux/hooks";
+import { clearCart } from "@/redux/features/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/types";
+import { DollarSign } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-const CheckOutForm = () => {
+const CheckOutForm = ({ setPurchase }) => {
   const [paymentMethod, setPaymentMethod] = useState("cashOn");
+  const [userInfo, setUserInfo] = useState({});
+  const [process, setProcess] = useState(false);
+  const [StripePaymentMethod, setStripePaymentMethod] = useState(false);
+
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
   const [createOrder] = useCreateOrderMutation();
   const [bActive, setBactive] = useState(false);
-  const navigate = useNavigate();
-  // const [payment] = usePaymentMutation();
   const amount = useTotalAmount();
-  // console.log("🚀 ~ CheckOutForm ~ amount:", amount);
-  // console.log(amount);
-
-  // const amount = useTotalAmount();
-
-  // useEffect(() => {
-  //   const res = payment(amount);
-  //   res.then((data) => {
-  //     console.log(data);
-  //   });
-  // }, [payment, amount]);
-
-  const paymentOption = (value: string) => {
-    setPaymentMethod(value);
-
-    if (paymentMethod === "cashOn") {
-      navigate("/checkout/cashOn");
-    } else if (paymentMethod === "card") {
-      navigate("/checkout/cardPayment");
-    }
-    // console.log(paymentMethod);
-  };
-
-  // console.log({ paymentMethod });
+  const cartDispatch = useAppDispatch();
 
   const handlePlaceOrder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const form = e.target as HTMLFormElement;
     const formData = new FormData(e.target as HTMLFormElement);
 
     const orderInfo = {
@@ -56,19 +38,29 @@ const CheckOutForm = () => {
       division: formData.get("division") as string,
       products: cartProducts.map((product) => ({
         _id: product._id,
-        name: product.name,
+        name: product?.name,
         qty: product.qty,
         price: product.price,
-        category: product.category.name,
+        category: product.category?.name,
       })),
       amount,
     };
 
+    if (paymentMethod === "card") {
+      setUserInfo(orderInfo);
+      setStripePaymentMethod(true);
+      return;
+    }
+    setProcess(true);
     try {
-      console.log("Order placed successfully", orderInfo);
+      // console.log("Order placed successfully", orderInfo);
 
       const res = await createOrder(orderInfo).unwrap();
       if (res.success === true) {
+        setProcess(false);
+        form.reset();
+        setPurchase("Order placed successfully!!");
+        cartDispatch(clearCart());
         toast.success("Order placed successfully!!");
       }
       console.log(res);
@@ -79,7 +71,7 @@ const CheckOutForm = () => {
   };
 
   return (
-    <>
+    <div className="">
       <div className="lg:mx-auto w-full px-5 bg-white rounded-md shadow-2xl drop-shadow-md">
         <div className="px-4 py-3 flex justify-between">
           <div>
@@ -227,10 +219,12 @@ const CheckOutForm = () => {
                         // paymentOption("cashOn");
                         // navigate("/checkout/cashOn");
                         setPaymentMethod("cashOn");
+                        setStripePaymentMethod(false);
                       }}
                       value="cashOnDelivery"
                       name="cashOnDelivery"
                       checked={paymentMethod === "cashOn"}
+
                       // required
                     />
                   </div>
@@ -258,28 +252,35 @@ const CheckOutForm = () => {
 
             <div className="text-center">
               <button
+                className={`text-white font-bold px-16 rounded-md btn-2 py-2 flex gap-2 items-center mx-auto ${
+                  process ? "cursor-not-allowed" : " hover:bg-black "
+                } ${StripePaymentMethod && "hidden"}`}
                 type="submit"
-                // className="text-white font-bold px-16 py-2 rounded-md btn-2 "
-                className={`text-white font-bold px-16 py-2 rounded-md btn-2 ${
-                  paymentMethod === "card" && "hidden"
-                }`}
               >
-                Place Order
+                {process ? (
+                  <RoundedLoad />
+                ) : (
+                  <div>
+                    <DollarSign size={15} />
+                  </div>
+                )}
+                {paymentMethod === "cashOn" ? "Place Order" : "Next"}
               </button>
             </div>
           </form>
+
           <div
             onClick={() => setBactive(!bActive)}
             className={`pt-4 lg:w-[60%] md:w-[70%] mx-auto ${
-              paymentMethod == "card" ? "block" : "hidden"
+              StripePaymentMethod ? "block" : "hidden"
             }`}
           >
             {/*! Pyament card  */}
-            <StripePayment />
+            <StripePayment setPurchase={setPurchase} userInfo={userInfo} />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
