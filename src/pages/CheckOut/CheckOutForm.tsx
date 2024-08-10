@@ -70,6 +70,20 @@ const CheckOutForm = ({ setPurchase }) => {
     }
   };
 
+  if (StripePaymentMethod) {
+    return (
+      <div
+        onClick={() => setBactive(!bActive)}
+        className={`lg:w-[60%] md:w-[60%] shadow-2xl p-10 pt-10 rounded-md bg-[#73ee8e12] mx-auto ${
+          StripePaymentMethod ? "block" : "hidden"
+        }`}
+      >
+        {/*! Pyament card  */}
+        <StripePayment setPurchase={setPurchase} userInfo={userInfo} />
+      </div>
+    );
+  }
+
   return (
     <div className="">
       <div className="lg:mx-auto w-full px-5 bg-white rounded-md shadow-2xl drop-shadow-md">
@@ -268,16 +282,6 @@ const CheckOutForm = ({ setPurchase }) => {
               </button>
             </div>
           </form>
-
-          <div
-            onClick={() => setBactive(!bActive)}
-            className={`pt-4 lg:w-[60%] md:w-[70%] mx-auto ${
-              StripePaymentMethod ? "block" : "hidden"
-            }`}
-          >
-            {/*! Pyament card  */}
-            <StripePayment setPurchase={setPurchase} userInfo={userInfo} />
-          </div>
         </div>
       </div>
     </div>

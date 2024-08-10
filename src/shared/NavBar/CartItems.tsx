@@ -79,7 +79,7 @@ const CartItems = ({ color }: { color: string }) => {
                 <DialogClose asChild>
                   <NavLink to="/checkout">
                     <Button type="submit" className="capitalize btn-2">
-                      Proced to chek-out
+                      Proced to check-out
                     </Button>
                   </NavLink>
                 </DialogClose>

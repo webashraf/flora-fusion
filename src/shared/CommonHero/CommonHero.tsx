@@ -1,5 +1,4 @@
 import { useGetProductsQuery } from "@/redux/api/baseApi";
-import Loader from "../Loader/loader/Loader";
 
 const CommonHero = ({ title }: { title: string }) => {
   // Fetch products data using the useGetProductsQuery hook
@@ -7,7 +6,7 @@ const CommonHero = ({ title }: { title: string }) => {
 
   // Display a loader if products data is not yet available
   if (!products) {
-    return <Loader />;
+    return;
   }
   return (
     <div

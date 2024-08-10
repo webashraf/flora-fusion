@@ -11,7 +11,7 @@ const MainLayout = () => {
 
   return (
     <>
-      <div className="lg:max-w-[1440px] md:w-[98%] w-full mx-auto overflow-x-hidden overflow-hidden relative">
+      <div className="lg:max-w-[1440px] md:w-[100%] w-full mx-auto overflow-x-hidden overflow-hidden relative">
         <NavBar />
 
         <Outlet />

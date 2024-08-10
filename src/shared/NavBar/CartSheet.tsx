@@ -247,7 +247,9 @@ export function CartSheet({ color }: { color: string }) {
           <SheetClose asChild>
             {cartTrees?.length > 0 ? (
               <NavLink to="/checkout">
-                <Button className="capitalize btn-2">Proced to chek-out</Button>
+                <Button className="capitalize btn-2">
+                  Proced to check-out
+                </Button>
               </NavLink>
             ) : (
               ""

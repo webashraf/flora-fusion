@@ -89,7 +89,7 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ["trees"],
     }),
-    payment: builder.mutation({
+    createPayment: builder.mutation({
       query: (payload) => {
         console.log(payload);
         return {
@@ -111,7 +111,7 @@ export const {
   useDeleteTreeMutation,
   useRetriveAllDeleteTreesMutation,
   useCreateOrderMutation,
-  usePaymentMutation,
+  useCreatePaymentMutation,
   useCreateTreeMutation,
   useUpdateCategoryMutation,
 } = baseApi;

@@ -31,7 +31,7 @@ const NavBar = () => {
     <nav className="w-full flex flex-col items-center bg-white">
       <div className="flex justify-between gap-10 w-full">
         {/* Nav Logo */}
-        <div className="lg:w-[20%] md:w-[40%] w-[40%] mx-auto relative lg:bottom-4 flex items-center">
+        <div className="lg:w-[20%] md:w-[40%] md:pb-5 md:pt-2 w-[40%] mx-auto relative lg:bottom-4 flex items-center">
           <img
             src="/Flora_Fusion_logos.png"
             className="bg-red-5 lg:h-auto"

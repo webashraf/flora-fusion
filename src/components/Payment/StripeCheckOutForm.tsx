@@ -1,5 +1,8 @@
 import useTotalAmount from "@/hooks/useTotalAmount";
-import { usePaymentMutation } from "@/redux/api/baseApi";
+import {
+  useCreateOrderMutation,
+  useCreatePaymentMutation,
+} from "@/redux/api/baseApi";
 import { clearCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
@@ -8,86 +11,127 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import RoundedLoad from "../customUi/RoundedLoad/RoundedLoad";
 
-const StripeCheckOutForm = ({ setPurchase, userInfo }) => {
-  console.log(userInfo);
-  const [error, setError] = useState("");
+// Define the props for the component
+interface StripeCheckOutFormProps {
+  setPurchase: (message: string) => void;
+  userInfo: {
+    name: string;
+    address?: Record<string, unknown>;
+    email?: string;
+    phone?: string;
+  };
+}
+
+const StripeCheckOutForm: React.FC<StripeCheckOutFormProps> = ({
+  setPurchase,
+  userInfo,
+}) => {
+  const [error, setError] = useState<string>("");
   const stripe = useStripe();
   const elements = useElements();
 
-  const [clientSecret, setClientSecret] = useState("");
-  const [process, setProcess] = useState(false);
-  const [load, setLoad] = useState(false);
+  const [clientSecret, setClientSecret] = useState<string>("");
+  const [process, setProcess] = useState<boolean>(false);
+  const [load, setLoad] = useState<boolean>(false);
 
-  const [payment] = usePaymentMutation();
+  const [createPayment] = useCreatePaymentMutation();
+  const [createOrder] = useCreateOrderMutation();
   const amount = useTotalAmount();
   const cartDispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchClientSecret = async () => {
-      const res = await payment({ amount, userInfo });
-      setClientSecret(res.data.clientSecret);
-      console.log(res);
+      try {
+        const res = await createPayment({ amount });
+        if (res?.data?.clientSecret) {
+          setClientSecret(res.data.clientSecret);
+        } else {
+          throw new Error("Failed to retrieve client secret.");
+        }
+      } catch (err: unknown) {
+        const errorMessage =
+          err instanceof Error ? err.message : "An error occurred.";
+        toast.error(`Error: ${errorMessage}`);
+      }
     };
     fetchClientSecret();
-  }, [payment, amount, userInfo]);
+  }, [createPayment, amount, userInfo]);
 
-  const handleSubmit = async (event) => {
+  // Handle payment submission
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    event.stopPropagation();
     setProcess(true);
     setLoad(true);
 
     if (!stripe || !elements) {
+      setError("Stripe has not loaded correctly.");
+      setProcess(false);
+      setLoad(false);
       return;
     }
 
     const card = elements.getElement(CardElement);
 
-    if (card == null) {
+    if (!card) {
+      setError("Card details not found.");
+      setProcess(false);
+      setLoad(false);
       return;
     }
 
-    // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card,
-    });
-
-
-    
-    if (error) {
-      console.log("[error]", error);
-      setError(error?.message);
-    } else {
-      setError("");
-    }
-
-    // Confirm Payment
-    const { paymentIntent, error: cardConfirmError } =
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
+    try {
+      const { error: paymentMethodError, paymentMethod } =
+        await stripe.createPaymentMethod({
+          type: "card",
           card,
-          billing_details: {
-            name: "Ali",
-            address: {},
-            email: "",
-            phone: "",
+        });
+      console.log("🚀 ~ handleSubmit ~ paymentMethod:", paymentMethod);
+
+      if (paymentMethodError) {
+        throw new Error(paymentMethodError.message);
+      }
+      console.log("User info", userInfo);
+
+      try {
+        const res = await createOrder(userInfo);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+
+      const { paymentIntent, error: cardConfirmError } =
+        await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card,
+            billing_details: {
+              name: userInfo.name || "Anonymous",
+              address: userInfo.address || {},
+              email: userInfo.email || "",
+              phone: userInfo.phone || "",
+            },
           },
-        },
-      });
-    if (cardConfirmError) {
+        });
+
+      if (cardConfirmError) {
+        throw new Error(cardConfirmError.message);
+      }
+
+      if (paymentIntent?.status === "succeeded") {
+        cartDispatch(clearCart());
+
+        setPurchase(
+          `Order placed successfully 😊. Transaction ID: ${paymentIntent.id}`
+        );
+        toast.success("Payment confirmed successfully!");
+      }
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : "An error occurred.";
+      setError(errorMessage);
+      toast.error(`Payment error: ${errorMessage}`);
+    } finally {
       setProcess(false);
       setLoad(false);
-      toast.error("Payment error: " + cardConfirmError?.message);
-      // console.log({ cardConfirmError });
-    } else if (paymentIntent.status) {
-      cartDispatch(clearCart());
-      setPurchase(
-        ` Order placed succesfully😊. TransectionId:  ${paymentIntent.id}`
-      );
-      setLoad(false);
-      toast.success("Payment confirm successfully");
-      console.log({ paymentIntent });
     }
   };
 
@@ -110,13 +154,12 @@ const StripeCheckOutForm = ({ setPurchase, userInfo }) => {
             },
           }}
         />
-        <div></div>
         <div className="flex justify-center items-center mt-10">
           <button
             className={`text-white font-bold px-16 rounded-md btn-2 py-2 flex gap-2 items-center ${
               !stripe || !clientSecret || process
                 ? "cursor-not-allowed"
-                : " hover:bg-black "
+                : "hover:bg-black"
             }`}
             disabled={!stripe || !clientSecret || process}
             type="submit"
@@ -131,9 +174,7 @@ const StripeCheckOutForm = ({ setPurchase, userInfo }) => {
             Place order
           </button>
         </div>
-
-        <p className="text-red-500">{error}</p>
-        {/* <p className="text-green-700 text-center text-xs mt-2">{purchase}</p> */}
+        {error && <p className="text-red-500">{error}</p>}
       </form>
     </div>
   );
