@@ -24,7 +24,7 @@ const StripeCheckOutForm = ({ setPurchase, userInfo }) => {
 
   useEffect(() => {
     const fetchClientSecret = async () => {
-      const res = await payment( userInfo );
+      const res = await payment({ amount, userInfo });
       setClientSecret(res.data.clientSecret);
       console.log(res);
     };
@@ -53,6 +53,8 @@ const StripeCheckOutForm = ({ setPurchase, userInfo }) => {
       card,
     });
 
+
+    
     if (error) {
       console.log("[error]", error);
       setError(error?.message);
