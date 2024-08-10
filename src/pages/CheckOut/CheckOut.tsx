@@ -80,7 +80,7 @@ const CheckOut = () => {
       </div>
     </div>
   ) : purchase ? (
-    <h2 className="text-2xl py-14 text-nowrap">{purchase}</h2>
+    <h2 className="text-2xl py-14 text-nowrap md:px-10">{purchase}</h2>
   ) : (
     <h2 className="text-5xl uppercase py-14">
       First add to cart some products!!😒
