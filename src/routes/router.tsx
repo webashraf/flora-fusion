@@ -29,14 +29,16 @@ const router = createBrowserRouter([
         path: "single-product/:id",
         element: <SingleProduct />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/api/v1/products/${params?.id}`),
+          fetch(
+            `https://flora-fusion-backend.vercel.app/api/v1/products/${params?.id}`
+          ),
       },
       {
         path: "products-by-category/:id",
         element: <ProductsByCategory />,
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/api/v1/products?categoryId=${params?.id}`
+            `https://flora-fusion-backend.vercel.app/api/v1/products?categoryId=${params?.id}`
           ),
       },
       {

@@ -26,7 +26,7 @@ const ProductPage = () => {
   });
 
   const { data: categories } = useGetCategoriesQuery({});
-  // console.log(categories?.result);
+  console.log(categories);
   const { data: products, isLoading } = useGetProductsQuery(queryInput);
 
   if (isLoading) {
