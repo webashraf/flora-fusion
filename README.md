@@ -14,6 +14,7 @@ FloraFusion is an online nursery platform where users can explore a wide variety
 ## Tech Stack
 
 ### Frontend
+
 - **React.js**: JavaScript library for building user interfaces.
 - **Redux**: State management library for handling application state.
 - **GSAP**: Animation library for creating complex animations.
@@ -21,6 +22,7 @@ FloraFusion is an online nursery platform where users can explore a wide variety
 - **sadcn**: Component library for styling and UI elements.
 
 ### Backend
+
 - **Node.js**: JavaScript runtime for server-side programming.
 - **Express.js**: Web framework for building the backend server.
 - **MongoDB**: NoSQL database for storing product and user data.
@@ -32,7 +34,8 @@ To get a local copy up and running, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/FloraFusion.git
+   git clone https://github.com/webashraf/flora-fussing.git
    cd FloraFusion
+   ```
 
-## Installation
+## live link
