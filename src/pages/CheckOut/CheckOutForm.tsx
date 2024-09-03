@@ -4,14 +4,18 @@ import useTotalAmount from "@/hooks/useTotalAmount";
 import { useCreateOrderMutation } from "@/redux/api/baseApi";
 import { clearCart } from "@/redux/features/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { TProduct } from "@/types/types";
+import { TProduct, TUserInfo } from "@/types/types";
 import { DollarSign } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const CheckOutForm = ({ setPurchase }) => {
+const CheckOutForm = ({
+  setPurchase,
+}: {
+  setPurchase: (value: string) => void;
+}) => {
   const [paymentMethod, setPaymentMethod] = useState("cashOn");
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState<TUserInfo>(null);
   const [process, setProcess] = useState(false);
   const [StripePaymentMethod, setStripePaymentMethod] = useState(false);
 
@@ -27,7 +31,7 @@ const CheckOutForm = ({ setPurchase }) => {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(e.target as HTMLFormElement);
 
-    const orderInfo = {
+    const orderInfo: TUserInfo = {
       firstName: formData.get("firstName") as string,
       lastName: formData.get("lastName") as string,
       email: formData.get("email") as string,

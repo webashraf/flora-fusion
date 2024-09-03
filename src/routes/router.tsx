@@ -2,7 +2,6 @@ import App from "@/App";
 import AddTree from "@/components/ManageProducts/AddTree";
 import ManageCategory from "@/components/ManageProducts/ManageCategory";
 import UpdateTree from "@/components/ManageProducts/UpdateTree";
-import StripePayment from "@/components/Payment/StripePayment";
 import CartPage from "@/pages/CartPage/CartPage";
 import CheckOut from "@/pages/CheckOut/CheckOut";
 import Home from "@/pages/Home";
@@ -53,10 +52,10 @@ const router = createBrowserRouter([
             path: "cashOn",
             element: <div></div>,
           },
-          {
-            path: "cardPayment",
-            element: <StripePayment />,
-          },
+          // {
+          //   path: "cardPayment",
+          //   element: <StripePayment />,
+          // },
         ],
       },
       {

@@ -1,12 +1,20 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet,  } from "react-router-dom";
+
+type ChipProps = {
+  name: string;
+  selected: boolean;
+  setSelected: (name: string) => void;
+  path: string;
+};
 
 const tabs = [
   { name: "Add Tree", path: "add-tree" },
   { name: "Manage Tree", path: "manage-tree" },
   { name: "Manage Category", path: "manage-category" },
 ];
+
 const ManageProducts = () => {
   const [selected, setSelected] = useState(tabs[0].name);
   // const [isActive, setIsActive] = useState(true);
@@ -29,11 +37,17 @@ const ManageProducts = () => {
   );
 };
 
-const Chip = ({ name, selected, setSelected, path }) => {
+const Chip: React.FC<ChipProps> = ({ name, selected, setSelected, path }) => {
   return (
     <NavLink
       to={`/manage-products/${path}`}
-      className={({ isActive }) => (isActive ? setSelected(name) : "")}
+      className={({ isActive }) => {
+        if (isActive) {
+          setSelected(name);
+          return "text-white";
+        }
+        return "text-slate-900 hover:text-slate-200 hover:bg-[#61815f] rounded-lg";
+      }}
     >
       <button
         onClick={() => setSelected(name)}
