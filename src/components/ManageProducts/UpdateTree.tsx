@@ -57,7 +57,7 @@ const UpdateTree = () => {
       }
     } catch (err) {
       console.log(err);
-      toast.error("Order not placed. Something went wrong!!");
+      toast.error("Failed to delete. Something went wrong!!");
     }
   };
 

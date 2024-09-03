@@ -1,30 +1,38 @@
-# React + TypeScript + Vite
+# FloraFusion - Online Nursery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FloraFusion is an online nursery platform where users can explore a wide variety of plants, add them to their cart, and make purchases through a seamless, animated interface. Built with modern web technologies, FloraFusion provides an engaging user experience with smooth animations and robust backend functionalities.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Animated Design**: Leveraging GSAP and Framer Motion for smooth, engaging animations across the platform.
+- **Product Management**: Users can add, update, and delete products with ease.
+- **Add to Cart**: Users can add plants to their cart and manage their selections.
+- **Stripe Payment Integration**: Secure payment processing with Stripe.
+- **Responsive Design**: Optimized for all devices, ensuring a seamless experience on mobile, tablet, and desktop.
+- **State Management**: Powered by Redux for efficient and scalable state management.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Frontend
+- **React.js**: JavaScript library for building user interfaces.
+- **Redux**: State management library for handling application state.
+- **GSAP**: Animation library for creating complex animations.
+- **Framer Motion**: React library for animations.
+- **sadcn**: Component library for styling and UI elements.
 
-- Configure the top-level `parserOptions` property like this:
+### Backend
+- **Node.js**: JavaScript runtime for server-side programming.
+- **Express.js**: Web framework for building the backend server.
+- **MongoDB**: NoSQL database for storing product and user data.
+- **Mongoose**: ODM (Object Data Modeling) library for MongoDB.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Installation
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To get a local copy up and running, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/FloraFusion.git
+   cd FloraFusion
+
+## Installation

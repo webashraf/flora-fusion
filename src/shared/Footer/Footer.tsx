@@ -2,7 +2,7 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className="bg-[#f4f4f4] relative z-0 px-2">
+    <div className="bg-[#f4f4f4] relative z-0 px-2 mt-20">
       <>
         <div className="flex justify-center gap-10 items-center flex-col py-10">
           <div

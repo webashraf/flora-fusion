@@ -37,7 +37,7 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
             src={pImg?.imageURL}
             alt=""
           />
-          <h2 className="text-4xl font-bold backdrop-blur-lg w-full text-center py-5 text-white absolute bottom-0 z-40">
+          <h2 className="text-4xl font-bold bg-green-700/30 backdrop-blur-lg w-full text-center py-5 text-white absolute bottom-0 z-40">
             {pImg?.name}
           </h2>
         </div>
