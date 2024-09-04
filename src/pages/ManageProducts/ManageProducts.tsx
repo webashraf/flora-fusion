@@ -20,7 +20,7 @@ const ManageProducts = () => {
   // const [isActive, setIsActive] = useState(true);
 
   return (
-    <div className="px-4 py-14">
+    <div className="px-4 pt-14">
       <div className="py-14 flex items-center flex-wrap gap-2 justify-center">
         {tabs.map((tab) => (
           <Chip

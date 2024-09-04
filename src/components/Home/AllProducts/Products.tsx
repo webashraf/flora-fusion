@@ -184,7 +184,7 @@ const Products = () => {
             </PaginationItem>
 
             {totalPage.map((_, i) => (
-              <PaginationItem>
+              <PaginationItem key={i}>
                 <PaginationLink
                   onClick={(event) => handlePagination(i + 1, "", event)}
                   href="#"

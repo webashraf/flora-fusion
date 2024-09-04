@@ -22,7 +22,7 @@ const CheckOut = () => {
   const amount = useTotalAmount();
 
   return cartProducts?.length > 0 ? (
-    <div className="py-20 mx-5">
+    <div className="pt-20 mx-5">
       <h2 className="lg:text-5xl text-4xl uppercase pb-10">
         Check-out process
       </h2>
@@ -80,9 +80,9 @@ const CheckOut = () => {
       </div>
     </div>
   ) : purchase ? (
-    <h2 className="text-2xl py-14 text-nowrap md:px-10">{purchase}</h2>
+    <h2 className="text-2xl pt-14 text-nowrap md:px-10">{purchase}</h2>
   ) : (
-    <h2 className="text-5xl uppercase py-14">
+    <h2 className="text-5xl uppercase pt-14">
       First add to cart some products!!😒
     </h2>
   );

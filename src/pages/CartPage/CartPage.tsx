@@ -82,7 +82,7 @@ const CartPage = () => {
   };
 
   return cartProducts.length > 0 ? (
-    <div className="py-20 px-5">
+    <div className="pt-20 px-5">
       <div className="">
         <h2 className="text-5xl uppercase pb-10">Cart Page</h2>
 
@@ -183,7 +183,7 @@ const CartPage = () => {
     </div>
   ) : (
     <div className="">
-      <h2 className="text-5xl uppercase py-14">Cart is empty yet!!</h2>
+      <h2 className="text-5xl uppercase pt-14">Cart is empty yet!!</h2>
     </div>
   );
 };
