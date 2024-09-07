@@ -22,12 +22,11 @@ import {
   useGetProductsQuery,
 } from "@/redux/api/baseApi";
 import CommonHeading from "@/shared/CommonHeading/CommonHeading";
-import ProductCard from "@/shared/productCard/ProductCard";
 import { TProduct, TTreeProductsCategory } from "@/types/types";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
+import ProductListCard from "../ProductList/ProductListCard";
 
 const Products = () => {
-  // State to hold search input and price filter
   const [queryInput, setQueryInput] = useState({
     searchItem: "",
     price: 1,
@@ -37,48 +36,67 @@ const Products = () => {
   });
 
   const { data: categories } = useGetCategoriesQuery({});
-  // console.log(categories?.result);
 
   const [paginate, setPaginate] = useState<number>(1);
-
-  const { data: products, isLoading } = useGetProductsQuery(queryInput);
+  const [searchTermValue, setSearchTermValue] = useState(queryInput.searchItem);
 
   const { data: paginateTotal, isLoading: paginateLoading } =
-    useGetProductsQuery({});
+    useGetProductsQuery({ searchItem: searchTermValue });
 
   const totalProducts = paginateTotal?.result?.length;
 
   const totalPage = Array.from({ length: Math.ceil(totalProducts / 8) });
 
-  if (isLoading || paginateLoading) {
-    return (
-      <div className="my-36 ">
-        <SkeletonCard />
-      </div>
-    );
-  }
+  const {
+    data: products,
+    isLoading,
+    isFetching,
+  } = useGetProductsQuery({
+    ...queryInput,
+    searchItem: searchTermValue,
+  });
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setSearchTermValue(queryInput.searchItem);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [queryInput.searchItem]);
+
   // Handle search form submission
   const handleSearch = (e: any) => {
     e.preventDefault();
-
     const value = e.target.searchInput.value;
+    setQueryInput((prevState) => ({
+      ...prevState,
+      searchItem: value,
+      page: 1,
+    }));
+  };
 
-    setQueryInput((prevState) => ({ ...prevState, searchItem: value }));
+  // Handle the 'Enter' key press with debounce
+  const handleKeyPress = (e: any) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const value = e.target.value;
+      setQueryInput((prevState) => ({
+        ...prevState,
+        searchItem: value,
+      }));
+    }
   };
 
   // Handle filter selection change
   const handleFilter = (e: any) => {
     let sorting: number = -1;
     if (e === "1") {
-      sorting = 1; // Set sorting to ascending if value is "1"
+      sorting = 1;
     }
-    //  Handle
-    console.log(e);
     if (e.length > 2) {
-      // console.log("object");
-      console.log(e);
       setQueryInput({ ...queryInput, category: e });
-      console.log(queryInput);
     }
     setQueryInput((prevState) => ({ ...prevState, price: sorting })); // Update price filter state
   };
@@ -105,11 +123,15 @@ const Products = () => {
       page: pageNumber,
       limit: "8",
     }));
-    // console.log(pageNumber);
-    // console.log(searchInput);
   };
-  // console.log(products?.result[1]);
 
+  if (isLoading || paginateLoading) {
+    return (
+      <div className="my-36">
+        <SkeletonCard />
+      </div>
+    );
+  }
   return (
     <div className="section-margin-top px-5 lg:px-0 md:px-20">
       <CommonHeading
@@ -143,7 +165,8 @@ const Products = () => {
               <input
                 id="searchInput"
                 type="text"
-                className="py-2 ps-3 w-[100%]"
+                onKeyDown={handleKeyPress}
+                className="py-2 ps-3 w-[100%] rounded-lg"
                 placeholder="What are you looking for?"
               />
               <button type="submit" className="px-5 flex items-center border">
@@ -166,11 +189,18 @@ const Products = () => {
       </div>
 
       {/* Map products from database and display using ProductCard component */}
-      <div className="mb-14 grid lg:grid-cols-4 md:grid-cols-2 gap-5 ">
-        {products?.result?.slice(0, 8).map((product: TProduct) => (
-          <ProductCard key={product?._id} product={product} />
-        ))}
-      </div>
+
+      {isFetching ? (
+        <div className="my-36">
+          <SkeletonCard />
+        </div>
+      ) : (
+        <div className="mb-14 grid lg:grid-cols-4 md:grid-cols-2 gap-5 ">
+          {products?.result?.slice(0, 8).map((product: TProduct) => (
+            <ProductListCard key={product?._id} product={product} />
+          ))}
+        </div>
+      )}
 
       {/* Pagination component */}
       <div className="py-5">

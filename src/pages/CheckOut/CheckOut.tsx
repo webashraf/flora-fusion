@@ -83,7 +83,7 @@ const CheckOut = () => {
     <h2 className="text-2xl pt-14 text-nowrap md:px-10">{purchase}</h2>
   ) : (
     <h2 className="text-5xl uppercase pt-14">
-      First add to cart some products!!😒
+      First add to cart some products!!💰
     </h2>
   );
 };

@@ -9,6 +9,7 @@ import ManageProducts from "@/pages/ManageProducts/ManageProducts";
 import ProductPage from "@/pages/ProductPage/ProductPage";
 import ProductsByCategory from "@/pages/ProductsByCategory/ProductsByCategory";
 import SingleProduct from "@/pages/ProductsDetails/SingleProduct";
+import ErrorPage from "@/shared/ErrorPage/ErrorPage";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);
 

@@ -2,7 +2,6 @@
 import Products from "@/components/Home/AllProducts/Products";
 import Gallery from "@/components/Home/Gallery/Gallery";
 import Hero from "@/components/Home/Hero/Hero";
-import ProductList from "@/components/Home/ProductList/ProductList";
 import ProductsCategory from "@/components/Home/ProductsCategory/ProductsCategory";
 import ProductsDetails from "@/components/Home/ProductsDetails/ProductsDetails";
 import SlideAdds from "@/components/Home/SlideAdds/SlideAdds";
@@ -44,7 +43,7 @@ const Home = () => {
       <Hero products={products?.result} />
       <Products />
       <ProductsCategory categories={categories?.result} />
-      <ProductList products={products?.result} />
+      {/* <ProductList products={products?.result} /> */}
       <SlideAdds />
       <ProductsDetails products={products?.result} />
       <Gallery products={products?.result} />

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { NavLink, Outlet,  } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 type ChipProps = {
   name: string;
@@ -10,9 +10,9 @@ type ChipProps = {
 };
 
 const tabs = [
-  { name: "Add Tree", path: "add-tree" },
   { name: "Manage Tree", path: "manage-tree" },
   { name: "Manage Category", path: "manage-category" },
+  { name: "Add Tree", path: "add-tree" },
 ];
 
 const ManageProducts = () => {
