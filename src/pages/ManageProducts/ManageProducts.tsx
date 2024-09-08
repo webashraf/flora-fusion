@@ -1,3 +1,4 @@
+import CommonHero from "@/shared/CommonHero/CommonHero";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
@@ -21,9 +22,9 @@ const ManageProducts = () => {
 
   return (
     <div className="px-4 ">
-      <h2 className="md:text-5xl text-[45px] text-center capitalize mt-20">
-        Manage Items
-      </h2>
+      <CommonHero title="Manage Products" />
+
+     
       <div className="py-14 flex items-center flex-wrap gap-2 justify-center">
         {tabs.map((tab) => (
           <Chip

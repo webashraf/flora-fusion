@@ -22,6 +22,7 @@ import {
   useGetCategoriesQuery,
   useGetProductsQuery,
 } from "@/redux/api/baseApi";
+import CommonHero from "@/shared/CommonHero/CommonHero";
 import { TProduct, TTreeProductsCategory } from "@/types/types";
 import { MouseEvent, useEffect, useState } from "react";
 
@@ -133,9 +134,7 @@ const ProductPage = () => {
   }
   return (
     <div className="section-margin-to  px-5 lg:px-0 md:">
-      <h2 className="md:text-5xl text-[45px] text-center capitalize my-20">
-        Discover all products
-      </h2>
+      <CommonHero title="Products" />
       <div className="flex justify-between mb-10">
         <div className="md:w-1/2 mx-1">
           {/* Select component for price filter */}

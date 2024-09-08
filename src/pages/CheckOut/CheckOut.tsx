@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import useTotalAmount from "@/hooks/useTotalAmount";
 import { useAppSelector } from "@/redux/hooks";
+import CommonHero from "@/shared/CommonHero/CommonHero";
 import { TProduct } from "@/types/types";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -20,70 +21,82 @@ const CheckOut = () => {
 
   const amount = useTotalAmount();
 
-  return cartProducts?.length > 0 ? (
-    <div className="pt-20 mx-5">
-      <h2 className="lg:text-5xl text-4xl uppercase pb-10">
-        Check-out process
-      </h2>
+  return (
+    <div>
+      <div className="mb-10">
+        <CommonHero title="Check-out" />
+      </div>
 
-      <div className="flex justify-between items-center lg:flex-row flex-col gap-20">
-        <div className="lg:w-1/2 w-full">
-          <div className=" w-full ml-auto">
-            <Table className="lg:w-[600px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[100px]">Serial</TableHead>
-                  <TableHead>Name & Category</TableHead>
-                  <TableHead>Quantity</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead className="text-right">Action</TableHead>
-                </TableRow>
-              </TableHeader>
+      {cartProducts?.length > 0 ? (
+        <div className="pt-20 mx-5">
+          <h2 className="lg:text-5xl text-4xl uppercase pb-10">
+            Check-out process
+          </h2>
 
-              {/* Map through the products and display each one in a table row */}
-              {cartProducts?.map((product: TProduct, i: number) => (
-                <TableBody key={product?._id}>
-                  <TableRow>
-                    <TableCell className="font-medium">{i}</TableCell>
-                    <TableCell className="uppercase">
-                      <h5 className="text-md font-bold mb-1">
-                        {product?.name}
-                      </h5>
-                      <p className="mini-active">{product?.category?.name}</p>
-                    </TableCell>
+          <div className="flex justify-between items-center lg:flex-row flex-col gap-20">
+            <div className="lg:w-1/2 w-full">
+              <div className=" w-full ml-auto">
+                <Table className="lg:w-[600px]">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-[100px]">Serial</TableHead>
+                      <TableHead>Name & Category</TableHead>
+                      <TableHead>Quantity</TableHead>
+                      <TableHead>Price</TableHead>
+                      <TableHead className="text-right">Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
 
-                    <TableCell
-                      className={product?.stock === 0 ? "text-red-500" : ""}
-                    >
-                      {product?.qty}
-                    </TableCell>
-                    <TableCell>${product?.price}</TableCell>
-                    <TableCell className="text-right">
-                      {/* Button to view single product details */}
-                      <NavLink to={`/single-product/${product?._id}`}>
-                        <Button className="btn-2">View Items</Button>
-                      </NavLink>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              ))}
-            </Table>
-            <div className="border-t-2 border-black py-5 pr-5 text-end">
-              <h4 className="font-semibold text-xl">Amount: ${amount}</h4>
+                  {/* Map through the products and display each one in a table row */}
+                  {cartProducts?.map((product: TProduct, i: number) => (
+                    <TableBody key={product?._id}>
+                      <TableRow>
+                        <TableCell className="font-medium">{i}</TableCell>
+                        <TableCell className="uppercase">
+                          <h5 className="text-md font-bold mb-1">
+                            {product?.name}
+                          </h5>
+                          <p className="mini-active">
+                            {product?.category?.name}
+                          </p>
+                        </TableCell>
+
+                        <TableCell
+                          className={product?.stock === 0 ? "text-red-500" : ""}
+                        >
+                          {product?.qty}
+                        </TableCell>
+                        <TableCell>${product?.price}</TableCell>
+                        <TableCell className="text-right">
+                          {/* Button to view single product details */}
+                          <NavLink to={`/single-product/${product?._id}`}>
+                            <Button className="btn-2">View Items</Button>
+                          </NavLink>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  ))}
+                </Table>
+                <div className="border-t-2 border-black py-5 pr-5 text-end">
+                  <h4 className="font-semibold text-xl">Amount: ${amount}</h4>
+                </div>
+              </div>
+            </div>
+            <div className="lg:w-1/2 w-full flex flex-col items-center justify-center">
+              <CheckOutForm setPurchase={setPurchase} />
             </div>
           </div>
         </div>
-        <div className="lg:w-1/2 w-full flex flex-col items-center justify-center">
-          <CheckOutForm setPurchase={setPurchase} />
+      ) : purchase ? (
+        <h2 className="text-2xl pt-14 text-nowrap md:px-10">{purchase}</h2>
+      ) : (
+        <div>
+          <h2 className="text-5xl uppercase pt-14">
+            First add to cart some products!!💰
+          </h2>
         </div>
-      </div>
+      )}
     </div>
-  ) : purchase ? (
-    <h2 className="text-2xl pt-14 text-nowrap md:px-10">{purchase}</h2>
-  ) : (
-    <h2 className="text-5xl uppercase pt-14">
-      First add to cart some products!!💰
-    </h2>
   );
 };
 
