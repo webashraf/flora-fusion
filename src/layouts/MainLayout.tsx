@@ -13,7 +13,6 @@ const MainLayout = () => {
     <>
       <div className="lg:max-w-[1440px] md:w-[100%] w-full mx-auto overflow-x-hidden overflow-hidden relative">
         <NavBar />
-
         <Outlet />
 
         <div className="fixed bottom-16 right-0 w-full flex justify-center z-20">

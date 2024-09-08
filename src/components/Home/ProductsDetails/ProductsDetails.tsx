@@ -93,4 +93,4 @@ const ProductsDetails = ({ products }: { products: TProduct | any }) => {
   );
 };
 
-export default ProductsDetails;
+export default ProductsDetails; 

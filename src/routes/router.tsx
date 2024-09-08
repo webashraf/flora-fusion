@@ -34,6 +34,14 @@ const router = createBrowserRouter([
           ),
       },
       {
+        path: "products/single-product/:id",
+        element: <SingleProduct />,
+        loader: ({ params }) =>
+          fetch(
+            `https://flora-fusion-backend.vercel.app/api/v1/products/${params?.id}`
+          ),
+      },
+      {
         path: "products-by-category/:id",
         element: <ProductsByCategory />,
         loader: ({ params }) =>
