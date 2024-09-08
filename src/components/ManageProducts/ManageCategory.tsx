@@ -8,7 +8,6 @@ import { toast } from "sonner";
 
 const ManageCategory = () => {
   const { data: categories } = useGetCategoriesQuery({});
-  // console.log("🚀 ~ ManageCategory ~ categories:", categories);
 
   const [updateCategory] = useUpdateCategoryMutation();
 
@@ -18,11 +17,10 @@ const ManageCategory = () => {
     categoryId: string
   ) => {
     e.preventDefault();
-    // console.log("clicked on category", categoryId);
+    
 
     const formData = new FormData(e.target as HTMLFormElement);
     const updatedData = Object.fromEntries(formData.entries());
-    // console.log("Form data:", formObject);
 
     //* Use the updateCategory mutation here with the formObject and categoryId
     const res = await updateCategory({
@@ -34,7 +32,6 @@ const ManageCategory = () => {
     } else {
       toast.error("Something went wrong happened!");
     }
-    console.log(res?.success);
   };
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import useTotalAmount from "@/hooks/useTotalAmount";
 import {
   useCreateOrderMutation,
@@ -85,16 +86,13 @@ const StripeCheckOutForm: React.FC<StripeCheckOutFormProps> = ({
           type: "card",
           card,
         });
-      console.log("🚀 ~ handleSubmit ~ paymentMethod:", paymentMethod);
 
       if (paymentMethodError) {
         throw new Error(paymentMethodError.message);
       }
-      console.log("User info", userInfo);
 
       try {
         const res = await createOrder(userInfo);
-        console.log(res);
       } catch (err) {
         console.log(err);
       }

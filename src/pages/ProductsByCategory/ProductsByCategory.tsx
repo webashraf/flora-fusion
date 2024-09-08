@@ -8,13 +8,11 @@ import { useLoaderData } from "react-router-dom";
 
 const ProductsByCategory = () => {
   const products: any = useLoaderData();
-  console.log(products?.result[0].category.name);
   // Display a loader if products data is not yet available
   if (!products) {
     return <Loader />;
   }
 
-  console.log("products", products);
 
   return (
     <>

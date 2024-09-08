@@ -93,7 +93,6 @@ export const baseApi = createApi({
     }),
     createPayment: builder.mutation({
       query: (payload) => {
-        console.log(payload);
         return {
           url: "/order/create-payment-intent",
           method: "POST",

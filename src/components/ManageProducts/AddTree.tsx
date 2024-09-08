@@ -9,11 +9,9 @@ import { toast } from "sonner";
 
 const AddTree = () => {
   const { data: categories } = useGetCategoriesQuery({});
-  // console.log("🚀 ~ AddTree ~ categories:", categories);
 
   const [createTree] = useCreateTreeMutation();
 
-  console.log(categories);
 
   if (!categories) {
     return <Loader />;
@@ -36,16 +34,14 @@ const AddTree = () => {
       isAvailable: true,
     };
 
-    console.log(orderInfo);
 
     try {
-      console.log("Order placed successfully", orderInfo);
-
+    
       const res = await createTree(orderInfo);
       if (res.data.success === true) {
         toast.success("Product added successfully");
       }
-      console.log("🚀 ~ handleAddProduct ~ res:", res);
+      
     } catch (err) {
       console.log(err);
       toast.error("Something went wrong!!");

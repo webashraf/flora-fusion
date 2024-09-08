@@ -23,7 +23,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
-  // console.log("🚀 ~ AlertDialogCustom ~ id:", id);
   const [isChecked, setIsChecked] = useState(false);
 
   const { data: product } = useGetSingleProductByIdQuery(treeID);
@@ -36,18 +35,14 @@ const AlertDialogCustom = ({ id: treeID }: { id: string }) => {
   // };
   const handleUpdate = async (e: any) => {
     e.preventDefault();
-    console.log("clicked alert dialog");
     const formData = new FormData(e.target);
     const updatedData = Object.fromEntries(formData.entries());
-    console.log("Form data:", updatedData);
 
     try {
-      console.log(treeID);
       const res = await updateTree({ treeID, updatedData }).unwrap();
 
       res?.success && toast.success("Successfully updated tree!");
 
-      console.log();
     } catch (error) {
       console.log(error);
     }

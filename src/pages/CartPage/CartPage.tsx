@@ -28,17 +28,13 @@ const CartPage = () => {
   const handleAddtocart = (product: TProduct) => {
     const qtyInput = inputValues[product._id] || "1"; // Default to "1" if no input value found
     const updatedQty = Math.min(Number(qtyInput), product.stock);
-    console.log(updatedQty);
 
     const treeCartItem = { ...product, qty: updatedQty };
 
-    console.log(treeCartItem);
 
     dispatch(setCart(treeCartItem));
-    toast.success("Quantity is increased" + qtyInput);
-    console.log(inputValues);
+    toast.success("Quantity is increased" );
   };
-  console.log({ inputValues });
 
   const handleMinustocart = (product: TProduct) => {
     const qtyInput = inputValues[product._id] || "1"; // Default to "1" if no input value found
@@ -47,8 +43,7 @@ const CartPage = () => {
     const treeCartItem = { ...product, qty: updatedQty };
 
     dispatch(decreseCartItem(treeCartItem));
-    toast.success("Quantity is decresed" + qtyInput);
-    console.log(inputValues);
+    toast.success("Quantity is decresed" );
   };
 
   const handleRemove = (item: TProduct) => {

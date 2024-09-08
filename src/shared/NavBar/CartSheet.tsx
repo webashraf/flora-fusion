@@ -35,12 +35,6 @@ export function CartSheet({ color }: { color: string }) {
   const inputValuesRef = useRef<{ [key: string]: string }>({});
   const [inputValues, setInputValues] = useState<{ [key: string]: string }>({});
 
-  // console.log(
-  //   "🚀 ~ CartSheet ~ inputValues:",
-  //   Number(inputValues["668e49375956bee8a5c61a5a"]) > 3,
-  //   inputValues["668e49375956bee8a5c61a5a"]
-  // );
-
   let newPrice: number = 0;
   cartProducts.forEach((item: TProduct) => {
     newPrice = item.price * item.qty + newPrice;
@@ -49,21 +43,14 @@ export function CartSheet({ color }: { color: string }) {
   //* Handle add to cart
   const handleAddtocart = (product: TProduct) => {
     const qtyInput = inputValues[product._id] || "1";
-    console.log(qtyInput);
     // Default to "1" if no input value found
     const updatedQty = Math.min(Number(qtyInput), product.stock);
-    console.log(updatedQty);
 
     const treeCartItem = { ...product, qty: updatedQty };
 
-    console.log(treeCartItem);
-
     dispatch(setCart(treeCartItem));
-    toast.success("Quantity is increased" + qtyInput);
-    console.log(inputValues);
+    toast.success("Quantity is increased");
   };
-
-  // console.log({ inputValues });
 
   //   * Handle minus to cart
   const handleMinustocart = (product: TProduct) => {
@@ -73,8 +60,7 @@ export function CartSheet({ color }: { color: string }) {
     const treeCartItem = { ...product, qty: updatedQty };
 
     dispatch(decreseCartItem(treeCartItem));
-    toast.success("Quantity is decresed" + qtyInput);
-    console.log(inputValues);
+    toast.success("Quantity is decresed");
   };
 
   //   * Handle remove item
@@ -89,8 +75,6 @@ export function CartSheet({ color }: { color: string }) {
       ...inputValues,
       [e.target.dataset.productid!]: value,
     });
-
-    console.log(inputValues);
 
     const input = e.target;
     const qty = Number(input.value);

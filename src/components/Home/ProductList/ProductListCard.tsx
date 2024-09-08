@@ -16,16 +16,11 @@ const ProductListCard = ({ product }: { product: TProduct }) => {
   const handleAddtocart = (tree: TProduct) => {
     // Creating a new cart item with quantity set to 1
     const treeCartItem = { ...tree, qty: 1 };
-    console.log("tree", tree);
 
     let isExisting = [{ qty: 0 }];
 
     isExisting = cartProducts.filter((item: TProduct) => tree._id === item._id);
-    console.log(
-      "🚀 ~ handleAddtocart ~ isExisting:",
-      isExisting[0]?.qty,
-      tree.stock
-    );
+    
 
     if (isExisting[0]?.qty >= tree?.stock) {
       toast.error(`You all ready catch the max stock of ${tree.name}.`);

@@ -17,7 +17,6 @@ import CheckOutForm from "./CheckOutForm";
 const CheckOut = () => {
   const cartProducts: TProduct[] = useAppSelector((state) => state.cart.cart);
   const [purchase, setPurchase] = useState<string>("");
-  console.log(purchase);
 
   const amount = useTotalAmount();
 

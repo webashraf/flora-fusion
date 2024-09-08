@@ -57,7 +57,6 @@ const CheckOutForm = ({
     }
     setProcess(true);
     try {
-      // console.log("Order placed successfully", orderInfo);
 
       const res = await createOrder(orderInfo).unwrap();
       if (res.success === true) {
@@ -67,7 +66,6 @@ const CheckOutForm = ({
         cartDispatch(clearCart());
         toast.success("Order placed successfully!!");
       }
-      console.log(res);
     } catch (err) {
       console.log(err);
       toast.error("Order not placed. Something went wrong!!");

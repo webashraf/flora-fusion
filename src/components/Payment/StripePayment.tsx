@@ -17,7 +17,6 @@ const StripePayment: React.FC<TStripePaymentProps> = ({
   userInfo,
   setPurchase,
 }) => {
-  console.log("userInfo", userInfo);
 
   return (
     <Elements stripe={stripePromise}>

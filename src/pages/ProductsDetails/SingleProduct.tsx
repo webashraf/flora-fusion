@@ -10,13 +10,11 @@ import { useLoaderData } from "react-router-dom";
 import { toast } from "sonner";
 
 const SingleProduct = () => {
-  // console.log("Single Product", product);
   const singleProduct: any = useLoaderData();
   const product: TProduct = singleProduct.result;
 
   const cartProducts = useAppSelector((state) => state.cart.cart);
   const dispatch = useAppDispatch();
-  console.log(cartProducts);
 
   if (!product) {
     return <Loader />;
@@ -34,11 +32,7 @@ const SingleProduct = () => {
     isExisting = cartProducts.filter(
       (item: TProduct) => product._id === item._id
     );
-    console.log(
-      "🚀 ~ handleAddtocart ~ isExisting:",
-      isExisting[0]?.qty,
-      product.stock
-    );
+  
 
     if (isExisting[0]?.qty >= product?.stock) {
       toast.error(`You all ready catch the max stock of ${product.name}.`);
@@ -49,7 +43,6 @@ const SingleProduct = () => {
     dispatch(setCart(treeCartItem));
   };
 
-  // console.log(product);
   return (
     <div>
       <CommonHero title="Single Product" />

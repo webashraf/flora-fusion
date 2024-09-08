@@ -20,7 +20,10 @@ const ManageProducts = () => {
   // const [isActive, setIsActive] = useState(true);
 
   return (
-    <div className="px-4 pt-14">
+    <div className="px-4 ">
+      <h2 className="md:text-5xl text-[45px] text-center capitalize mt-20">
+        Manage Items
+      </h2>
       <div className="py-14 flex items-center flex-wrap gap-2 justify-center">
         {tabs.map((tab) => (
           <Chip

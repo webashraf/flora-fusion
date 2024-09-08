@@ -36,7 +36,6 @@ const Home = () => {
     );
   }
 
-  // console.log("products", products);
 
   return (
     <div data-scroll-section>

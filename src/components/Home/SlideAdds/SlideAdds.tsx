@@ -8,9 +8,7 @@ const SlideAdds = () => {
   const container: any = useRef(null);
   const discountAdsText: any = useRef(null);
 
-  console.log(discountAdsText?.current?.offsetWidth);
   // GSAP ANimation
-
   useGSAP(
     () => {
       // gsap code here...

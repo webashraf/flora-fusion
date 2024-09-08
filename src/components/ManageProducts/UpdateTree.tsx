@@ -51,7 +51,6 @@ const UpdateTree = () => {
   const handleDeleteTree = async (id: string) => {
     try {
       const res = await deleteTree(id);
-      console.log("🚀 ~ handleDeleteTree ~ res:", res.data.success);
       if (res.data.success === true) {
         toast.success("Delete Succesfully");
       }
