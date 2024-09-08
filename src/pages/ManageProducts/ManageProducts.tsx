@@ -10,9 +10,9 @@ type ChipProps = {
 };
 
 const tabs = [
+  { name: "Add Tree", path: "add-tree" },
   { name: "Manage Tree", path: "manage-tree" },
   { name: "Manage Category", path: "manage-category" },
-  { name: "Add Tree", path: "add-tree" },
 ];
 
 const ManageProducts = () => {
