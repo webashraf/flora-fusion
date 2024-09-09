@@ -23,7 +23,7 @@ const CheckOut = () => {
 
   return (
     <div>
-      <div className="mb-10">
+      <div className="">
         <CommonHero title="Check-out" />
       </div>
 

@@ -9,7 +9,7 @@ const CommonHero = ({ title }: { title: string }) => {
   }
   return (
     <div
-      className="h-[500px] w-full "
+      className="h-[500px] w-full mb-20"
       style={{
         backgroundImage: `url(${products.result[5].imageURL})`,
         backgroundSize: "contain",

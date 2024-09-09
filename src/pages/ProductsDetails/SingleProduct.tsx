@@ -32,7 +32,6 @@ const SingleProduct = () => {
     isExisting = cartProducts.filter(
       (item: TProduct) => product._id === item._id
     );
-  
 
     if (isExisting[0]?.qty >= product?.stock) {
       toast.error(`You all ready catch the max stock of ${product.name}.`);
@@ -46,7 +45,7 @@ const SingleProduct = () => {
   return (
     <div>
       <CommonHero title="Single Product" />
-      <div className="flex justify-center gap-10 py-20 bg-slat-200 border">
+      <div className="flex justify-center gap-10 py-20 bg-slat-200 ">
         <div className=" h-[600px] w-[400px] overflow-hidden">
           <img
             className="w-full h-full object-cover transform transition-transform duration-500 ease-in-out hover:scale-[1.40] cursor-zoom-in"

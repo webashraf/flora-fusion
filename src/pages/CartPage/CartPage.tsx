@@ -78,7 +78,7 @@ const CartPage = () => {
 
   return (
     <div>
-      <div className="mb-10">
+      <div className="">
         <CommonHero title="Products Cart" />
       </div>
 
@@ -188,7 +188,7 @@ const CartPage = () => {
         </div>
       ) : (
         <div className="">
-          <h2 className="text-5xl uppercase pt-14">Cart is empty yet!!</h2>
+          <h2 className="text-5xl uppercase pb-14">Cart is empty yet!!</h2>
         </div>
       )}
     </div>
