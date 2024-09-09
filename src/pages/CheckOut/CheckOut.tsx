@@ -28,10 +28,8 @@ const CheckOut = () => {
       </div>
 
       {cartProducts?.length > 0 ? (
-        <div className="pt-20 mx-5">
-          <h2 className="lg:text-5xl text-4xl uppercase pb-10">
-            Check-out process
-          </h2>
+        <div className=" mx-5">
+          <h2 className="text-4xl uppercase pb-10">Product Items:</h2>
 
           <div className="flex justify-between items-center lg:flex-row flex-col gap-20">
             <div className="lg:w-1/2 w-full">
@@ -88,10 +86,10 @@ const CheckOut = () => {
           </div>
         </div>
       ) : purchase ? (
-        <h2 className="text-2xl pt-14 text-nowrap md:px-10">{purchase}</h2>
+        <h2 className="text-2xl text-nowrap lg:px-0 px-5">{purchase}</h2>
       ) : (
         <div>
-          <h2 className="text-5xl uppercase pt-14">
+          <h2 className="text-5xl uppercase lg:px-0 px-5">
             First add to cart some products!!💰
           </h2>
         </div>

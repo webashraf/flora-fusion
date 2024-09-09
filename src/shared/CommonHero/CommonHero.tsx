@@ -1,23 +1,15 @@
-import { useGetProductsQuery } from "@/redux/api/baseApi";
-
+import heroImg from "../../assets/images/hero/heroImg.jpg";
 const CommonHero = ({ title }: { title: string }) => {
-  const { data: products } = useGetProductsQuery({});
-
-  // Display a loader if products data is not yet available
-  if (!products) {
-    return;
-  }
   return (
     <div
-      className="h-[500px] w-full mb-20"
+      className="h-[500px] w-full mb-20 bg-cover bg-no-repeat"
       style={{
-        backgroundImage: `url(${products.result[5].imageURL})`,
-        backgroundSize: "contain",
+        backgroundImage: `url(${heroImg})`,
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full h-full backdrop-blur-sm flex items-center justify-center">
-        <h2 className="lg:text-7xl lg:text-left text-5xl text-center underline uppercase text-slate-300">
+      <div className="w-full h-full bg-black/20 backdrop-blur-sm flex items-center justify-center">
+        <h2 className="lg:text-7xl lg:text-left text-5xl text-center underline uppercase text-slate-200">
           {title}
         </h2>
       </div>

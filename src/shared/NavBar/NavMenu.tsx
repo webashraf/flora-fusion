@@ -51,21 +51,21 @@ const SlideTabs: React.FC = () => {
       </NavLink>
 
       <NavLink
-        to="/checkout"
-        className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "activeNav" : ""
-        }
-      >
-        <Tab setPosition={setPosition}>ChekOut</Tab>
-      </NavLink>
-
-      <NavLink
         to="/cart"
         className={({ isActive, isPending }) =>
           isPending ? "pending" : isActive ? "activeNav" : ""
         }
       >
         <Tab setPosition={setPosition}>Cart</Tab>
+      </NavLink>
+
+      <NavLink
+        to="/checkout"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "activeNav" : ""
+        }
+      >
+        <Tab setPosition={setPosition}>ChekOut</Tab>
       </NavLink>
 
       <NavLink

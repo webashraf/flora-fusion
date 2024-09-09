@@ -45,15 +45,15 @@ const SingleProduct = () => {
   return (
     <div>
       <CommonHero title="Single Product" />
-      <div className="flex justify-center gap-10 py-20 bg-slat-200 ">
-        <div className=" h-[600px] w-[400px] overflow-hidden">
+      <div className="flex flex-wrap justify-center gap-10 py-20 bg-slat-200 lg:px-0 px-5">
+        <div className=" h-[600px] lg:w-[400px] w-full overflow-hidden">
           <img
             className="w-full h-full object-cover transform transition-transform duration-500 ease-in-out hover:scale-[1.40] cursor-zoom-in"
             src={product.imageURL}
             alt=""
           />
         </div>
-        <div className=" w-1/2 pl-10 space-y-4">
+        <div className=" lg:w-1/2 lg:pl-10 space-y-4">
           <h2 className="text-4xl uppercase">{product.name}</h2>
           <h2 className="text-7xl">${product.price}</h2>
           <h4 className="font-bold">

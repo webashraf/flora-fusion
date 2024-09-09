@@ -24,8 +24,7 @@ const ManageProducts = () => {
     <div className="px-4 ">
       <CommonHero title="Manage Products" />
 
-     
-      <div className="py-14 flex items-center flex-wrap gap-2 justify-center">
+      <div className="pb-14 flex items-center flex-wrap gap-2 justify-center">
         {tabs.map((tab) => (
           <Chip
             name={tab.name}

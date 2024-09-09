@@ -83,9 +83,9 @@ const CartPage = () => {
       </div>
 
       {cartProducts.length > 0 ? (
-        <div className="pt-20 px-5">
+        <div className=" px-5">
           <div className="">
-            <h2 className="text-5xl uppercase pb-10">Cart Page</h2>
+            <h2 className="text-4xl uppercase pb-10">Product Items:</h2>
 
             {cartProducts?.length !== 0 ? (
               <Table className="flex lg:flex-row flex-col lg:justify-between flex-wrap gap-2 rounded-md items-center justify-center ">
@@ -188,7 +188,9 @@ const CartPage = () => {
         </div>
       ) : (
         <div className="">
-          <h2 className="text-5xl uppercase pb-14">Cart is empty yet!!</h2>
+          <h2 className="text-5xl uppercase lg:px-0 px-5">
+            Cart is empty yet!!
+          </h2>
         </div>
       )}
     </div>

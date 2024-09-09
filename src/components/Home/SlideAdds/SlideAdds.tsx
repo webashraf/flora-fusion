@@ -29,7 +29,7 @@ const SlideAdds = () => {
   );
   return (
     <div>
-      <div ref={container} className="py-10 items-center-rotate-1">
+      <div ref={container} className="pt-10 items-center-rotate-1">
         <div id="discount" className=" flex flex-nowrap gap-0">
           <div
             ref={discountAdsText}
