@@ -133,9 +133,9 @@ const ProductPage = () => {
     );
   }
   return (
-    <div className="section-margin-to  px-5 lg:px-0 md:">
+    <div className="section-margin-to  ">
       <CommonHero title="Products" />
-      <div className="flex justify-between mb-10">
+      <div className="flex justify-between mb-10 px-5 lg:px-0">
         <div className="md:w-1/2 mx-1">
           {/* Select component for price filter */}
           <Select onValueChange={handleFilter}>

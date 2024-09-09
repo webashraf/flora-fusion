@@ -21,10 +21,10 @@ const ManageProducts = () => {
   // const [isActive, setIsActive] = useState(true);
 
   return (
-    <div className="px-4 ">
+    <div className="">
       <CommonHero title="Manage Products" />
 
-      <div className="pb-14 flex items-center flex-wrap gap-2 justify-center">
+      <div className="pb-14 flex items-center flex-wrap gap-2 justify-center px-5">
         {tabs.map((tab) => (
           <Chip
             name={tab.name}
