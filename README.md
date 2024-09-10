@@ -53,8 +53,8 @@ Ensure you have the following installed before setting up the project:
 
 ### Configuration
 
-1. **Create a .env file in the root directory of the project.**:
-1. **Add necessary configuration variables in the .env file. Example:**:
+1. Create a .env file in the root directory of the project.
+2. Add necessary configuration variables in the .env file. Example
    ```bash
    VITE_PAYMENT_PK=pk_test_51NsKaMH4yQXhpwqmc1wVEn5CCr7gkfuDfdi8FVkmbibBgPRREMgu4deLXbVy4LU9GLcR9AFIbFa0S5jYtRXupN6000ajaSjVp4
    SERVER_URL=https://flora-fusion-backend.vercel.app/
