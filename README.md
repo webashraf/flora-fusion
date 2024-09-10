@@ -1,41 +1,65 @@
 # FloraFusion - Online Nursery
 
-FloraFusion is an online nursery platform where users can explore a wide variety of plants, add them to their cart, and make purchases through a seamless, animated interface. Built with modern web technologies, FloraFusion provides an engaging user experience with smooth animations and robust backend functionalities.
+## Introduction
+
+FloraFusion is an online nursery platform where users can explore a wide variety of plants, add them to their cart, and make purchases through a seamless, animated interface.
+
+## Project Description
+
+FloraFusion aims to provide an easy-to-use, visually appealing platform for plant enthusiasts to browse and purchase plants online. The platform offers a smooth, animated shopping experience with real-time cart management and secure payment integration. It caters to users across various devices by offering a responsive design and optimized UI.
 
 ## Features
 
-- **Animated Design**: Leveraging GSAP and Framer Motion for smooth, engaging animations across the platform.
-- **Product Management**: Users can add, update, and delete products with ease.
-- **Add to Cart**: Users can add plants to their cart and manage their selections.
-- **Stripe Payment Integration**: Secure payment processing with Stripe.
-- **Responsive Design**: Optimized for all devices, ensuring a seamless experience on mobile, tablet, and desktop.
-- **State Management**: Powered by Redux for efficient and scalable state management.
+- **Animated Design**: Uses GSAP and Framer Motion for smooth animations across the platform.
+- **Product Management**: Users can easily add, update, and delete products.
+- **Add to Cart**: Seamless cart management functionality.
+- **Stripe Payment Integration**: Secure payment processing through Stripe.
+- **Responsive Design**: Optimized for mobile, tablet, and desktop devices.
+- **State Management**: Powered by Redux for efficient application state handling.
 
-## Tech Stack
+## Technology Stack
 
 ### Frontend
 
-- **React.js**: JavaScript library for building user interfaces.
-- **Redux**: State management library for handling application state.
-- **GSAP**: Animation library for creating complex animations.
-- **Framer Motion**: React library for animations.
-- **sadcn**: Component library for styling and UI elements.
+- **React.js**: For building interactive user interfaces.
+- **Redux**: For state management.
+- **GSAP**: For creating animations.
+- **Framer Motion**: For adding animations within React components.
+- **sadcn**: UI component library.
 
 ### Backend
 
-- **Node.js**: JavaScript runtime for server-side programming.
-- **Express.js**: Web framework for building the backend server.
-- **MongoDB**: NoSQL database for storing product and user data.
-- **Mongoose**: ODM (Object Data Modeling) library for MongoDB.
+- **Node.js**: JavaScript runtime for server-side development.
+- **Express.js**: Backend framework for handling server-side operations.
+- **MongoDB**: NoSQL database for storing products, users, and orders.
+- **Mongoose**: ODM library for MongoDB.
 
-## Installation
+## Installation Guideline
 
-To get a local copy up and running, follow these steps:
+### Prerequisites
 
-1. **Clone the repository:**
+Ensure you have the following installed before setting up the project:
+
+- Node.js
+- MongoDB (either locally or through a cloud service like MongoDB Atlas)
+
+### Installation Steps
+
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/webashraf/flora-fussing.git
+   git clone https://github.com/webashraf/flora-fusion.git
    cd FloraFusion
    ```
 
-## live link
+### Configuration
+
+1. **Create a .env file in the root directory of the project.**:
+1. **Add necessary configuration variables in the .env file. Example:**:
+   ```bash
+   VITE_PAYMENT_PK=pk_test_51NsKaMH4yQXhpwqmc1wVEn5CCr7gkfuDfdi8FVkmbibBgPRREMgu4deLXbVy4LU9GLcR9AFIbFa0S5jYtRXupN6000ajaSjVp4
+   SERVER_URL=https://flora-fusion-backend.vercel.app/
+   ```
+
+### Live Link:
+
+https://flora-fusion-nursery.vercel.app/
