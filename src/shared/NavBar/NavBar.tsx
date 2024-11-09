@@ -1,6 +1,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { CartSheet } from "./CartSheet";
 import NavMenu from "./NavMenu";
 import OffCanvusMenu from "./OffCanvusMenu/OffCanvusMenu";
@@ -32,11 +33,13 @@ const NavBar = () => {
       <div className="flex justify-between gap-10 w-full">
         {/* Nav Logo */}
         <div className="lg:w-[20%] md:w-[40%] md:pb-5 md:pt-2 w-[40%] mx-auto relative lg:bottom-4 flex items-center">
-          <img
-            src="/Flora_Fusion_logos.png"
-            className="bg-red-5 lg:h-auto"
-            alt=""
-          />
+          <NavLink to="/">
+            <img
+              src="/Flora_Fusion_logos.png"
+              className="bg-red-5 lg:h-auto"
+              alt=""
+            />
+          </NavLink>
         </div>
 
         {/* Nav contact */}
